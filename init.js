@@ -1,3 +1,11 @@
+/*
+ * The majority of this tracker is the work of FeltZ, who in turn re-used things from
+ * Chris N and HoneyBadger's scripts.
+ *
+ * Rock on, guys.
+ * -n0q
+ */
+
 var AnnounceNewSecond  = true;
 var tint_color_turn    = '#FFFF00';     // Tint color for the current tokens turn
 var tint_color_default = 'transparent'; // Default tint color 
