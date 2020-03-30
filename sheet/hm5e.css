@@ -951,7 +951,68 @@
 	width: 17.64706%;
 }
 
-.charsheet .sh88%;
+.charsheet .sheet-offset-3-17 {
+	margin-left: 17.64706%;
+}
+
+.charsheet .sheet-col-4-17 {
+	width: 23.52941%;
+}
+
+.charsheet .sheet-offset-4-17 {
+	margin-left: 23.52941%;
+}
+
+.charsheet .sheet-col-5-17 {
+	width: 29.41176%;
+}
+
+.charsheet .sheet-offset-5-17 {
+	margin-left: 29.41176%;
+}
+
+.charsheet .sheet-col-6-17 {
+	width: 35.29412%;
+}
+
+.charsheet .sheet-offset-6-17 {
+	margin-left: 35.29412%;
+}
+
+.charsheet .sheet-col-7-17 {
+	width: 41.17647%;
+}
+
+.charsheet .sheet-offset-7-17 {
+	margin-left: 41.17647%;
+}
+
+.charsheet .sheet-col-8-17 {
+	width: 47.05882%;
+}
+
+.charsheet .sheet-offset-8-17 {
+	margin-left: 47.05882%;
+}
+
+.charsheet .sheet-col-9-17 {
+	width: 52.94118%;
+}
+
+.charsheet .sheet-offset-9-17 {
+	margin-left: 52.94118%;
+}
+
+.charsheet .sheet-col-10-17 {
+	width: 58.82353%;
+}
+
+.charsheet .sheet-offset-10-17 {
+	margin-left: 58.82353%;
+}
+
+.charsheet .sheet-col-11-17 {
+	width: 64.70588%;
 }
 
 .charsheet .sheet-offset-11-17 {
@@ -1210,7 +1271,75 @@
 	width: 15%;
 }
 
-.charsheet  .sheet-col-2-21 {
+.charsheet .sheet-offset-3-20 {
+	margin-left: 15%;
+}
+
+.charsheet .sheet-col-7-20 {
+	width: 35%;
+}
+
+.charsheet .sheet-offset-7-20 {
+	margin-left: 35%;
+}
+
+.charsheet .sheet-col-9-20 {
+	width: 45%;
+}
+
+.charsheet .sheet-offset-9-20 {
+	margin-left: 45%;
+}
+
+.charsheet .sheet-col-11-20 {
+	width: 55%;
+}
+
+.charsheet .sheet-offset-11-20 {
+	margin-left: 55%;
+}
+
+.charsheet .sheet-col-13-20 {
+	width: 65%;
+}
+
+.charsheet .sheet-offset-13-20 {
+	margin-left: 65%;
+}
+
+.charsheet .sheet-col-15-20 {
+	width: 75%;
+}
+
+.charsheet .sheet-offset-15-20 {
+	margin-left: 75%;
+}
+
+.charsheet .sheet-col-17-20 {
+	width: 85%;
+}
+
+.charsheet .sheet-offset-17-20 {
+	margin-left: 85%;
+}
+
+.charsheet .sheet-col-19-20 {
+	width: 95%;
+}
+
+.charsheet .sheet-offset-19-20 {
+	margin-left: 95%;
+}
+
+.charsheet .sheet-col-1-21 {
+	width: 4.7619%;
+}
+
+.charsheet .sheet-offset-1-21 {
+	margin-left: 4.7619%;
+}
+
+.charsheet .sheet-col-2-21 {
 	width: 9.52381%;
 }
 
@@ -1466,7 +1595,83 @@
 	margin-left: 21.73913%;
 }
 
-.charsheet .sheet-col-
+.charsheet .sheet-col-6-23 {
+	width: 26.08696%;
+}
+
+.charsheet .sheet-offset-6-23 {
+	margin-left: 26.08696%;
+}
+
+.charsheet .sheet-col-7-23 {
+	width: 30.43478%;
+}
+
+.charsheet .sheet-offset-7-23 {
+	margin-left: 30.43478%;
+}
+
+.charsheet .sheet-col-8-23 {
+	width: 34.78261%;
+}
+
+.charsheet .sheet-offset-8-23 {
+	margin-left: 34.78261%;
+}
+
+.charsheet .sheet-col-9-23 {
+	width: 39.13043%;
+}
+
+.charsheet .sheet-offset-9-23 {
+	margin-left: 39.13043%;
+}
+
+.charsheet .sheet-col-10-23 {
+	width: 43.47826%;
+}
+
+.charsheet .sheet-offset-10-23 {
+	margin-left: 43.47826%;
+}
+
+.charsheet .sheet-col-11-23 {
+	width: 47.82609%;
+}
+
+.charsheet .sheet-offset-11-23 {
+	margin-left: 47.82609%;
+}
+
+.charsheet .sheet-col-12-23 {
+	width: 52.17391%;
+}
+
+.charsheet .sheet-offset-12-23 {
+	margin-left: 52.17391%;
+}
+
+.charsheet .sheet-col-13-23 {
+	width: 56.52174%;
+}
+
+.charsheet .sheet-offset-13-23 {
+	margin-left: 56.52174%;
+}
+
+.charsheet .sheet-col-14-23 {
+	width: 60.86957%;
+}
+
+.charsheet .sheet-offset-14-23 {
+	margin-left: 60.86957%;
+}
+
+.charsheet .sheet-col-15-23 {
+	width: 65.21739%;
+}
+
+.charsheet .sheet-offset-15-23 {
 	margin-left: 65.21739%;
 }
 
@@ -1629,3 +1834,109 @@
 }
 
 /* End custom Pure grid css (24 cols) */
+
+/* Roll templates */
+
+.sheet-rolltemplate-hm_attack table {
+    width: 100%;
+    padding: 2px;
+    background:url(http://i.imgur.com/BLb0XMU.jpg) top left repeat;
+}
+ 
+.sheet-rolltemplate-hm_attack th {
+	color: rgb(233, 223, 151);
+    background-color: rgb(63, 32, 33);
+    padding-left: 5px;
+	line-height: 1.1em;
+	font-size: 1em;
+    text-align: left;
+	font-family: "Arial", Helvetica, sans-serif;
+    text-transform: uppercase;
+}
+ 
+.sheet-rolltemplate-hm_attack .sheet-arrow-right {
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+	border-left: 180px solid rgb(126, 45, 64);
+}
+ 
+.sheet-rolltemplate-hm_attack .sheet-tcat {
+    font-weight: bold;
+}
+ 
+.sheet-rolltemplate-hm_attack td {
+    padding-left: 5px;
+    font-size: 0.9em;
+}
+ 
+.sheet-rolltemplate-hm_attack .inlinerollresult  {
+    background-color: transparent;
+    border: none;
+}
+ 
+.sheet-rolltemplate-hm_attack .inlinerollresult.fullcrit {
+	color: #3FB315;
+    border: none;
+}
+ 
+.sheet-rolltemplate-hm_attack .inlinerollresult.fullfail {
+	color: #B31515;
+    border: none;
+}
+ 
+.sheet-rolltemplate-hm_attack .inlinerollresult.importantroll {
+	color: #4A57ED;
+    border: none;
+}
+
+.sheet-rolltemplate-hm_defend table {
+    width: 100%;
+    padding: 2px;
+    background:url(http://i.imgur.com/BLb0XMU.jpg) top left repeat;
+}
+ 
+.sheet-rolltemplate-hm_defend th {
+	color: rgb(233, 223, 151);
+    background-color: rgb(63, 32, 33);
+    padding-left: 5px;
+	line-height: 1.1em;
+	font-size: 1em;
+    text-align: left;
+	font-family: "Arial", Helvetica, sans-serif;
+    text-transform: uppercase;
+}
+ 
+.sheet-rolltemplate-hm_defend .sheet-arrow-right {
+    border-top: 3px solid transparent;
+    border-bottom: 3px solid transparent;
+	border-left: 180px solid rgb(126, 45, 64);
+}
+ 
+.sheet-rolltemplate-hm_defend .sheet-tcat {
+    font-weight: bold;
+}
+ 
+.sheet-rolltemplate-hm_defend td {
+    padding-left: 5px;
+    font-size: 0.9em;
+}
+ 
+.sheet-rolltemplate-hm_defend .inlinerollresult  {
+    background-color: transparent;
+    border: none;
+}
+ 
+.sheet-rolltemplate-hm_defend .inlinerollresult.fullcrit {
+	color: #3FB315;
+    border: none;
+}
+ 
+.sheet-rolltemplate-hm_defend .inlinerollresult.fullfail {
+	color: #B31515;
+    border: none;
+}
+ 
+.sheet-rolltemplate-hm_defend .inlinerollresult.importantroll {
+	color: #4A57ED;
+    border: none;
+}
