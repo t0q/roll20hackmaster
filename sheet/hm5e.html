@@ -298,7 +298,7 @@
             <div class="sheet-col-1-16"><input type="number" name="attr_weapon_damage_mod_total" value="@{weapon_stat_bonus_damage}+@{weapon_spec_damage}+@{weapon_talent_damage}+@{weapon_magic_bonus}" disabled="disabled"/></div>
             <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_attack' value='&{template:hm_attack} {{name=@{character_name}}} {{weapon=@{weapon}}} {{speed=@{base_weapon_speed}}} {{reach=@{weapon_reach}}} {{atk_roll=[[d20+@{weapon_attack_mod_total}]]}} {{damage=[[@{weapon_base_damage}+@{weapon_damage_mod_total}]]}}'>ATK</button></div>
             <div class="sheet-col-1-16"></div>
-            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_defense' value='&{template:hm_defend} {{name=@{character_name}}} {{weapon=@{weapon}}} {{def_roll=[[1d20cs>19cf19 +@{weapon_defense_mod_total}]]}} {{dr=@{weapon_defense_mod_total}}} {{sdr=@{shield_dr}}}'>DEF</button></div>
+            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_defense' value='&{template:hm_defend} {{name=@{character_name}}} {{weapon=@{weapon}}} {{def_roll=[[1d20cs>19cf19 +@{weapon_defense_mod_total}]]}} {{dr=[[@{dr}]]}} {{sdr=[[@{shield_dr}]]}}'>DEF</button></div>
 		</div>
         <div class="sheet-row sheet-stat-row sheet-padl">
             <div class="sheet-col-1-16"></div>
