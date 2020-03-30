@@ -1837,12 +1837,14 @@
 
 /* Roll templates */
 
+.sheet-rolltemplate-hm_defend table,
 .sheet-rolltemplate-hm_attack table {
     width: 100%;
     padding: 2px;
     background:url(https://i.imgur.com/j2D6vR4.jpg) top left repeat;
 }
- 
+
+.sheet-rolltemplate-hm_defend th,
 .sheet-rolltemplate-hm_attack th {
 	color: rgb(233, 223, 151);
     background-color: rgb(63, 32, 33);
@@ -1854,89 +1856,44 @@
     text-transform: uppercase;
 }
  
+.sheet-rolltemplate-hm_defend .sheet-arrow-right,
 .sheet-rolltemplate-hm_attack .sheet-arrow-right {
     border-top: 3px solid transparent;
     border-bottom: 3px solid transparent;
 	border-left: 180px solid rgb(126, 45, 64);
 }
  
+.sheet-rolltemplate-hm_defend .sheet-tcat,
 .sheet-rolltemplate-hm_attack .sheet-tcat {
     font-weight: bold;
 }
  
+.sheet-rolltemplate-hm_defend td,
 .sheet-rolltemplate-hm_attack td {
     padding-left: 5px;
     font-size: 0.9em;
 }
  
+.sheet-rolltemplate-hm_defend .inlinerollresult,
 .sheet-rolltemplate-hm_attack .inlinerollresult  {
     background-color: transparent;
     border: none;
 }
  
+.sheet-rolltemplate-hm_defend .inlinerollresult.fullcrit,
 .sheet-rolltemplate-hm_attack .inlinerollresult.fullcrit {
 	color: #3FB315;
     border: none;
 }
  
+.sheet-rolltemplate-hm_defend .inlinerollresult.fullfail,
 .sheet-rolltemplate-hm_attack .inlinerollresult.fullfail {
 	color: #B31515;
     border: none;
 }
  
+.sheet-rolltemplate-hm_defend .inlinerollresult.importantroll,
 .sheet-rolltemplate-hm_attack .inlinerollresult.importantroll {
-	color: #4A57ED;
-    border: none;
-}
-
-.sheet-rolltemplate-hm_defend table {
-    width: 100%;
-    padding: 2px;
-    background:url(https://i.imgur.com/j2D6vR4.jpg) top left repeat;
-}
- 
-.sheet-rolltemplate-hm_defend th {
-	color: rgb(233, 223, 151);
-    background-color: rgb(63, 32, 33);
-    padding-left: 5px;
-	line-height: 1.1em;
-	font-size: 1em;
-    text-align: left;
-	font-family: "Arial", Helvetica, sans-serif;
-    text-transform: uppercase;
-}
- 
-.sheet-rolltemplate-hm_defend .sheet-arrow-right {
-    border-top: 3px solid transparent;
-    border-bottom: 3px solid transparent;
-	border-left: 180px solid rgb(126, 45, 64);
-}
- 
-.sheet-rolltemplate-hm_defend .sheet-tcat {
-    font-weight: bold;
-}
- 
-.sheet-rolltemplate-hm_defend td {
-    padding-left: 5px;
-    font-size: 0.9em;
-}
- 
-.sheet-rolltemplate-hm_defend .inlinerollresult  {
-    background-color: transparent;
-    border: none;
-}
- 
-.sheet-rolltemplate-hm_defend .inlinerollresult.fullcrit {
-	color: #3FB315;
-    border: none;
-}
- 
-.sheet-rolltemplate-hm_defend .inlinerollresult.fullfail {
-	color: #B31515;
-    border: none;
-}
- 
-.sheet-rolltemplate-hm_defend .inlinerollresult.importantroll {
 	color: #4A57ED;
     border: none;
 }
