@@ -14,22 +14,24 @@ You can find the following resources here:
 Note that all template arguments are optional. You might wish to display just a creature's attack roll, then roll for damage after the target has opted not to spend Luck points to alter the roll. Or you might wish to show an NPC's defense, but whisper her DR values to yourself.
 
 # hm_attack
-| argument | description |
-| -------- | ----------- |
-| name     | Name of actor.
-| weapon   | Name of weapon.
-| speed    | Weapon speed.
-| reach    | Weapon reach.
-| atk_roll | Attack roll.
-| damage   | Damage roll.
+| argument | description    |
+| -------- | -------------- |
+| name     | Name of actor. |
+| weapon   | Name of weapon.|
+| speed    | Weapon speed.  |
+| reach    | Weapon reach.  |
+| atk_roll | Attack roll.   |
+| damage   | Damage roll.   |
+
 Example usage: `&{template:hm_attack} {{name=Orc Captain}} {{weapon=Longsword}} {{speed=10}} {{reach=3.5}} {{atk_roll=[[1d20+2]]}}`
 
 # hm_defend
-| argument | description |
-| -------- | ----------- |
-| name     | Name of actor.
-| weapon   | Name of weapon.
-| def_roll | Defense roll. Use a [[1d20cs>19cfc9]] here, so we can detect a near perfect defense.
+| argument | description                                                                          |
+| -------- | ------------------------------------------------------------------------------------ |
+| name     | Name of actor.                                                                       |
+| weapon   | Name of weapon.                                                                      |
+| def_roll | Defense roll. Use a [[1d20cs>19cfc9]] here, so we can detect a near perfect defense. |
+
 Example usage: `&{template:hm_defend} {{name=Orc Captain}} {{weapon=Longsword}} {{def_roll=[[1d20cs>19cf19 +6]]}} {{dr=2}} {{sdr=6}}`
 
 ### Thanks!
