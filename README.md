@@ -21,7 +21,7 @@ Note that all template arguments are optional. You might wish to display just a 
 | speed    | Weapon speed.                                                                        |
 | reach    | Weapon reach.                                                                        |
 | atk_roll | Attack roll.                                                                         |
-| def_roll | Defense roll. Use a [[1d20cs>19cfc9]] here, so we can detect a near perfect defense. |
+| def_roll | Defense roll. Use a [[1d20cs>19cf19]] here, so we can detect a near perfect defense. |
 | damage   | Damage roll.                                                                         |
 
 Example usage: `&{template:hm_std} {{name=Orc Captain attacks!}} {{weapon=Longsword}} {{speed=10}} {{reach=3.5}} {{atk_roll=[[1d20+2]]}}`
@@ -29,13 +29,13 @@ Example usage: `&{template:hm_std} {{name=Orc Captain attacks!}} {{weapon=Longsw
 Example usage: `&{template:hm_std} {{name=Orc Captain defends!}} {{weapon=Longsword}} {{def_roll=[[1d20cs>19cf19 +6]]}} {{dr=2}} {{sdr=6}}`
 
 # hm_spell
-| argument | description         |
-| -------- | ------------------- |
-| name     | Name of spell.      |
-| caster   | Name of spellcaster | 
-| level    | Spell level.        |
+| argument   | description         |
+| ---------  | ------------------- |
+| name       | Name of spell.      |
+| caster     | Name of spellcaster | 
+| level      | Spell level.        |
 | components | V, S, M, etc      |
-| speed    | Casting time.       | 
+| speed      | Casting time.       | 
 
 Example usage: `&{template:hm_spell} {{name=Fireball}} {{caster=@{Noir Lotus|character_name}}} {{level=10}} {{components=V, S, M}} {{speed=300}} {{cost=140}}`
 
