@@ -14,28 +14,28 @@ You can find the following resources here:
 Note that all template arguments are optional. You might wish to display just a creature's attack roll, then roll for damage after the target has opted not to spend Luck points to alter the roll. Or you might wish to show an NPC's defense, but whisper her DR values to yourself.
 
 # hm_std
-| argument | description                                                                          |
-| -------- | ------------------------------------------------------------------------------------ |
-| name     | Name of actor.                                                                       |
-| weapon   | Name of weapon.                                                                      |
-| speed    | Weapon speed.                                                                        |
-| reach    | Weapon reach.                                                                        |
-| atk_roll | Attack roll.                                                                         |
-| def_roll | Defense roll. Use a [[1d20cs>19cf19]] here, so we can detect a near perfect defense. |
-| damage   | Damage roll.                                                                         |
+| argument | description                                                                             |
+| -------- | --------------------------------------------------------------------------------------- |
+| name     | Name of actor.                                                                          |
+| weapon   | Name of weapon.                                                                         |
+| speed    | Weapon speed.                                                                           |
+| reach    | Weapon reach.                                                                           |
+| atk_roll | Attack roll.                                                                            |
+| def_roll | Defense roll. Use a [[1d20cs>19cf1cf19]] here, so we can detect a near perfect defense. |
+| damage   | Damage roll.                                                                            |
 
 Example usage: `&{template:hm_std} {{name=Orc Captain attacks!}} {{weapon=Longsword}} {{speed=10}} {{reach=3.5}} {{atk_roll=[[1d20+2]]}}`
 
-Example usage: `&{template:hm_std} {{name=Orc Captain defends!}} {{weapon=Longsword}} {{def_roll=[[1d20cs>19cf19 +6]]}} {{dr=2}} {{sdr=6}}`
+Example usage: `&{template:hm_std} {{name=Orc Captain defends!}} {{weapon=Longsword}} {{def_roll=[[1d20cs>19cf1cf19 +6]]}} {{dr=2}} {{sdr=6}}`
 
 # hm_spell
-| argument   | description         |
-| ---------  | ------------------- |
-| name       | Name of spell.      |
-| caster     | Name of spellcaster | 
-| level      | Spell level.        |
-| components | V, S, M, etc      |
-| speed      | Casting time.       | 
+| argument   | description          |
+| ---------  | -------------------- |
+| name       | Name of spell.       |
+| caster     | Name of spellcaster. | 
+| level      | Spell level.         |
+| components | V, S, M, etc         |
+| speed      | Casting time.        | 
 
 Example usage: `&{template:hm_spell} {{name=Fireball}} {{caster=@{Noir Lotus|character_name}}} {{level=10}} {{components=V, S, M}} {{speed=300}} {{cost=140}}`
 
