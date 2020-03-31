@@ -46,14 +46,14 @@ on("change:graphic:bar3_value", function(obj, prev) {
             }
         }
 
-        var card = "&{template:default} "         +
-                   "{{name=ToP Save for "         +
-                   obj.get('name')                +
-                   "}}{{wound="    + wound        +
-                   "}}{{limit="    + limit        +
-                   "}}{{ToP Save=" + top_save     +
-                   "}}{{ToP Roll=" + top_roll     +
-                   "}}{{Result="   + top_result   +
+        var card = "&{template:hm_std}"         +
+                   "{{name=ToP Save for "       +
+                   obj.get('name')              +
+                   "}}{{wound="    + wound      +
+                   "}}{{limit="    + limit      +
+                   "}}{{ToP Save=" + top_save   +
+                   "}}{{ToP Roll=" + top_roll   +
+                   "}}{{Result="   + top_result +
                    "}}";
         sendChat("AutoDM", "/w gm " + card); 
     }

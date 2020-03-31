@@ -427,7 +427,7 @@ function setPriors(cid, table) {
         var lineage = "Bastard";
     }
 
-    var card = "&{template:default} "                    +
+    var card = "&{template:hm_std}" +
                "{{name="            + "Priors for " + params.name +
                "}}{{handedness="    + handed             +
                "}}{{lineage="       + lineage            +
