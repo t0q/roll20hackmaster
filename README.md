@@ -20,11 +20,11 @@ Note that all template arguments are optional. You might wish to display just a 
 | weapon   | Name of weapon.                                                                         |
 | speed    | Weapon speed.                                                                           |
 | reach    | Weapon reach.                                                                           |
-| atk_roll | Attack roll.                                                                            |
+| atk_roll | Attack roll. Use a [[1d20cs>19cf1cf19]] here, so we can detect a near perfect attack.   |
 | def_roll | Defense roll. Use a [[1d20cs>19cf1cf19]] here, so we can detect a near perfect defense. |
 | damage   | Damage roll.                                                                            |
 
-Example usage: `&{template:hm_std} {{name=Orc Captain attacks!}} {{weapon=Longsword}} {{speed=10}} {{reach=3.5}} {{atk_roll=[[1d20+2]]}}`
+Example usage: `&{template:hm_std} {{name=Orc Captain attacks!}} {{weapon=Longsword}} {{speed=10}} {{reach=3.5}} {{atk_roll=[[1d20cs>19cf1cf19 +2]]}}`
 
 Example usage: `&{template:hm_std} {{name=Orc Captain defends!}} {{weapon=Longsword}} {{def_roll=[[1d20cs>19cf1cf19 +6]]}} {{dr=2}} {{sdr=6}}`
 
