@@ -298,7 +298,7 @@
             <div class="sheet-col-1-16"><input type="number" name="attr_weapon_damage_mod_total" value="@{weapon_stat_bonus_damage}+@{weapon_spec_damage}+@{weapon_talent_damage}+@{weapon_magic_bonus}" disabled="disabled"/></div>
             <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_attack' value='&{template:hm_std} {{name=@{character_name} attacks!}} {{weapon=@{weapon}}} {{speed=@{base_weapon_speed}}} {{reach=@{weapon_reach}}} {{atk_roll=[[d20+@{weapon_attack_mod_total}]]}}'>ATK</button></div>
             <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} hits!}} {{weapon=@{weapon}}} {{speed=@{base_weapon_speed}}} {{reach=@{weapon_reach}}} {{damage=[[@{weapon_base_damage}+@{weapon_damage_mod_total}]]}}'>DMG</button></div>
-            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_defense' value='&{template:hm_std} {{name=@{character_name} defends!}} {{weapon=@{weapon}}} {{def_roll=[[1d20cs>19cf19 +@{weapon_defense_mod_total}]]}} {{dr=[[@{dr}]]}} {{sdr=[[@{shield_dr}]]}}'>DEF</button></div>
+            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_defense' value='&{template:hm_std} {{name=@{character_name} defends!}} {{weapon=@{weapon}}} {{def_roll=[[1d20cs>19cf1cf19 +@{weapon_defense_mod_total}]]}} {{dr=[[@{dr}]]}} {{sdr=[[@{shield_dr}]]}}'>DEF</button></div>
 		</div>
         <div class="sheet-row sheet-stat-row sheet-padl">
             <div class="sheet-col-1-16"></div>
@@ -1158,7 +1158,7 @@
         {{#caster}}<tr>
             <td><span class="tcat">Caster: </span>{{caster}}</td>
         </tr>{{/caster}}
-        {{#level}}<tr><td><span class="tcat">Spell Level :</span>{{level}}</td></tr>{{/level}}
+        {{#level}}<tr><td><span class="tcat">Spell Level: </span>{{level}}</td></tr>{{/level}}
         {{#cost}}<tr><td><span class="tcat">Base SP Cost: </span>{{cost}}</td></tr>{{/cost}}
         {{#components}}<tr><td><span class="tcat">Components: </span>{{components}}</td></tr>{{/components}}
         {{#speed}}<tr><td><span class="tcat">Casting Time: </span>{{speed}}</td></tr>{{/speed}}
