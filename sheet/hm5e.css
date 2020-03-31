@@ -213,6 +213,13 @@
 	padding: 0 5px!important;
 }
 
+/* Spells section */
+.charsheet .sheet-spell-roll {
+	padding: 0 5px!important;
+	vertical-align: middle!important;
+}
+
+
 /* Custom Pure Grid CSS (24 cols) DO NOT EIDT BELOW THIS LINE OR RISK BREAKING FORMATTING */
 .charsheet .sheet-row {
     letter-spacing: -0.31em;
@@ -1837,15 +1844,15 @@
 
 /* Roll templates */
 
-.sheet-rolltemplate-hm_defend table,
-.sheet-rolltemplate-hm_attack table {
+.sheet-rolltemplate-hm_spell table, 
+.sheet-rolltemplate-hm_std table {
     width: 100%;
     padding: 2px;
     background:url(https://i.imgur.com/j2D6vR4.jpg) top left repeat;
 }
 
-.sheet-rolltemplate-hm_defend th,
-.sheet-rolltemplate-hm_attack th {
+.sheet-rolltemplate-hm_spell th,
+.sheet-rolltemplate-hm_std th {
 	color: rgb(233, 223, 151);
     background-color: rgb(63, 32, 33);
     padding-left: 5px;
@@ -1853,47 +1860,48 @@
 	font-size: 1em;
     text-align: left;
 	font-family: "Arial", Helvetica, sans-serif;
+	font-style: italic;
     text-transform: uppercase;
 }
  
-.sheet-rolltemplate-hm_defend .sheet-arrow-right,
-.sheet-rolltemplate-hm_attack .sheet-arrow-right {
+.sheet-rolltemplate-hm_spell .sheet-arrow-right,
+.sheet-rolltemplate-hm_std .sheet-arrow-right {
     border-top: 3px solid transparent;
     border-bottom: 3px solid transparent;
 	border-left: 180px solid rgb(126, 45, 64);
 }
  
-.sheet-rolltemplate-hm_defend .sheet-tcat,
-.sheet-rolltemplate-hm_attack .sheet-tcat {
+.sheet-rolltemplate-hm_spell .sheet-tcat,
+.sheet-rolltemplate-hm_std .sheet-tcat {
     font-weight: bold;
 }
  
-.sheet-rolltemplate-hm_defend td,
-.sheet-rolltemplate-hm_attack td {
+.sheet-rolltemplate-hm_spell td,
+.sheet-rolltemplate-hm_std td {
     padding-left: 5px;
     font-size: 0.9em;
 }
  
-.sheet-rolltemplate-hm_defend .inlinerollresult,
-.sheet-rolltemplate-hm_attack .inlinerollresult  {
+.sheet-rolltemplate-hm_std .inlinerollresult  {
     background-color: transparent;
     border: none;
 }
  
-.sheet-rolltemplate-hm_defend .inlinerollresult.fullcrit,
-.sheet-rolltemplate-hm_attack .inlinerollresult.fullcrit {
+.sheet-rolltemplate-hm_std .inlinerollresult.fullcrit {
 	color: #3FB315;
     border: none;
 }
  
-.sheet-rolltemplate-hm_defend .inlinerollresult.fullfail,
-.sheet-rolltemplate-hm_attack .inlinerollresult.fullfail {
+.sheet-rolltemplate-hm_std .inlinerollresult.fullfail {
 	color: #B31515;
     border: none;
 }
  
-.sheet-rolltemplate-hm_defend .inlinerollresult.importantroll,
-.sheet-rolltemplate-hm_attack .inlinerollresult.importantroll {
+.sheet-rolltemplate-hm_std .inlinerollresult.importantroll {
 	color: #4A57ED;
     border: none;
+}
+
+.sheet-rolltemplate-hm_std img {
+	height: 1em;
 }
