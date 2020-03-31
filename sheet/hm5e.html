@@ -1150,9 +1150,14 @@
 		{{#damage}}
             <tr><td><span class="tcat">Damage Roll: </span>{{damage}}<img src="https://i.imgur.com/N8POrfv.png"></td></tr>
         {{/damage}}
+
 		{{#dr}}
             <tr><td><span class="tcat">DR: </span>{{dr}}{{#sdr}} + {{sdr}}<img src="https://i.imgur.com/AYeAO4C.png">{{/sdr}}</td></tr>
         {{/dr}}
+        
+        {{#allprops() name weapon speed reach atk_roll def_roll damage dr sdr}}
+            <tr><td><span class="tcat">{{key}}: </span>{{value}}</td></tr>
+        {{/allprops() name weapon speed reach atk_roll def_roll damage dr sdr}}
     </table>
 </rolltemplate>
 

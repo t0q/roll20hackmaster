@@ -23,6 +23,10 @@ Note that all template arguments are optional. You might wish to display just a 
 | atk_roll | Attack roll. Use a [[1d20cs>19cf1cf19]] here, so we can detect a near perfect attack.   |
 | def_roll | Defense roll. Use a [[1d20cs>19cf1cf19]] here, so we can detect a near perfect defense. |
 | damage   | Damage roll.                                                                            |
+| dr       | Damage reduction without a shield.                                                      |
+| sdr      | Damage reduction due to a shield.                                                       |
+
+This template will also accept arbitrary parameters.
 
 Example usage: `&{template:hm_std} {{name=Orc Captain attacks!}} {{weapon=Longsword}} {{speed=10}} {{reach=3.5}} {{atk_roll=[[1d20cs>19cf1cf19 +2]]}}`
 
