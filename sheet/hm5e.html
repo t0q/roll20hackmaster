@@ -265,16 +265,17 @@
 <div class="sheet-section-combat">
 
     <div class="sheet-row sheet-stat-row sheet-padl">
-		<div class="sheet-col-1-4 sheet-vert-bottom">Weapon</div>
+		<div class="sheet-col-3-16 sheet-vert-bottom">Weapon</div>
 		<div class="sheet-col-1-8 sheet-vert-bottom">Base Damage</div>
-		<div class="sheet-col-1-8 sheet-vert-bottom">Damage Bonus</div>
+		<div class="sheet-col-1-8 sheet-vert-bottom">Shield Damage</div>
+		<div class="sheet-col-1-16 sheet-vert-bottom">STR Bonus</div>
         <div class="sheet-col-1-16 sheet-vert-bottom">Magic Bonus</div>
         <div class="sheet-col-1-16 sheet-vert-bottom">Attack</div>
         <div class="sheet-col-1-16 sheet-vert-bottom">Speed</div>
         <div class="sheet-col-1-16 sheet-vert-bottom">Defense</div>
         <div class="sheet-col-1-16 sheet-vert-bottom">Damage</div>
         <div class="sheet-col-1-16 sheet-vert-bottom">Attack Roll</div>
-        <div class="sheet-col-1-16 sheet-vert-bottom">Damage Roll</div>
+        <div class="sheet-col-1-16 sheet-vert-bottom">Damage Rolls</div>
         <div class="sheet-col-1-16 sheet-vert-bottom">Defense Roll</div>
 	</div>
     
@@ -283,12 +284,13 @@
     <fieldset class="repeating_weapon">
     
 		<div class="sheet-row sheet-stat-row sheet-padl">
-			<div class="sheet-col-1-4"><input type="text" name="attr_weapon"/></div>
+			<div class="sheet-col-3-16"><input type="text" name="attr_weapon"/></div>
 			<div class="sheet-col-1-8" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input type="text" name="attr_weapon_base_damage"/></div>
-			<div class="sheet-col-1-8" title="Choose STR Mod for melee weapon or None for ranged weapon">
+			<div class="sheet-col-1-8" title="Only enter the shield damage roll here without any bonuses from stats or other sources"><input type="text" name="attr_weapon_shield_damage"/></div>
+			<div class="sheet-col-1-16" title="Choose STR Mod for melee weapon or None for ranged weapon">
 				<select name="attr_weapon_stat_bonus_damage">
-					<option value="0">None</option>
-					<option value="@{strength_damage_mod}">STR</option>
+					<option value="0">N</option>
+					<option value="@{strength_damage_mod}">Y</option>
 				</select>
 			</div>
 			<div class="sheet-col-1-16" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_weapon_magic_bonus" value="0"/></div>
@@ -346,7 +348,9 @@
                     <option value="5">5</option>
 				</select>
             </div>
-            <div class="sheet-col-3-16"></div>
+            <div class="sheet-col-1-16"></div>
+            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} is blocked!}} {{weapon=@{weapon}}} {{speed=@{base_weapon_speed}}} {{reach=@{weapon_reach}}} {{damage=[[@{weapon_shield_damage}+@{weapon_damage_mod_total}]]}}'>SHD</button></div>
+            <div class="sheet-col-1-16"></div>
         </div>
         
         <div class="sheet-row sheet-stat-row sheet-padl">
