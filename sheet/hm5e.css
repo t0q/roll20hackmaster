@@ -1,5 +1,40 @@
 /* My custom styles */
 
+
+/* General sheet wide Styles */
+/* ==== SKIN CHECKBOX FOR ARROW TOGGLES (►/▼) ==== */
+/* ==== HIDES THE ORIGINAL CHECKBOX ==== */
+input.sheet-arrow[type="checkbox"] {
+    opacity: 0;
+	width: 18px;
+	height: 18px;
+	cursor: pointer;
+	z-index: 1;
+}
+
+/* ==== STYLES AND POSITIONS WHAT COVERS THE UNCHECKED CHECKBOX ==== */
+input.sheet-arrow[type="checkbox"] + span::before {
+	margin-right: 4px;
+	margin-left: -22px;
+	line-height: 16px;
+	text-align: center;
+	display: inline-block;
+	vertical-align: middle;
+	content: "►";
+	width: 18px;
+	height: 18px;
+	font-size: 16px;
+}
+
+/* ==== WHAT CHANGES WHEN THE CHECKBOX IS CHECKED ==== */
+input.sheet-arrow[type="checkbox"]:checked + span::before {
+    content: "▼";
+}
+
+/* ==== HIDES THE CONTENT UNLESS THE CHECKBOX IS CHECKED ==== */
+.sheet-wombat-show:not(:checked)~.sheet-wombat {
+    display: none;
+}
 /* General sheet wide Styles */
 .charsheet button, input, select, textarea,
 .charsheet .sheet-row [class *= "sheet-col"],

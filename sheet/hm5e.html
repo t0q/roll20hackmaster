@@ -13,6 +13,25 @@
             }
         });
     });
+on("change:repeating_weapon:defence_dice_switch", function() {
+        getAttrs(["repeating_weapon_defence_dice_switch"], function(values) {
+            var check = parseInt(values.repeating_weapon_defence_dice_switch) || 0;
+            var dice = check ? "1d10!pcs>19cf1cf19" : "1d20cs>19cf1cf19";
+        setAttrs({
+            repeating_weapon_defence_dice: dice
+        });
+    });
+});
+
+on("change:skill_dice_switch", function() {
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var dice = check ? "[[1d100+@{skill_acting}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_acting}]]";
+        setAttrs({
+            acting_dice: dice
+        });
+    });
+});
 </script>
 
 <div class="sheet-section-header">
@@ -47,7 +66,9 @@
                 <option value="Human">Human</option>
                 <option value="Pixie Fairy">Pixie Fairy</option>
             </select><br/>Race</div>
+
     	</div>    
+
     	<div class="sheet-row">
     		<div class="sheet-col-1-8"><input class="sheet-underlined" type="text" name="attr_sex"/><br/>Sex</div>
     		<div class="sheet-col-1-8"><input class="sheet-underlined" type="text" name="attr_age"/><br/>Age</div>
@@ -60,8 +81,11 @@
                 <option value="Left">Left</option>
                 <option value="Ambidextrous">Ambidextrous</option>
             </select><br/>Handedness</div>
+
     	</div>
+
     </div>
+
     <div class="sheet-col-1-3"><img class="sheet-icon" src="http://www.kenzerco.com/images/rpg/hackmaster/hackmaster_logo.jpg" alt="HackMaster"></div>
     <div class="sheet-row">
         <div class="sheet-col-1-12"><select name="attr_alignment">
@@ -74,7 +98,9 @@
   		    <option value="CG">CG</option>
      	    <option value="CN">CN</option>
             <option value="CE">CE</option>
+
         </select><br/>Alignment</div>
+
         <div class="sheet-col-1-4"><input class="sheet-underlined" type="text" name="attr_god"/><br/>Patron God(s)</div>
         <div class="sheet-col-1-12"><input class="sheet-underlined" type="checkbox" name="attr_annointed"/><br/>Annointed?</div>
         <div class="sheet-col-5-24"></div>
@@ -85,18 +111,18 @@
         <div class="sheet-col-1-24"></div>
         <div class="sheet-col-1-24"><input class="sheet-underlined" type="text" name="attr_bp"/><br/>BP</div>
         <div class="sheet-col-1-24"></div>
+
     </div>
+
 </div>
 
 <hr/>
 
+
 <div class="sheet-section-statsandsaves">
 	<div class="sheet-row">
-		
 		<div class="sheet-col-5-8 sheet-padr">
-        
             <h4>Core Stats</h4>
-            
             <div class="sheet-row">
 				<div class="sheet-col-1-10 sheet-core-stat-label">STR</div>
 				<div class="sheet-col-1-16"><input type="text" name="attr_strength"/></div>
@@ -150,7 +176,6 @@
                 <div class="sheet-col-1-16"><input type="text" name="attr_looks"/></div>
                 <div class="sheet-col-1-16"><input type="text" name="attr_looks_fractional"/></div>
             </div>
-            
             <div class="sheet-row">
                 <div class="sheet-col-1-10 sheet-core-stat-label">CHA</div>
                 <div class="sheet-col-1-16"><input type="text" name="attr_charisma"/></div>
@@ -199,7 +224,6 @@
                 </div>
                 <div class="sheet-col-1-8"></div>
             </div>
-
 		</div>
 		
 		<div class="sheet-col-3-8">
@@ -263,7 +287,7 @@
                         <option value="d10">d10</option>
                         <option value="d12">d12</option>
                         <option value="d20">d20</option>
-    				</select>
+       				</select>
                 </div>
                 <div class="sheet-col-1-4 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_quick_initiative' value='@{character_name} rolls initiative\n\nRoll :[[@{initiative_die} + @{initiative} &{tracker} ]]'>Roll</button></div>
             </div>
@@ -284,19 +308,14 @@
         
     </div>
 </div>
-
 <hr />
-
 <h3>Combat Profiles</h3>
-
 <div class="sheet-section-combat">
-
     <div class="sheet-row sheet-stat-row sheet-padl">
 		<div class="sheet-col-3-16 sheet-vert-bottom">Weapon</div>
 		<div class="sheet-col-1-8 sheet-vert-bottom">Base Damage</div>
 		<div class="sheet-col-1-8 sheet-vert-bottom">Shield Damage</div>
-		<div class="sheet-col-1-16 sheet-vert-bottom">STR Bonus</div>
-        <div class="sheet-col-1-16 sheet-vert-bottom">Magic Bonus</div>
+        <div class="sheet-col-1-16 sheet-vert-bottom">Weapon Reach</div>
         <div class="sheet-col-1-16 sheet-vert-bottom">Attack</div>
         <div class="sheet-col-1-16 sheet-vert-bottom">Speed</div>
         <div class="sheet-col-1-16 sheet-vert-bottom">Defense</div>
@@ -304,36 +323,41 @@
         <div class="sheet-col-1-16 sheet-vert-bottom">Attack Roll</div>
         <div class="sheet-col-1-16 sheet-vert-bottom">Damage Rolls</div>
         <div class="sheet-col-1-16 sheet-vert-bottom">Defense Roll</div>
+        <div class="sheet-col-1-16 sheet-vert-bottom">Shield Damage</div>
 	</div>
-    
     <hr />
-    
     <fieldset class="repeating_weapon">
-    
 		<div class="sheet-row sheet-stat-row sheet-padl">
 			<div class="sheet-col-3-16"><input type="text" name="attr_weapon"/></div>
 			<div class="sheet-col-1-8" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input type="text" name="attr_weapon_base_damage"/></div>
 			<div class="sheet-col-1-8" title="Only enter the shield damage roll here without any bonuses from stats or other sources"><input type="text" name="attr_weapon_shield_damage"/></div>
-			<div class="sheet-col-1-16" title="Choose STR Mod for melee weapon or None for ranged weapon">
-				<select name="attr_weapon_stat_bonus_damage">
-					<option value="0">N</option>
-					<option value="@{strength_damage_mod}">Y</option>
-				</select>
-			</div>
-			<div class="sheet-col-1-16" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_weapon_magic_bonus" value="0"/></div>
-        	<div class="sheet-col-1-16"><input type="number" name="attr_weapon_attack_mod_total" value="@{level_attack_bonus}+@{intelligence_attack_mod}+@{dexterity_attack_mod}+@{weapon_magic_bonus}+@{weapon_spec_attack}+@{weapon_talent_attack}" disabled="disabled"/></div>
-            <div class="sheet-col-1-16"><input type="number" name="attr_weapon_speed_mod_total" value="@{base_weapon_speed}+@{level_speed_bonus}+@{weapon_spec_speed}+@{weapon_talent_speed}+@{encumbrance_speed_mod}" disabled="disabled"/></div>
-            <div class="sheet-col-1-16"><input type="number" name="attr_weapon_defense_mod_total" value="@{wisdom_defense_mod}+@{dexterity_defense_mod}+@{weapon_spec_defense}+@{weapon_talent_defense}+@{armor_defense_bonus}+@{shield_defense_bonus}+@{natural_defense_bonus}+@{encumbrance_defense_mod}" disabled="disabled"/></div>
-            <div class="sheet-col-1-16"><input type="number" name="attr_weapon_damage_mod_total" value="@{weapon_stat_bonus_damage}+@{weapon_spec_damage}+@{weapon_talent_damage}+@{weapon_magic_bonus}" disabled="disabled"/></div>
+			<div class="sheet-col-1-16"><input type="number" name="attr_weapon_reach" min=0 step=0.25></div>
+        	<div class="sheet-col-1-16"><input type="number" name="attr_weapon_attack_mod_total" value="@{weapon_misc_attack}+@{weapon_style_attack}+@{level_attack_bonus}+@{intelligence_attack_mod}+@{dexterity_attack_mod}+@{weapon_magic_bonus}+@{weapon_spec_attack}+@{weapon_talent_attack}" disabled="disabled"/></div>
+            <input type="hidden" name="attr_weapon_jab_speed_mod_total" value="@{weapon_misc_speed}+@{weapon_style_speed}+@{base_weapon_jab_speed}+@{level_speed_bonus}+@{armor_speed_modifier}+@{weapon_spec_speed}+@{weapon_talent_speed}+@{encumbrance_speed_mod}" disabled="disabled"/>
+            <div class="sheet-col-1-16"><input type="number" name="attr_weapon_speed_mod_total" value="@{weapon_misc_speed}+@{weapon_style_speed}+@{base_weapon_speed}+@{level_speed_bonus}+@{armor_speed_modifier}+@{weapon_spec_speed}+@{weapon_talent_speed}+@{encumbrance_speed_mod}" disabled="disabled"/></div>
+            <div class="sheet-col-1-16"><input type="number" name="attr_weapon_defense_mod_total" value="@{weapon_misc_defense}+@{weapon_style_defense}+@{wisdom_defense_mod}+@{dexterity_defense_mod}+@{weapon_spec_defense}+@{weapon_talent_defense}+@{armor_defense_bonus}+@{shield_defense_bonus}+@{natural_defense_bonus}+@{encumbrance_defense_mod}" disabled="disabled"/></div>
+            <div class="sheet-col-1-16"><input type="number" name="attr_weapon_damage_mod_total" value="@{weapon_misc_damage}+@{weapon_style_damage}+@{weapon_stat_bonus_damage}+@{weapon_spec_damage}+@{weapon_talent_damage}+@{weapon_magic_bonus}" disabled="disabled"/></div>
             <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_attack' value='&{template:hm_std} {{name=@{character_name} attacks!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}} {{reach=@{weapon_reach}}} {{atk_roll=[[1d20cs>19cf1cf19 +@{weapon_attack_mod_total}]]}}'>ATK</button></div>
             <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} hits!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}} {{reach=@{weapon_reach}}} {{damage=[[@{weapon_base_damage}+@{weapon_damage_mod_total}]]}}'>DMG</button></div>
-            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_defense' value='&{template:hm_std} {{name=@{character_name} defends!}} {{weapon=@{weapon}}} {{def_roll=[[1d20cs>19cf1cf19 +@{weapon_defense_mod_total}]]}} {{dr=[[@{dr}]]}} {{sdr=[[@{shield_dr}]]}}'>DEF</button></div>
-		</div>
-        <div class="sheet-row sheet-stat-row sheet-padl">
-            <div class="sheet-col-1-16"></div>
-            <div class="sheet-col-1-8 sheet-vert-bottom">Weapon Reach</div>
-            <div class="sheet-col-1-16"><input type="number" name="attr_weapon_reach" min=0 step=0.25></div>
-            <div class="sheet-col-3-16"></div>
+            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_defense' value='&{template:hm_std} {{name=@{character_name} defends!!}}{{def_roll=[[ @{defence_dice} +@{weapon_defense_mod_total}]]}} {{dr=[[@{dr}]]}} {{sdr=[[@{shield_dr}]]}}'>DEF</button></div>
+            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} is blocked!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}} {{reach=@{weapon_reach}}} {{damage=[[@{weapon_shield_damage}+@{weapon_damage_mod_total}]]}}'>SHD</button></div>
+            <div>
+            <div class="sheet-col-1-8"><span>Hidden Details</span></div>
+            <input type="checkbox" class="wombat-show arrow" name="attr_wombat_show" title="Show/Hide" value="1">
+            <span></span>
+            <div class="wombat">
+            
+            
+        <div class="sheet-row sheet-stat-row sheet-_padl">
+            <div class="sheet-col-1-8 sheet-vert-bottom">Magic Bonus</div>
+            
+            <div class="sheet-col-1-16" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_weapon_magic_bonus" value="0"/></div>
+            
+            <div class="sheet-col-1-16"><input type="checkbox" name="attr_defence_dice_switch" value="1" /></div>
+            
+            <input type="hidden" name="attr_defence_dice" value="1d20cs>19cf1cf19" />
+            
+            <div class="sheet-col-1-16"><span>d10 Def</span></div>
             <div class="sheet-col-1-8 sheet-vert-bottom">Specialization</div>
             <div class="sheet-col-1-16">
     			<select name="attr_weapon_spec_attack">
@@ -375,16 +399,19 @@
                     <option value="5">5</option>
 				</select>
             </div>
-            <div class="sheet-col-1-16"></div>
-            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} is blocked!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}} {{reach=@{weapon_reach}}} {{damage=[[@{weapon_shield_damage}+@{weapon_damage_mod_total}]]}}'>SHD</button></div>
-            <div class="sheet-col-1-16"></div>
+            
+            <div class="sheet-col-1-8">Jab Damage</div>
+            <div class="sheet-col-1-16" title="Only enter the jab damage roll here without any bonuses from stats or other sources"><input type="text" name="attr_weapon_jab_damage"/></div>
+            
         </div>
         
-        <div class="sheet-row sheet-stat-row sheet-padl">
+        <div class="sheet-row sheet-stat-row sheet-_padl">
             <div class="sheet-col-1-16"></div>
             <div class="sheet-col-1-8 sheet-vert-bottom">Base Speed</div>
             <div class="sheet-col-1-16"><input type="number" name="attr_base_weapon_speed"></div>
-            <div class="sheet-col-3-16"></div>
+            <div class="sheet-col-1-16"></div>
+            <div class="sheet-col-1-16"></div>
+           
             <div class="sheet-col-1-8 sheet-vert-bottom">Talents</div>
             <div class="sheet-col-1-16 sheet-vert-bottom">
         		<select name="attr_weapon_talent_attack">
@@ -426,20 +453,55 @@
                     <option value="5">5</option>
 				</select>
             </div>
+            <div class="sheet-col-1-8">Jab Speed</div>
+            <div class="sheet-col-1-16" title="Only enter the jab speed"><input type="text" name="attr_weapon_jab_speed"/></div>          
+            
+            <div class="sheet-col-1-16"></div>
+            
+            <div class="sheet-col-1-8 sheet-vert-bottom">Str Bonus</div>
+            
+            <div class="sheet-col-1-16" title="Choose STR Mod for melee weapon or None for ranged weapon">
+				<select name="attr_weapon_stat_bonus_damage">
+					<option value="0">N</option>
+					<option value="@{strength_damage_mod}">Y</option>
+				</select>
+			</div>
+            <div class="sheet-col-1-16"></div>
+            
+            <div class="sheet-col-1-16"></div>
+            <div class="sheet-col-1-8 sheet-vert-bottom">Style</div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_style_attack" value="0"/></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_style_speed" value="0"/></div> 
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_style_defense" value="0"/></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_style_damage" value="0"/></div>
+            
+            <div class="sheet-col-1-8">Jab Roll</div>
+            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} jabs you!}} {{weapon=@{weapon}}} {{speed=@{weapon_jab_speed_mod_total}}} {{reach=@{weapon_reach}}} {{damage=[[@{weapon_jab_damage}+@{weapon_damage_mod_total}]]}}'>DMG</button></div>
+              
+        <div class="sheet-row sheet-stat-row sheet-padl">
+            <div class="sheet-col-1-16"></div>
+            <div class="sheet-col-1-8 sheet-vert-bottom"></div>
+            <div class="sheet-col-1-16"></div>
+            <div class="sheet-col-1-16"></div>
+            <div class="sheet-col-1-8 sheet-vert-bottom">Miscellaneous</div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_misc_attack" value="0"/></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_misc_speed" value="0"/></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_misc_defense" value="0"/></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_misc_damage" value="0"/></div>
             <div class="sheet-col-3-16"></div>
             <hr />
         </div>
-        
+        </div>
+        </fieldset>
+		</div>
 	</fieldset>
     </div>
 </div>
 
 <div class="sheet-section-healthandskills">
     <div class="sheet-row">
-        
         <div class="sheet-col-5-8 sheet-padr">
             <h3>Health and Defense</h3>
-            
             <div class="sheet-row sheet-stat-row">
                 <div class="sheet-col-1-10">Current HP</div>
                 <div class="sheet-col-1-12"><input type="number" name="attr_hp" value="@{hp|max}-@{wound1}-@{wound2}-@{wound3}-@{wound4}-@{wound5}-@{wound6}-@{wound7}-@{wound8}-@{wound9}-@{wound10}" disabled="disabled"/></div>
@@ -452,11 +514,9 @@
                 <div class="sheet-col-1-10">TOP Save</div>
                 <div class="sheet-col-1-12"><input type="number" name="attr_topsave" value="0"/></div>
             </div>
-            
             <hr />
             
             <h4>Wounds</h4>
-            
             <div class="sheet-row sheet-stat-row">
                 <div class="sheet-col-1-16"></div>
                 <div class="sheet-col-1-8"></div>
@@ -492,7 +552,6 @@
                 <div class="sheet-col-1-8"><input type="number" name="attr_wound7_days" value="0"/></div>
                 <div class="sheet-col-1-16"></div>
             </div>
-            
             <div class="sheet-row sheet-stat-row">
                 <div class="sheet-col-1-16"></div>
                 <div class="sheet-col-1-8">Wound 3</div>
@@ -567,7 +626,6 @@
                 <div class="sheet-col-1-8"><input type="number" name="attr_natural_defense_bonus" value="0"/></div>
                 <div class="sheet-col-3-8"></div>
             </div>
-
             <hr/>
             
             <h3>Character Traits</h3>
@@ -575,7 +633,7 @@
             <h4>Proficiencies</h4>
             <div><textarea name="attr_proficiencies"></textarea></div>
             <hr/>
-            
+         
             <h4>Talents & Racial Abilities</h4>
             <div><textarea name="attr_talents"></textarea></div>
             <hr/>
@@ -644,6 +702,7 @@
                     <div class="sheet-col-1-12"><input type="text" name="attr_spell_speed"/></div>
                     <div class="sheet-col-1-16"><input type="text" name="attr_spell_points"/></div>
                     <div class="sheet-col-1-16"><input type="checkbox" name="attr_spell_memorized"/></div>
+                
                 </fieldset>
             </div>
             
@@ -652,16 +711,48 @@
         <div class="sheet-col-3-8">
             <h3>Skills</h3>
             <div class="sheet-row sheet-heading-row">
+                <div class="sheet-col-9-24 sheet-vert-middle">Mastery</div>
+                <div class="sheet-col-1-6 sheet-vert-middle">Attribute</div>
+                <div class="sheet-col-5-24 sheet-vert-middle">Roll</div>
+                
+                <div class="sheet-col-1-4">Opposed</div>
+            </div>
+            <div class="sheet-row sheet-heading-row">
+                <div class="sheet-col-9-24"><select name="attr_skill_mastery_die">
+					<option value="1d12!p + 0">Unskilled (= 0)</option>
+   					<option value="1d12!p">Novice (&#8804; 25)</option>
+                    <option value="1d8!p">Average (&#8804; 50)</option>
+                    <option value="1d6!p">Advanced (&#8804; 75)</option>
+                    <option value="1d4!p">Expert (&#8804; 87)</option>
+                    <option value="1d3!p">Master (&#8804; 100)</option>
+                </select></div>
+                <div class="sheet-col-1-6"><select name="attr_skill_mastery_ability">
+                    <option value="Strength">STR</option>
+                    <option value="Intelligence">INT</option>
+                    <option value="Wisdom">WIS</option>
+                    <option value="Dexterity">DEX</option>
+                    <option value="Constitution">CON</option>
+                    <option value="Looks">LKS</option>
+                    <option value="Charisma">CHA</option>
+                </select></div>
+                
+                <div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_mastery' value='!sheet_master_die [[@{skill_mastery_die}]] @{skill_mastery_ability}'>Train</button></div>
+                <div class="sheet-col-1-4"><input type="checkbox" name="attr_skill_dice_switch" value="1" /></div>
+            </div>
+            <div class="sheet-row sheet-heading-row">
                 <div class="sheet-col-1-2 sheet-vert-middle">Skill</div>
                 <div class="sheet-col-1-8 sheet-vert-middle"></div>
                 <div class="sheet-col-1-8 sheet-vert-middle">Mastery</div>
-                <div class="sheet-col-1-4 sheet-vert-middle">Roll</div>
+                <div class="sheet-col-1-4 sheet-vert-middle"> Std Roll</div>
             </div>
             
 			<div class="sheet-row sheet-skill-row">
 				<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Acting (Lks,Cha)</div>
+                
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_acting" value="0"/></div>
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_acting' value='@{character_name} makes an acting skill check\n\nRoll :[[d100]] Skill: [[@{skill_acting}]]'>Check</button></div>
+				
+				<input type="hidden" name="attr_acting_dice" value="[[d100]] Skill: [[@{skill_acting}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_acting' value='@{character_name} makes an acting skill check\n\nRoll :@{acting_dice}'>Check</button></div>
 			</div>
 			
     		<div class="sheet-row sheet-skill-row">
@@ -669,7 +760,6 @@
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_animal_husbandry" value="0"/></div>
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_animal_husbandry' value='@{character_name} makes an animal husbandry skill check\n\nRoll :[[d100]] Skill: [[@{skill_animal_husbandry}]]'>Check</button></div>
 			</div>
-			
         	<div class="sheet-row sheet-skill-row">
 				<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Animal Mimicry (Wis)</div>
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_animal_mimicry" value="0"/></div>
@@ -681,7 +771,6 @@
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_boating" value="0"/></div>
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_boating' value='@{character_name} makes a boating skill check\n\nRoll :[[d100]] Skill: [[@{skill_boating}]]'>Check</button></div>
 			</div>
-			
             <div class="sheet-row sheet-skill-row">
 				<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Cartography (Int)</div>
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_cartography" value="0"/></div>
@@ -693,188 +782,351 @@
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_climbing" value="0"/></div>
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_climbing' value='@{character_name} makes a climbing skill check\n\nRoll :[[d100]] Skill: [[@{skill_climbing}]]'>Check</button></div>
 			</div>
-			
             <div class="sheet-row sheet-skill-row">
     			<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Current Affairs (Wis)</div>
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_current_affairs" value="0"/></div>
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_current_affairs' value='@{character_name} makes a current affairs skill check\n\nRoll :[[d100]] Skill: [[@{skill_current_affairs}]]'>Check</button></div>
 			</div>
-			
             <div class="sheet-row sheet-skill-row">
     			<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Diplomacy (Cha)</div>
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_diplomacy" value="0"/></div>
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_diplomacy' value='@{character_name} makes a diplomacy skill check\n\nRoll :[[d100]] Skill: [[@{skill_diplomacy}]]'>Check</button></div>
 			</div>
-			
             <div class="sheet-row sheet-skill-row">
         		<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Disguise (Int,Cha)</div>
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_disguise" value="0"/></div>
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_disguise' value='@{character_name} makes a disguise skill check\n\nRoll :[[d100]] Skill: [[@{skill_disguise}]]'>Check</button></div>
 			</div>
+
 			
+
             <div class="sheet-row sheet-skill-row">
+
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Distraction (Cha)</div>
+
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_distraction" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_distraction' value='@{character_name} makes a distraction skill check\n\nRoll :[[d100]] Skill: [[@{skill_distraction}]]'>Check</button></div>
+
 			</div>
+
 			
+
             <div class="sheet-row sheet-skill-row">
+
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Escape Artist (Int,Dex)</div>
+
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_escape_artist" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_escape_artist' value='@{character_name} makes an escape artist skill check\n\nRoll :[[d100]] Skill: [[@{skill_escape_artist}]]'>Check</button></div>
+
 			</div>
+
 			
+
             <div class="sheet-row sheet-skill-row">
+
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Fire Building (Wis)</div>
+
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_fire_building" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_fire_building' value='@{character_name} makes a fire building skill check\n\nRoll :[[d100]] Skill: [[@{skill_fire_building}]]'>Check</button></div>
+
 			</div>
+
 			
+
             <div class="sheet-row sheet-skill-row">
+
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Glean Information (Int,Wis,Cha)</div>
+
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_glean_information" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_glean_information' value='@{character_name} makes a glean information skill check\n\nRoll :[[d100]] Skill: [[@{skill_glean_information}]]'>Check</button></div>
+
 			</div>
+
 			
+
             <div class="sheet-row sheet-skill-row">
+
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Hiding (Int,Dex)</div>
+
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_hiding" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_hiding' value='@{character_name} makes a hiding skill check\n\nRoll :[[d100]] Skill: [[@{skill_hiding}]]'>Check</button></div>
+
 			</div>
+
 			
+
             <div class="sheet-row sheet-skill-row">
+
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Interrogation (Wis,Cha)</div>
+
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_interrogation" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_interrogation' value='@{character_name} makes an interrogation skill check\n\nRoll :[[d100]] Skill: [[@{skill_interrogation}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Intimidation (Str,Cha)</div>
+
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_intimidation" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_intimidation' value='@{character_name} makes an intimidation skill check\n\nRoll :[[d100]] Skill: [[@{skill_intimidation}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Jumping (Str)</div>
+
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_jumping" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_jumping' value='@{character_name} makes a jumping skill check\n\nRoll :[[d100]] Skill: [[@{skill_jumping}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Law (Int)</div>
+
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_law" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_law' value='@{character_name} makes a law skill check\n\nRoll :[[d100]] Skill: [[@{skill_law}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Listening (Wis)</div>
+
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_listening" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_listening' value='@{character_name} makes a listening skill check\n\nRoll :[[d100]] Skill: [[@{skill_listening}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Observation (Wis)</div>
+
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_observation" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_observation' value='@{character_name} makes an observation skill check\n\nRoll :[[d100]] Skill: [[@{skill_observation}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Oration (Cha)</div>
+
     			<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_oration" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_oration' value='@{character_name} makes an oration skill check\n\nRoll :[[d100]] Skill: [[@{skill_oration}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Persuasion (Cha)</div>
+
     			<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_persuasion" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_persuasion' value='@{character_name} makes a persuasion skill check\n\nRoll :[[d100]] Skill: [[@{skill_persuasion}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Pick Pocket (Dex)</div>
+
     			<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_pick_pocket" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_pick_pocket' value='@{character_name} makes a pick pocket skill check\n\nRoll :[[d100]] Skill: [[@{skill_pick_pocket}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Reading Lips (Int)</div>
+
     			<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_reading_lips" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_reading_lips' value='@{character_name} makes a reading lips skill check\n\nRoll :[[d100]] Skill: [[@{skill_reading_lips}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Recruiting (Cha)</div>
+
     			<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_recruiting" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_recruiting' value='@{character_name} makes a recruiting skill check\n\nRoll :[[d100]] Skill: [[@{skill_recruiting}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Resist Persuasion (Wis)</div>
+
     			<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_resist_persuasion" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_resist_persuasion' value='@{character_name} makes a resist persuasion skill check\n\nRoll :[[d100]] Skill: [[@{skill_resist_persuasion}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Rope Use (Dex)</div>
+
     			<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_rope_use" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_rope_use' value='@{character_name} makes a rope use skill check\n\nRoll :[[d100]] Skill: [[@{skill_rope_use}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Salesmanship (Int,Wis,Cha)</div>
+
         		<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_salesmanship" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_salesmanship' value='@{character_name} makes a salesmanship skill check\n\nRoll :[[d100]] Skill: [[@{skill_salesmanship}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Scrutiny (Wis)</div>
+
             	<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_scrutiny" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_scrutiny' value='@{character_name} makes a scrutiny skill check\n\nRoll :[[d100]] Skill: [[@{skill_scrutiny}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Seduction, Art of (Cha,Lks)</div>
+
             	<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_seduction" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_seduction' value='@{character_name} makes a seduction skill check\n\nRoll :[[d100]] Skill: [[@{skill_seduction}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Skilled Liar (Cha)</div>
+
             	<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_skilled_liar" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_skilled_liar' value='@{character_name} makes a skilled liar skill check\n\nRoll :[[d100]] Skill: [[@{skill_skilled_liar}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Sneaking (Dex)</div>
+
             	<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_sneaking" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_sneaking' value='@{character_name} makes a sneaking skill check\n\nRoll :[[d100]] Skill: [[@{skill_sneaking}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Survival (Wis,Con)</div>
+
             	<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_survival" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_survival' value='@{character_name} makes a survival skill check\n\nRoll :[[d100]] Skill: [[@{skill_survival}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Torture (Int)</div>
+
             	<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_torture" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_torture' value='@{character_name} makes a torture skill check\n\nRoll :[[d100]] Skill: [[@{skill_torture}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Tracking (Wis)</div>
+
             	<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_tracking" value="0"/></div>
+
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_tracking' value='@{character_name} makes a tracking skill check\n\nRoll :[[d100]] Skill: [[@{skill_tracking}]]'>Check</button></div>
+
 			</div>
+
             
+
             <div class="sheet-row sheet-skill-row">
+
                 <fieldset class="repeating_skill">
+
                     <div class="sheet-col-15-24 sheet-vert-middle"><input type="text" name="attr_skillname"/></div>
+
                     <div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_mastery" value="0"/></div>
+
                     <div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill' value='@{character_name} makes a @{skillname} skill check\n\nRoll :[[d100]] Skill: [[@{mastery}]]'>Check</button></div>
+
                 </fieldset>
+
             </div>
+
+
 
 	</div>
 
@@ -888,7 +1140,7 @@
     <div class="sheet-col-1-2 sheet-padl">
         <div class="sheet-row sheet-stat-row">
             <div class="sheet-col-7-8 sheet-vert-middle">Item</div>
-            <div class="sheet-col-1-8 sheet-vert-middle">Weight</div>
+           <div class="sheet-col-1-8 sheet-vert-middle">Weight</div>
         </div>
         <div class="sheet-row sheet-stat-row">
             <div class="sheet-col-7-8 sheet-vert-middle"><input type="text" name="attr_item01"/></div>
@@ -1017,11 +1269,10 @@
             <div class="sheet-col-1-8 sheet-vert-middle"><input type="number" name="attr_item30_weight" value=0 min=0 step=0.5></div>
         </div>
     </div>
-    
     <hr/>
-    
+
     <h4>Currency</h4>
-    
+
     <div class="sheet-col-1-2 sheet-padl">
         <div class="sheet-row sheet-stat-row">
             <div class="sheet-col-1-4 sheet-vert-middle">Trade Coins</div>
@@ -1040,16 +1291,16 @@
             <div><textarea name="attr_otherWealth" style="height: 52px;"></textarea></div>
         </div>
     </div>
-    
+
     <div class="sheet-col-1-2 sheet-padr">
         <div class="sheet-row sheet-stat-row">
             <div class="sheet-col-1 sheet-vert-middle">Gems & Jewelry</div>
             <div><textarea name="attr_gemsAndJewelry"></textarea></div>
         </div>
     </div>
-    
+
     <hr/>
-    
+
     <div class="sheet-col-1-2 sheet-padl">
     <h4>Weight</h4>
         <div class="sheet-row sheet-stat-row">
@@ -1065,7 +1316,7 @@
             <div class="sheet-col-1-4 sheet-vert-middle"><input type="number" name="attr_coin_weight_value" value="floor(@{trade_coins}/200+@{copper}/80+@{silver}/80+@{gold}/80)" disabled="disabled"/></div>
         </div>
     </div>
-    
+
     <div class="sheet-col-1-2 sheet-padl">
     <h4>Encumbrance</h4>
         <div class="sheet-row sheet-stat-row">
@@ -1092,17 +1343,20 @@
             <div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_encumbrance_fatigue_mod" value="floor(@{encumbrance}*1.5)" disabled="disabled"/></div>
         </div>
     </div>
-    
+
 </div>
+
 
 <h3>Notes</h3>
 
 <div class="sheet-col-1 sheet-vert-middle">
     <div><textarea name="attr_notes" style="height: 300px;"></textarea></div>
 </div>
+
 <div>Icons made by <a href="https://www.flaticon.com/authors/smashicons" title="Smashicons">Smashicons</a> from <a href="https://www.flaticon.com/" title="Flaticon">www.flaticon.com</a></div>
 
 <!-- Roll templates -->
+
 <rolltemplate class="sheet-rolltemplate-hm_std">
     <table>
         {{#name}}<tr><th>{{name}}</th></tr>{{/name}}
@@ -1114,10 +1368,12 @@
             {{#reach}}<span class="tcat">Reach: </span>{{reach}}{{/reach}}
         </td></tr>
 
+
+
 <!-- Roll dice in the form of 1d20cs>19cf19 for nat19 detection. -->
+
         {{#atk_roll}}
             <tr><td><span class="tcat">Attack Roll: </span>{{atk_roll}}</td></tr>
-
             {{#rollWasCrit() atk_roll}}{{#^rollWasFumble() atk_roll}}
                     <tr><td><span class="tcat">Critical Hit!</span></td></tr>
             {{/^rollWasFumble() atk_roll}}{{/rollWasCrit() atk_roll}}
@@ -1125,15 +1381,12 @@
             {{#rollWasCrit() atk_roll}}{{#rollWasFumble() atk_roll}}
                     <tr><td><span class="tcat">Near-Perfect Attack!</span></td></tr>
             {{/rollWasFumble() atk_roll}}{{/rollWasCrit() atk_roll}}
-        
             {{#rollWasFumble() atk_roll}}{{#^rollWasCrit() atk_roll}}
                 <tr><td><span class="tcat">Fumble!</span></td></tr>
             {{/^rollWasCrit() atk_roll}}{{/rollWasFumble() atk_roll}}
         {{/atk_roll}}
-
         {{#def_roll}}
             <tr><td><span class="tcat">Defense Roll: </span>{{def_roll}}</td></tr>
-
             {{#rollWasCrit() def_roll}}{{#^rollWasFumble() def_roll}}
                     <tr><td><span class="tcat">Perfect Defense!</span></td></tr>
             {{/^rollWasFumble() def_roll}}{{/rollWasCrit() def_roll}}
@@ -1146,11 +1399,9 @@
                 <tr><td><span class="tcat">Fumble!</span></td></tr>
             {{/^rollWasCrit() def_roll}}{{/rollWasFumble() def_roll}}
         {{/def_roll}}
-
 		{{#damage}}
             <tr><td><span class="tcat">Damage Roll: </span>{{damage}}<img src="https://i.imgur.com/N8POrfv.png"></td></tr>
         {{/damage}}
-
 		{{#dr}}
             <tr><td><span class="tcat">DR: </span>{{dr}}{{#sdr}} + {{sdr}}<img src="https://i.imgur.com/AYeAO4C.png">{{/sdr}}</td></tr>
         {{/dr}}
@@ -1159,9 +1410,11 @@
             <tr><td><span class="tcat">{{key}}: </span>{{value}}</td></tr>
         {{/allprops() name weapon speed reach atk_roll def_roll damage dr sdr}}
     </table>
+
 </rolltemplate>
 
 <rolltemplate class="sheet-rolltemplate-hm_spell">
+
     <table>
         {{#name}}<tr><th>{{name}}</th></tr>{{/name}}
         {{#caster}}<tr>
@@ -1172,4 +1425,6 @@
         {{#components}}<tr><td><span class="tcat">Components: </span>{{components}}</td></tr>{{/components}}
         {{#speed}}<tr><td><span class="tcat">Casting Time: </span>{{speed}}</td></tr>{{/speed}}
     </table>
+
 </rolltemplate>
+
