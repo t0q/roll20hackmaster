@@ -1,0 +1,1044 @@
+on('chat:message', function(rang) {
+
+    var cmdNam;
+
+    var msgtxt;
+
+
+
+    cmdNam = '!RangFumb ';
+
+    msgtxt = rang.content;
+
+    if(rang.type == 'api' && msgtxt.indexOf(cmdNam) !== -1) {
+
+
+
+            var missdif = msgtxt.slice(cmdNam.length);
+
+            var selfinj = 1;
+
+            var rangfumbroll;
+
+            var penalty = 0;
+
+            var penaltydur = 0;
+
+            var pen = 0;
+
+            var pendur = 0;
+
+            var pendur1 = 0;
+
+            var count = 1;
+
+            var error = 0;
+            
+            
+
+            rangfumbroll = randomInteger(1000)+(Number(missdif)*10);
+
+
+
+
+            
+
+            do
+
+            {//log(rangfumbroll);
+
+            
+
+            if (rangfumbroll < 201)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=No special ill effect.}}");}
+
+            else
+
+            {if (rangfumbroll < 217)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Sweat in your eyes}}{{Effect=-1 attack for 10 seconds.}}");}
+
+            else
+
+            {if (rangfumbroll < 233)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Blood in your eyes}}{{Effect=-3 attack for 10 seconds.}}");}
+
+            else
+
+            {if (rangfumbroll < 248)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Arrow whistles by head of random ally in field of fire}}{{Effect=Distraction causes them to be automatically hit by their opponent and the ally's count resets.}}");}
+
+            else
+
+            {if (rangfumbroll < 264)
+
+            {penaltydur = randomInteger(4);
+
+            pendur = penaltydur;
+
+            while (pendur == 4)
+
+            {pendur = randomInteger(4);
+
+            penaltydur = penaltydur + pendur - 1;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Distracted by glare}}{{Effect=add " + penaltydur + " seconds wait time before next attack and -4 penalty to Attack whilst so distracted.}}");}
+
+            else
+
+            {if (rangfumbroll < 277)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Boot/footgear breaks}}{{Effect=-1 to attack until repaired or discarded.}}");}
+
+            else
+
+            {if (rangfumbroll < 319)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Backpack, pouch, or other container strap breaks}}{[Effect=-1 to attack until item repaired or discarded.}}");}
+
+            else
+
+            {if (rangfumbroll < 344)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Belt, girdle, etc. breaks}}{{Effect=-1 to attack until item repaired or discarded.}}");}
+
+            else
+
+            {if (rangfumbroll < 365)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Armor loosened}}{{Effect= -1 to attack until readjusted (by redonning or by another person helping for 10 seconds).}}");}
+
+            else
+
+            {if (rangfumbroll < 371)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Armor strap breaks}}{{Effect=-2 to attack until repaired.}}");}
+
+            else
+
+            {if (rangfumbroll < 437)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Bowstring breaks}}{{Effect=Bow useless until replaced.}}");}
+
+            else
+
+            {if (rangfumbroll < 509)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=String Notch chipped}}{{Effect=-1 to attack.}}");}
+
+            else
+
+            {if (rangfumbroll < 563)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=String Notch badly chipped}}{{Effect=-2 to attack.}}");}
+
+            else
+
+            {if (rangfumbroll < 581)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Limb cracked}}{{Effect=-25% to damage.}} /w gm p.s. The limb is the end of the bow where the string is notched. ");}
+
+            else
+
+            {if (rangfumbroll < 590)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Limb badly cracked}}{{Effect= -50% to damage.}} /w gm p.s. The limb is the end of the bow where the string is notched");}
+
+            else
+
+            {if (rangfumbroll < 617)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Limb broken (useless).}} /w gm p.s. the limb is the end of the bow where the string is notched");}
+
+            else
+
+            {if (rangfumbroll < 631)
+
+            {penaltydur = randomInteger(4);
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Overextend}}{{Effect= +" + penaltydur + " seconds penalty to next attack, -2 to next defense roll.}}");}
+
+            else
+
+            {if (rangfumbroll < 645)
+
+            {penalty = randomInteger(4) + 1;
+
+            penaltydur = randomInteger(6);
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Graze nearest ally in field of fire}}{{Effect= Though insufficient to cause a wound, bewildered distraction causes them to suffer a +" + penaltydur + " seconds penalty to next attack and a -" + penalty + " to hit penalty on next attack roll. If the ally is a spellcaster in the midst of casting a spell this counts as 'Caster struck by blow absorbed by body armor' for spell mishaps.}}");}
+
+            else
+
+            {if (rangfumbroll < 659)
+
+            {penaltydur = randomInteger(4);
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Off balance}}{{Effect=+" + penaltydur + " seconds to next attack.}}");}
+
+            else
+
+            {if (rangfumbroll < 673)
+
+            {penaltydur = randomInteger(8);
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Really Overextend}}{{Effect=+" + penaltydur + " seconds penalty to next shot.}}");}
+
+            else
+
+            {if (rangfumbroll < 687)
+
+            {penalty = randomInteger(20);
+
+            pen = penalty;
+
+            if (pen == 20)
+
+            {while (pen > 5)
+
+            {pen = randomInteger(6);
+
+            penalty = penalty + pen - 1;}}
+
+            penalty = penalty + 6;
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Slip}}{{Effect= make a Feat of Agility check vs. " + penalty + " or fall prone and suffer a -6 to all defense and attack rolls for 10 seconds. Righting oneself requires 3 seconds plus time to gather dropped objects.}}");}
+
+            else
+
+            {if (rangfumbroll < 695)
+
+            {penalty = randomInteger(3);
+
+            if (penalty == 1)
+
+            {penaltydur = randomInteger(3);}
+
+            else
+
+            {if (penalty == 2)
+
+            {penaltydur = randomInteger(3) + randomInteger(3);}
+
+            else
+
+            {if (penalty == 3)
+
+            {penaltydur = randomInteger(3) + randomInteger(3) + randomInteger(3);}}}
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {penaltydur = penaltydur * 1.5;
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle tear in right wrist}}{{Effect=-" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}
+
+            else
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Right wrist is sprained/hyperextended}}{{Effect=-" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}}
+
+            else
+
+            {if (rangfumbroll < 699)
+
+            {penalty = randomInteger(3);
+
+            if (penalty == 1)
+
+            {penaltydur = randomInteger(3);}
+
+            else
+
+            {if (penalty == 2)
+
+            {penaltydur = randomInteger(3) + randomInteger(3);}
+
+            else
+
+            {if (penalty == 3)
+
+            {penaltydur = randomInteger(3) + randomInteger(3) + randomInteger(3);}}}
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {penaltydur = penaltydur * 1.5;
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle tear in left wrist}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}
+
+            else
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Left wrist is sprained/hyperextended}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}}
+
+            else
+
+            {if (rangfumbroll < 705)
+
+            {penalty = randomInteger(3);
+
+            if (penalty == 1)
+
+            {penaltydur = randomInteger(3);}
+
+            else
+
+            {if (penalty == 2)
+
+            {penaltydur = randomInteger(3) + randomInteger(3);}
+
+            else
+
+            {if (penalty == 3)
+
+            {penaltydur = randomInteger(3) + randomInteger(3) + randomInteger(3);}}}
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {penaltydur = penaltydur * 1.5;
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle tear in right shoulder}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}
+
+            else
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Right shoulder is sprained/hyperextended}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}}
+
+            else
+
+            {if (rangfumbroll < 709)
+
+            {penalty = randomInteger(3);
+
+            if (penalty == 1)
+
+            {penaltydur = randomInteger(3);}
+
+            else
+
+            {if (penalty == 2)
+
+            {penaltydur = randomInteger(3) + randomInteger(3);}
+
+            else
+
+            {if (penalty == 3)
+
+            {penaltydur = randomInteger(3) + randomInteger(3) + randomInteger(3);}}}
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {penaltydur = penaltydur * 1.5;
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle tear in left shoulder}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}
+
+            else
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Left shoulder is sprained/hyperextended}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}}
+
+            else
+
+            {if (rangfumbroll < 713)
+
+            {penalty = randomInteger(3);
+
+            if (penalty == 1)
+
+            {penaltydur = randomInteger(3);}
+
+            else
+
+            {if (penalty == 2)
+
+            {penaltydur = randomInteger(3) + randomInteger(3);}
+
+            else
+
+            {if (penalty == 3)
+
+            {penaltydur = randomInteger(3) + randomInteger(3) + randomInteger(3);}}}
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {penaltydur = penaltydur * 1.5;
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle tear in right elbow}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}
+
+            else
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Right elbow is sprained/hyperextended}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}}
+
+            else
+
+            {if (rangfumbroll < 717)
+
+            {penalty = randomInteger(3);
+
+            if (penalty == 1)
+
+            {penaltydur = randomInteger(3);}
+
+            else
+
+            {if (penalty == 2)
+
+            {penaltydur = randomInteger(3) + randomInteger(3);}
+
+            else
+
+            {if (penalty == 3)
+
+            {penaltydur = randomInteger(3) + randomInteger(3) + randomInteger(3);}}}
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {penaltydur = penaltydur * 1.5;
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle tear in left elbow}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}
+
+            else
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Left elbow is sprained/hyperextended}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}}
+
+            else
+
+            {if (rangfumbroll < 723)
+
+            {penalty = randomInteger(3);
+
+            if (penalty == 1)
+
+            {penaltydur = randomInteger(3);}
+
+            else
+
+            {if (penalty == 2)
+
+            {penaltydur = randomInteger(3) + randomInteger(3);}
+
+            else
+
+            {if (penalty == 3)
+
+            {penaltydur = randomInteger(3) + randomInteger(3) + randomInteger(3);}}}
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {penaltydur = penaltydur * 1.5;
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle tear in neck}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}
+
+            else
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Neck is sprained/hyperextended}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}}
+
+            else
+
+            {if (rangfumbroll < 729)
+
+            {penalty = randomInteger(3);
+
+            if (penalty == 1)
+
+            {penaltydur = randomInteger(3);}
+
+            else
+
+            {if (penalty == 2)
+
+            {penaltydur = randomInteger(3) + randomInteger(3);}
+
+            else
+
+            {if (penalty == 3)
+
+            {penaltydur = randomInteger(3) + randomInteger(3) + randomInteger(3);}}}
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {penaltydur = penaltydur * 1.5;
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle tear in back}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}
+
+            else
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Back is sprained/hyperextended}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}}
+
+            else
+
+            {if (rangfumbroll < 734)
+
+            {penalty = randomInteger(4);
+
+            pen = penalty;
+
+            while (pen == 4)
+
+            {pen = randomInteger(4);
+
+            penalty = penalty + pen - 1;}
+
+            pen = penalty;
+
+            penaltydur = 0;
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur;
+
+            while (pendur == 3)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur1 + pendur - 1;}
+
+            penaltydur = penaltydur + pendur1;
+
+            pen = pen - 0.5;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Torn ligament in forearm}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks, but half the penalty is permanent}}");}
+
+            else
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            penaltydur = penaltydur + pendur;
+
+            pen = pen - 1;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle in forearm is strained/pulled}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks}}");}}
+
+            else
+
+            {if (rangfumbroll < 739)
+
+            {penalty = randomInteger(4);
+
+            pen = penalty;
+
+            while (pen == 4)
+
+            {pen = randomInteger(4);
+
+            penalty = penalty + pen - 1;}
+
+            pen = penalty;
+
+            penaltydur = 0;
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur;
+
+            while (pendur == 3)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur1 + pendur - 1;}
+
+            penaltydur = penaltydur + pendur1;
+
+            pen = pen - 0.5;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Torn ligament in bicep}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks, but half the penalty is permanent.}}");}
+
+            else
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            penaltydur = penaltydur + pendur;
+
+            pen = pen - 1;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle in bicep is strained/pulled}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}}
+
+            else
+
+            {if (rangfumbroll < 744)
+
+            {penalty = randomInteger(4);
+
+            pen = penalty;
+
+            while (pen == 4)
+
+            {pen = randomInteger(4);
+
+            penalty = penalty + pen - 1;}
+
+            pen = penalty;
+
+            penaltydur = 0;
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur;
+
+            while (pendur == 3)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur1 + pendur - 1;}
+
+            penaltydur = penaltydur + pendur1;
+
+            pen = pen - 0.5;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Torn ligament in tricep}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks, but half the penalty is permanent.}}");}
+
+            else
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            penaltydur = penaltydur + pendur;
+
+            pen = pen - 1;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle in tricep is strained/pulled}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}}
+
+            else
+
+            {if (rangfumbroll < 749)
+
+            {penalty = randomInteger(4);
+
+            pen = penalty;
+
+            while (pen == 4)
+
+            {pen = randomInteger(4);
+
+            penalty = penalty + pen - 1;}
+
+            pen = penalty;
+
+            penaltydur = 0;
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur;
+
+            while (pendur == 3)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur1 + pendur - 1;}
+
+            penaltydur = penaltydur + pendur1;
+
+            pen = pen - 0.5;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Torn ligament in lower back}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks, but half the penalty is permanent}}");}
+
+            else
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            penaltydur = penaltydur + pendur;
+
+            pen = pen - 1;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle in lower back is strained/pulled}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks}}");}}
+
+            else
+
+            {if (rangfumbroll < 754)
+
+            {penalty = randomInteger(4);
+
+            pen = penalty;
+
+            while (pen == 4)
+
+            {pen = randomInteger(4);
+
+            penalty = penalty + pen - 1;}
+
+            pen = penalty;
+
+            penaltydur = 0;
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur;
+
+            while (pendur == 3)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur1 + pendur - 1;}
+
+            penaltydur = penaltydur + pendur1;
+
+            pen = pen - 0.5;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Torn ligament in side}}{[Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks, but half the penalty is permanent}}");}
+
+            else
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            penaltydur = penaltydur + pendur;
+
+            pen = pen - 1;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle in side is strained/pulled}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks}}");}}
+
+            else
+
+            {if (rangfumbroll < 759)
+
+            {penalty = randomInteger(4);
+
+            pen = penalty;
+
+            while (pen == 4)
+
+            {pen = randomInteger(4);
+
+            penalty = penalty + pen - 1;}
+
+            pen = penalty;
+
+            penaltydur = 0;
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur;
+
+            while (pendur == 3)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur1 + pendur - 1;}
+
+            penaltydur = penaltydur + pendur1;
+
+            pen = pen - 0.5;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Torn ligament in upper back}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks, but half the penalty is permanent.}}");}
+
+            else
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            penaltydur = penaltydur + pendur;
+
+            pen = pen - 1;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle in upper back is strained/pulled}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}}
+
+            else
+
+            {if (rangfumbroll < 764)
+
+            {penalty = randomInteger(4);
+
+            pen = penalty;
+
+            while (pen == 4)
+
+            {pen = randomInteger(4);
+
+            penalty = penalty + pen - 1;}
+
+            pen = penalty;
+
+            penaltydur = 0;
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur;
+
+            while (pendur == 3)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur1 + pendur - 1;}
+
+            penaltydur = penaltydur + pendur1;
+
+            pen = pen - 0.5;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Torn ligament in left shoulder}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks, but half the penalty is permanent.}}");}
+
+            else
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            penaltydur = penaltydur + pendur;
+
+            pen = pen - 1;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle in left shoulder is strained/pulled}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}}
+
+            else
+
+            {if (rangfumbroll < 769)
+
+            {penalty = randomInteger(4);
+
+            pen = penalty;
+
+            while (pen == 4)
+
+            {pen = randomInteger(4);
+
+            penalty = penalty + pen - 1;}
+
+            pen = penalty;
+
+            penaltydur = 0;
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur;
+
+            while (pendur == 3)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur1 + pendur - 1;}
+
+            penaltydur = penaltydur + pendur1;
+
+            pen = pen - 0.5;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Torn ligament in right shoulder}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks, but half the penalty is permanent.}}");}
+
+            else
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            penaltydur = penaltydur + pendur;
+
+            pen = pen - 1;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle in right shoulder is strained/pulled}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}}
+
+            else
+
+            {if (rangfumbroll < 775)
+
+            {penalty = randomInteger(4);
+
+            pen = penalty;
+
+            while (pen == 4)
+
+            {pen = randomInteger(4);
+
+            penalty = penalty + pen - 1;}
+
+            pen = penalty;
+
+            penaltydur = 0;
+
+            selfinj = randomInteger(6);
+
+            if (selfinj == 6)
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur;
+
+            while (pendur == 3)
+
+            {pendur = randomInteger(3);
+
+            pendur1 = pendur1 + pendur - 1;}
+
+            penaltydur = penaltydur + pendur1;
+
+            pen = pen - 0.5;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Torn ligament in neck}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks, but half the penalty is permanent.}}");}
+
+            else
+
+            {while (pen > 0)
+
+            {pendur = randomInteger(3);
+
+            penaltydur = penaltydur + pendur;
+
+            pen = pen - 1;}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Muscle in neck is strained/pulled}}{{Effect= -" + penalty + " attack penalty. Injury heals over " + penaltydur + " weeks.}}");}}
+
+            else
+
+            {if (rangfumbroll < 865)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Automatically hit a random ally in the field of fire}}{{Effect= Roll damage dice and add strength bonus (if applicable), but do not add bonuses from talents or specialization.}}");}
+
+            else
+
+            {if (rangfumbroll < 942)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Drop bow at feet.}}");}
+
+            else
+
+            {if (rangfumbroll < 965)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Drop bow 2 feet away.}}");}
+
+            else
+
+            {if (rangfumbroll < 983)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Drop bow 3 feet away.}}");}
+
+            else
+
+            {if (rangfumbroll < 1045)
+
+            {sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Bowstring breaks}}{{Effect= Bow useless until replaced.}}");}
+
+            else
+
+            {if (rangfumbroll < 1101)
+
+            {penalty = randomInteger(20);
+
+            pen = penalty;
+
+            if (pen == 20)
+
+            {while (pen > 5)
+
+            {pen = randomInteger(6);
+
+            penalty = penalty + pen - 1;}}
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?=Shoot own hand or foot}}{{Effect=Roll damage dice and add strength bonus (if applicable), but do not add bonuses from talents or specialization. Attempt a Feat of Agility check vs. " + penalty + " to sustain only half damage.}}");}
+
+            else
+
+            {if (rangfumbroll < 1201)
+
+            {count = count + 2;
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result = " + rangfumbroll +"}}{{What Happened?= Double results!}}{[Effect=If identical results are obtained, then add the durations together.}}");
+
+            //log("At roll 1 Count " + count);
+
+            }
+
+            else
+
+            {count = count + 3;
+
+            sendChat("Fumble", "&{template:hm_std}{{name=Fumble Result}}{{Fumble result == " + rangfumbroll +"}}{{What Happened?=Triple results!}}{{Effect= If identical results are obtained, then add the durations together.}}");
+
+            //log("At roll 2 Count " + count);
+
+            }
+
+            }}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+
+        count = count - 1;
+
+        error = error + 1;
+
+        if (error > 19)
+
+        {break;}
+
+        rangfumbroll = randomInteger(1000)+(Number(missdif)*10);
+
+        //log("Count" + count);
+
+        } while (count > 0)
+
+        if (error > 19)
+
+        {sendChat("Fumble", "You got too many additional results and the script might crash! You have " + count + " additional results left to roll. You can try using the script again or roll the results individually on your own.");
+
+        sendChat("Fumble", "Or you could just accept your inevitable death. That's on you.");}
+
+        return;};
+
+});
