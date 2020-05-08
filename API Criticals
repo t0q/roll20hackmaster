@@ -1,0 +1,4098 @@
+on('chat:message', function(msg) {
+
+    var cmdName;
+
+    var msgTxt;
+
+
+
+    cmdName = '!Critical ';
+
+    msgTxt = msg.content;
+
+    if(msg.type == 'api' && msgTxt.indexOf(cmdName) !== -1) {
+
+        var paramList = msgTxt.slice(cmdName.length);
+
+        if(paramList.indexOf(',') == -1) {
+
+            sendChat(msg.who, '/w ' + msg.who + ' must specify seven comma-separated parameters for !Critical command.');
+
+        }
+
+        else {
+
+            var paramArray = paramList.split(',');
+
+            var atksize = trimString(paramArray[0]);
+
+            var defsize = trimString(paramArray[1]);
+
+            var atkroll = trimString(paramArray[2]);
+
+            var defroll = trimString(paramArray[3]);
+
+            var atkdmg = trimString(paramArray[4]);
+
+            var defdr = trimString(paramArray[5]);
+
+            var weapon = trimString(paramArray[6]);
+
+            var severity = (Number(atkroll) + Number(atkdmg)) - (Number(defroll) + Number(defdr));
+
+            var sizedif = Number(atksize) - Number(defsize);
+
+            var critroll = 0;
+
+            var wpntype;
+
+        }
+
+            if (weapon == 1)
+
+            {wpntype = "C";}
+
+            if (weapon == 2)
+
+            {wpntype = "H";}
+
+            if (weapon == 3)
+
+            {wpntype = "P";}
+
+            
+
+            if (sizedif > -1)
+
+{//Roll for if attacker is larger or equal size
+
+critroll = randomInteger((10-sizedif)*1000)+(sizedif*1000);}
+
+else
+
+{//Roll for if attack is smaller
+
+critroll = randomInteger((10+sizedif)*1000);}
+
+if (critroll < 101)
+
+{//Foot, top result
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Top of foot.}}")
+
+if (severity < 16)
+
+{//1-10 and 11-15 results
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Lucky Break= No additional effect.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage= 1 extra damage die}}{{Other= movement penalty -50% for 1 minute.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 5 minutes.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= muscle tear; movement penalty (-50% for 1d12p hours, -25% until healed).}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= broken bone; movement penalty (-50% for 1d12p hours, -25% until healed).}}")}}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= torn ligament; movement penalty (-75% for 6 hours, -50% until healed).}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= broken bone; movement penalty (-75% for 6 hours, -50% until healed).}}")}}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; movement penalty (-75% for 1 day, -50% until healed); permanent limp.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; shattered bone; severe bleeding; movement penalty (-75% for 1 day, -50% until healed); permanent limp.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; shattered bone; movement penalty (-75% for 1 day, -50% until healed); permanent limp.}}")}}
+
+}}}}}}
+
+else
+
+{if (critroll < 105)
+
+{//Heel result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Heel.}}")
+
+if (severity < 16)
+
+{//1-10 and 11-15 results
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Lucky Break=No additional effect.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage die}}{{Other= movement penalty -50% for 1 minute.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 5 minutes.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= muscle tear; -2 Attack penalty; -2 Defense penalty; movement penalty (-50% for 1d12p hours, -25% until healed).}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= broken bone; -2 Attack penalty; -2 Defense penalty; movement penalty (-50% for 1d12p hours, -25% until healed).}}")}}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= torn ligament; -3 Attack penalty; -2 Dex penalty; movement penalty (-75% for 6 hours, -50% until healed).}}")}
+
+else
+
+{//Consult Piercing chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= broken bone; -3 Attack penalty; -2 Dex penalty; movement penalty (-75% for 6 hours, -50% until healed); permanent limp.}}")}}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; -3 Attack penalty; -2 Defense penalty; movement penalty (-75% for 1 day, -50% until healed); permanent limp & -1 ATK penalty.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; shattered bone; severe bleeding; -3 Attack penalty; -2 Dexterity penalty; immobile; permanent limp and -1 ATK & DEF penalty.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; shattered bone; -3 Attack penalty; -2 Dexterity penalty; immobile; permanent limp and -1 ATK & DEF penalty.}}")}}
+
+}}}}}}
+
+else
+
+{if (critroll < 137)
+
+{//Toes result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Toes.}}")
+
+if (severity < 16)
+
+{//1-10 and 11-15 results
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Lucky Break=No additional effect.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage die}}{{Other= movement penalty -50% for 1 minute.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 5 minutes.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= muscle tear; movement penalty (-50% for 1d12p hours, -25% until healed).}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= broken bone; movement penalty (-50% for 1d12p hours, -25% until healed).}}")}}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= torn ligament; movement penalty (-75% for 6 hours, -50% until healed).}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= broken bone; movement penalty (-75% for 6 hours, -50% until healed).}}")}}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= broken bone; movement penalty (-75% for 6 hours, -50% until healed).}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= broken bone; severe bleeding; movement penalty (-75% for 6 hours, -50% until healed).}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= broken bone; movement penalty (-75% for 6 hours, -50% until healed).}}")}}
+
+}}}}}}
+
+else
+
+{if (critroll < 141)
+
+{//Foot, arch result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Arch of the foot.}}")
+
+if (severity < 16)
+
+{//1-10 and 11-15 results
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Lucky Break=No additional effect.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage die}}{{Other= movement penalty -50% for 1 minute.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 5 minutes.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= muscle tear; -2 Attack penalty; -2 Defense penalty; movement penalty (-50% for 1d12p hours, -25% until healed).}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= broken bone; -2 Attack penalty; -2 Defense penalty; movement penalty (-50% for 1d12p hours, -25% until healed).}}")}}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= torn ligament; -3 Attack penalty; -2 Dex penalty; movement penalty (-75% for 6 hours, -50% until healed).}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= broken bone; -3 Attack penalty; -2 Dex penalty; movement penalty (-75% for 6 hours, -50% until healed); permanent limp.}}")}}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; -3 Attack penalty; -2 Defense penalty; movement penalty (-75% for 1 day, -50% until healed); permanent limp & -1 ATK penalty.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; shattered bone; severe bleeding; -3 Attack penalty; -2 Defense penalty; immobile; permanent limp, -1 ATK & DEF penalty.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; shattered bone; -3 Attack penalty; -2 Defense penalty; immobile; permanent limp, -1 ATK & DEF penalty.}}")}}
+
+}}}}}}
+
+else
+
+{if (critroll < 171)
+
+{//Ankle, inner result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Inner ankle.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Lucky Break=No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Other=Movement penalty -50% for 1 minute.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage die}}{{Other= movement penalty -50% for 5 minutes; count reset.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 1 minute; count reset; held items dropped; -1 Defense.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat('',"&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty (50% until healed); count reset; held items dropped; -3 Defense.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= torn ligament; -4 Defense penalty; -2 Str penalty; movement penalty (-75% until healed); count reset; held items dropped; permanent -1 Defense, -0/25 Str.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= broken bone; -4 Defense penalty; -2 Str penalty; movement penalty (-75% until healed); count reset; held items dropped; permanent limp, -1 Defense, -0/25 Str.}}")}}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; immobile; permanent limp, -2 Defense, -0/75 Str.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; shattered bone; torn ligaments or tendon; severe bleeding; immobile; permanent limp, -1 ATK penalty, -2 Defense}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; shattered bone; torn ligaments or tendon; immobile; permanent limp, -1 ATK penalty, -2 Defense.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 201)
+
+{//Ankle, outer result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Outer ankle.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Other=Movement penalty -50% for 1 minute.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage die}}{{Other= movement penalty -50% for 5 minutes; count reset.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 1 minute; count reset; held items dropped; -1 Defense.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty (50% until healed); count reset; held items dropped; -3 Defense.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= torn ligament; -4 Defense penalty; -2 Str penalty; movement penalty (-75% until healed); count reset; held items dropped; permanent -1 Defense, -0/25 Str.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= broken bone; -4 Defense penalty; -2 Str penalty; movement penalty (-75% until healed); count reset; held items dropped; permanent limp, -1 Defense, -0/25 Str.}}")}}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; immobile; permanent limp, -2 Defense, -0/75 Str.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; multiple fracture; torn ligaments/tendons; severe bleeding; immobile; permanent limp, -2 Defense.}}")}
+
+else
+
+{//Consult Consulting or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; multiple fracture; torn ligaments/tendons; immobile; permanent limp, -2 Defense.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 221)
+
+{//Ankle, upper or Achilles result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Upper ankle or achilles.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat('', "&{template:hm_std}{{name=Result}}{{Damage=No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Other=Movement penalty -50% for 1 minute.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage die}}{{Other= movement penalty -50% for 5 minutes; count reset.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 5 minutes.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty (50% until healed); count reset; held items dropped; -3 Defense.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= torn ligament; -4 Defense penalty; -2 Str penalty; movement penalty (-75% until healed); count reset; held items dropped; permanent -1 Defense, -0/25 Str.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= broken bone; -4 Defense penalty; -2 Str penalty; movement penalty (-75% until healed); count reset; held items dropped; permanent limp, -1 Defense, -0/25 Str.}}")}}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; immobile; permanent limp, -2 Defense, -0/75 Str.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; multiple fracture; torn ligaments/tendons; severe bleeding; immobile; permanent limp, -2 Defense.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("Result", "4 extra damage dice; automatically ToPed; multiple fracture; torn ligaments/tendons; immobile; permanent limp, -2 Defense.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 965)
+
+{//Shin result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Shin.}}")
+
+if (severity < 16)
+
+{//1-10 and 11-15 results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=No additional effect.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage die}}{{Other= movement penalty -50% for 1 minute.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 5 minutes.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -2 Defense.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; torn ligament; -4 Defense penalty; movement penalty (-75% until healed).}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; broken bone; -4 Defense penalty; movement penalty (-75% until healed).}}")}}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; compound fracture; immobile.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Leg Severed; severe bleeding; immobile; Peg Leg Proficiency required to regain movement.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; multiple fracture; torn ligaments/tendons; immobile; permanent limp, -1 Defense.}}")}}
+
+}}}}}}
+
+else
+
+{if (critroll < 1007)
+
+{//Calf result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Calf.}}")
+
+if (severity < 16)
+
+{//1-10 and 11-15 results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=No additional effect.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage die}}{{Other= movement penalty -50% for 1 minute.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 5 minutes.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; muscle tear; -1 Defense.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; broken bone and muscle tear; -4 Defense penalty; movement penalty (-75% until healed).}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; compound fracture; immobile.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Leg Severed; severe bleeding; immobile; Peg Leg proficiency required to regain movement.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; multiple fracture; torn ligaments/tendons; immobile; permanent limp, -1 Defense.}}")}}
+
+}}}}}}
+
+else
+
+{if (critroll < 1119)
+
+{//Knee result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Knee.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage die.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 5 minutes; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Def penalty; movement penalty (-50% for 6 hours, -25% until healed); count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; movement penalty (-75% for 6 hours, -50% for subsequent week); -3 Def penalty.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; movement penalty (-75% for 6 hours, -50% until healed); -4 Defense penalty; permanent -1 Defense penalty.}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments/tendons; immobile; permanent limp & -2 Def.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Leg Severed; immobile; Peg Leg proficiency required to regain movement.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; multiple fracture; torn ligaments/tendons; immobile; permanent limp & -2 Def.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 1133)
+
+{//Knee, back result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Back of the knee.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Other=No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 5 minutes; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Def penalty; movement penalty (-50% for 6 hours, -25% until healed); count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; movement penalty (-75% for 6 hours, -50% for subsequent week); -3 Defense penalty.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; movement penalty (-75% for 6 hours, -50% until healed); -4 Def penalty.}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments/tendons; immobile; permanent limp & -1 Def.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Leg Severed; severe bleeding; immobile; Peg Leg proficiency required to regain movement.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; multiple fracture; torn ligaments/tendons; immobile; permanent limp & -2 Def.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 1217)
+
+{//Hamstring result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Hamstring.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Other= No additional effect}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 5 minutes; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -1 Atk & Def penalty; movement penalty (-50% for 6 hours, -25% until healed); count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; movement penalty (-75% for 6 hours, -50% for subsequent week); -2 Def penalty.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; movement penalty (-75% for 6 hours, -50% until healed); -3 Def penalty.}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments/tendons; immobile; permanent limp & -1 Def.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; severe bleeding; immobile; permanent limp & -1 Atk & -1 Def.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; immobile; permanent limp & -1 Atk & -1 Def.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 2001)
+
+{//Thigh result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Thigh.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Other=No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 5 minutes; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -1 Atk & Def penalty; movement penalty (-50% for 6 hours, -25% until healed); count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("Result", "3 extra damage dice; count reset; held items dropped; movement penalty (-75% for 6 hours, -50% for subsequent week); -2 Def penalty.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; movement penalty (-75% for 6 hours, -50% until healed); -3 Def penalty.}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments/tendons; immobile; permanent limp & -1 Def.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; severe bleeding; immobile; permanent limp & -1 Atk & -1 Def.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("Result", "4 extra damage dice; automatically ToPed; compound fracture; immobile; permanent limp & -1 Atk & -1 Def.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 2331)
+
+{//Hip result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Hip.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Other=No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 5 minutes; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Atk & Def penalty; movement penalty (-50% for 6 hours, -25% until healed); count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; torn ligament; movement penalty (-75% for 6 hours, -50% for subsequent week); -2 Def penalty.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; broken bone; immobile; -3 Def penalty.}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; immobile; permanent limp & -1 ATK & -1 DEF.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; severe bleeding; immobile; permanent limp & -1 ATK & -2 DEF.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; immobile; permanent limp & -1 ATK & -2 DEF.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 2406)
+
+{//Groin result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Groin.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Other=No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= movement penalty -50% for 5 minutes; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -1 Atk & Def penalty; movement penalty (-50% for 6 hours, -25% until healed); count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; movement penalty (-75% for 6 hours, -50% until healed); -3 Def penalty.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; severe bleeding; movement penalty (-75% for 6 hours, -50% until healed); -4 Def penalty.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; internal bleeding; movement penalty (-75% for 6 hours, -50% until healed); -4 Def penalty.}}")}}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; severe bleeding; movement penalty (-75% for 6 hours, -50% until healed); -4 Def penalty.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; internal bleeding; movement penalty (-75% for 6 hours, -50% until healed); -4 Def penalty.}}")}}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; sterilized; severe bleeding; movement penalty (-75% for 6 hours, -50% until healed); -4 Def penalty.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; sterilized; internal bleeding; movement penalty (-75% for 6 hours, -50% until healed); -4 Def penalty.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 2436)
+
+{//Buttock result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Buttock.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Other=No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; movement penalty (-75% for 6 hours, -50% for subsequent week); -2 Def penalty.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; movement penalty (-75% for 6 hours, -50% until healed); -3 Def penalty.}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments/tendons; immobile; permanent limp & -1 Def.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; severe bleeding; immobile; permanent limp & -1 Def.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; immobile; permanent limp & -1 Def.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 2571)
+
+{//Abdomen, lower result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Abdomen.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= -2 Str until healed.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= 50% chance of internal bleeding; -2 Str until healed.}}")}}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; severe bleeding; -2 Str until healed.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; internal bleeding; -2 Str until healed.}}")}}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; internal bleeding; -3 Str until healed; permanent loss of 0/50 Con.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; severe bleeding; -3 Str until healed; permanent loss of 0/50 Con.}}")}}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; internal hemorrhaging; permanent -1 Con.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; severe bleeding; permanent -1 Con.}}")}}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; internal hemorrhaging; permanent -2 Con.}}")}
+
+else
+
+{if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=Target killed instantly; gutted and internal organs spill out.}}")}
+
+else
+
+{//Consult Piercing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; severe bleeding; permanent -2 Con.}}")}}}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=Target killed instantly; gutted and internal organs spill out.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly; multiple organ failure.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 3021)
+
+{//Side, lower result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Lower side.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Str until healed.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= 50% chance for internal bleeding; -2 Str until healed.}}")}}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; internal bleeding; -2 Str until healed.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; severe bleeding; -2 Str until healed.}}")}}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; internal bleeding; -3 Str until healed; permanent loss of 0/50 Con.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; severe bleeding; -3 Str until healed; permanent loss of 0/50 Con.}}")}}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; internal hemorrhaging; permanent -1 Con.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; severe bleeding; permanent -1 Con.}}")}}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=Target killed instantly; gutted and internal organs spilled out.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; internal hemorrhaging; permanent -2 Con.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 3111)
+
+{//Abdomen, upper result
+
+sendChat('Critical', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Abdomen.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("Result", "2 extra damage dice; -2 Str until healed.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= 50% chance of internal bleeding; -2 Str until healed.}}")}}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; severe bleeding; -2 Str until healed.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; internal bleeding; -2 Str until healed.}}")}}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; internal bleeding; -3 Str until healed; permanent loss of 0/50 Con.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; severe bleeding; -3 Str until healed; permanent loss of 0/50 Con.}}")}}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; internal hemorrhaging; permanent -1 Con.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; severe bleeding; permanent -1 Con.}}")}}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=Target killed instantly; gutted and internal organs spill out.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; severe bleeding; permanent -2 Con.}}")}}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=Target killed instantly; gutted and internal organs spill out.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=Target killed instantly; multiple organ failure.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 3126)
+
+{//Back, small of result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Small of the Back.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; 30% chance of internal bleeding.}}")}}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; torn muscle and 65% chance of internal bleeding; -2 Str until healed.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; bruised kidney & torn muscle; internal bleeding; -3 Str until healed; permanent loss of 0/75 Strength.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; torn muscle; severe bleeding; -3 Str until healed; permanent loss of 0/75 Strength.}}")}}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; broken bone (vertebrae); paralyzed until healed (85% chance of it being permanent).}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Other=Target killed instantly; broken spine.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Other=Target killed instantly; severed spine.}}")}}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("Result", "Target killed instantly; severed spine.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Other=Target killed instantly; broken spine.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 3156)
+
+{//Back, lower result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Lower back.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; 30% chance of internal bleeding.}}")}}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; torn muscle; -3 Str until healed.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; torn muscle and 65% chance of internal bleeding; -3 Str until healed.}}")}}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; broken bone (vertebrae); paralyzed until healed (65% chance of it being permanent).}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; broken bone (vertebrae); paralyzed until healed (85% chance of it being permanent).}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly; broken spine.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly; severed spine.}}")}}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly; severed spine.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly; broken spine.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 3426)
+
+{//Chest result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Chest.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; broken bone; -2 Str until healed.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; 30% chance of internal bleeding; broken bone; -2 Str until healed.}}")}}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; broken bone; -3 Str until healed.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; broken bone and 50% chance of internal bleeding; -3 Str until healed.}}")}}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; broken bone; bruised lung; 75% chance of internal bleeding; -3 Str until healed; -0/75 Str permanently.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; broken bone; 75% chance of internal bleeding; -3 Str until healed; -0/75 Str permanently.}}")}}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; internal bleeding; -5 Str until healed; -1/25 Str permanently.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; compound fracture; severe bleeding; -5 Str until healed; -1/25 Str permanently.}}")}}
+
+else
+
+{//41-50 and 51+ results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly; ruptured aorta.}}")}
+
+}}}}}}
+
+else
+
+{if (critroll < 3456)
+
+{//Side, upper result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Upper side.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Other=No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; broken ribs; -2 Str until healed.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; broken ribs; 30% chance of internal bleeding; -2 Str until healed.}}")}}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; broken ribs; 50% internal bleeding; -3 Str until healed; -0/75 Str permanently.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; broken ribs; severe bleeding; -3 Str until healed; -0/75 Str permanently.}}")}}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; internal bleeding; broken ribs; -5 Str until healed; -1/25 Str permanently.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; severe bleeding; broken ribs; -5 Str until healed; -1/25 Str permanently.}}")}}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; internal bleeding; broken ribs; -6 Str until healed; -1/50 Str permanently.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; severe bleeding; broken ribs; -6 Str until healed; -1/50 Str permanently.}}")}}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly; pulmonary artery ruptured.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly; body cavity crushed.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 3486)
+
+{//Back, upper result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Upper back.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; muscle tear; -2 Str until healed.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; muscle tear; -3 Str until healed.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; broken bone; 30% chance of internal bleeding; -3 Str untl healed; -0/75 Str permanently.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; torn ligament; -3 Str until healed; -0/75 Str permanently.}}")}}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; broken bones; internal bleeding; -6 Str until healed; -1/50 Str permanently.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; broken bones; severe bleeding; -6 Str until healed; -1/50 Str permanently.}}")}}
+
+else
+
+{//41-50 and 51+ results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly; ruptured aorta.}}")}
+
+}}}}}}
+
+else
+
+{if (critroll < 3501)
+
+{//Back, upper middle result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Upper middle back.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; muscle tear; -2 Str until healed.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; muscle tear; -3 Str until healed.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; broken bone; 30% chance of internal bleeding; -3 Str untl healed; -0/75 Str permanently.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; torn ligament; -3 Str until healed; -0/75 Str permanently.}}")}}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+if (weapon == 1)
+
+{//Consult Crushing chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; broken bones; internal bleeding; -6 Str until healed; -1/50 Str permanently.}}")}
+
+else
+
+{//Consult Hacking or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; broken bones; severe bleeding; -6 Str until healed; -1/50 Str permanently.}}")}}
+
+else
+
+{//41-50 and 51+ results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly; ruptured aorta.}}")}
+
+}}}}}}
+
+else
+
+{if (critroll < 3821)
+
+{//Armpit result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Armpit.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("Result", "1 extra damage die.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -2 Atk (if primary side) or -2 Def (if secondary); -2 Str (all until healed).}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= count reset; held items dropped; -3 Atk (if primary side) or -3 Def (if secondary); -3 Str; -1 Dex (all until healed); -0/50 Str permanently.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; torn ligaments; -3 Atk (if primary side) or -3 Def (if secondary); -3 Str; -1 Dex (all until healed); -1 Atk or Def & -0/75 Str permanently.}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments; -3 Atk (if primary side) or -3 Def (if secondary); -4 Str; -2 Dex (all until healed); -1 Atk or Def, -0/50 Dex & -1/00 Str permanently.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments; severe bleeding; -3 Atk (if primary side) or -3 Def (if secondary); -4 Str; -2 Dex (all until healed); -1 Atk or Def, -0/50 Dex & -1/50 Str permanently.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly; body cavity crushed.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 4301)
+
+{//Arm, upper outer result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Upper outer arm.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -2 Atk & +1 Speed (if primary side) or -2 Def (if secondary); -2 Str (all until healed).}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -3 Atk & +1 Speed (if primary side) or -3 Def (if secondary); -3 Str (all until healed).}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; -3 Atk & +1 Speed (if primary side) or -3 Def (if secondary); -3 Str (all until healed); permanent -1 Atk or Def and -0/75 Str.}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments; -5 Atk & +2 Speed (if primary side) or -4 Def (if secondary); -4 Str (all until healed); permanent -1 Atk & +1 Speed (or -1 Def) and -1/00 Str.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Arm Severed; severe bleeding.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Arm Mangled and Useless.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 4493)
+
+{//Arm, upper inner result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Upper inner arm. }}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("Result", "2 extra danage dice; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -2 Atk & +1 Speed (if primary side) or -2 Def (if secondary); -2 Str (all until healed).}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -3 Atk & +1 Speed (if primary side) or -3 Def (if secondary); -3 Str (all until healed).}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; -3 Atk & +1 Speed (if primary side) or -3 Def (if secondary); -3 Str (all until healed); permanent -1 Atk or Def and -0/75 Str.}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments; -5 Atk & +2 Speed (if primary side) or -4 Def (if secondary); -4 Str (all until healed); permanent -1 Atk & +1 Speed (or -1 Def) and -1/00 Str.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Arm Severed; severe bleeding.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Arm Mangled and Useless.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 4589)
+
+{//Elbow result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Elbow.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -2 Atk & +1 Speed (if primary side) or -2 Def (if secondary); -1 Str (all until healed).}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -3 Atk & +1 Speed (if primary side) or -3 Def (if secondary); -1 Str (all until healed).}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= muscle tear; -3 Atk & +1 Speed (if primary side) or -3 Def (if secondary); -2 Str (all until healed); permanent -1 Atk (if primary else -1 Def).}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments; -5 Atk & +2 Speed (if primary side) or -4 Def (if secondary); -2 Str (all until healed); permanent -1 Atk & +1 Speed (or -1 Def).}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Arm Severed at elbow; severe bleeding.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Elbow & below Mangled and Useless.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 4685)
+
+{//Inner joint result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Inner joint.}}")
+
+if (severity < 16)
+
+{//1-10 and 11-15 results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= No additional effect.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -2 Atk & +1 Speed (if primary side) or -2 Def (if secondary); -1 Str (all until healed).}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -3 Atk & +1 Speed (if primary side) or -3 Def (if secondary); -1 Str (all until healed).}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; -3 Atk & +1 Speed (if primary side) or -3 Def (if secondary); -2 Str (all until healed); permanent -1 Atk & +1 Speed (or -1 Def).}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Arm Severed at elbow; severe bleeding.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Elbow & below Mangled and Useless.}}")}}
+
+}}}}}}
+
+else
+
+{if (critroll < 5309)
+
+{//Forearm, back result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Back of the forearm.}}")
+
+if (severity < 16)
+
+{//1-10 and 11-15 results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= No additional effect.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("Result", "2 extra damage dice; count reset; held items dropped; -2 Atk (if primary side).}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= muscle tear; -3 Atk & +1 Speed (if primary side); -1 Str (all until healed); permanent -1 Atk.}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments; -4 Atk & +1 Speed (if primary side); -1 Str (all until healed); permanent -1 Atk.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Arm Severed below elbow; severe bleeding.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Mangled and Hand Useless.}}")}}
+
+}}}}}}
+
+else
+
+{if (critroll < 5837)
+
+{//Forearm, inner result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Inner forearm.}}")
+
+if (severity < 16)
+
+{//1-10 and 11-15 results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= No additional effect.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -2 Atk (if primary side).}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= muscle tear; -3 Atk & +1 Speed (if primary side); -1 Str (all until healed); permanent -1 Atk.}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments; -4 Atk & +1 Speed (if primary side); -1 Str (all until healed); permanent -1 Atk.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Arm Severed below elbow; severe bleeding.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Mangled and Hand Useless.}}")}}
+
+}}}}}}
+
+else
+
+{if (critroll < 5909)
+
+{//Wrist, back result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - back of the wrist.}}")
+
+if (severity < 16)
+
+{//1-10 and 11-15 results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= No additional effect.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -2 Atk & +1 Speed (if primary side).}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -3 Atk & +1 Speed (if primary side); permanent -1 Atk (if primary).}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= muscle tear; -4 Atk & +2 Speed (if primary side); -1 Str (all until healed); permanent -1 Atk & +1 Speed (if primary).}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments; -5 Atk & +3 Speed (if primary side); -1 Str (all until healed); permanent -2 Atk & +2 Speed (if primary).}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Hand Severed; severe bleeding.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Mangled and Hand Useless.}}")}}
+
+}}}}}}
+
+else
+
+{if (critroll < 5981)
+
+{//Wrist, front result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Front of the wrist.}}")
+
+if (severity < 16)
+
+{//1-10 and 11-15 results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= No additional effect.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -2 Atk & +1 Speed (if primary side).}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -3 Atk & +1 Speed (if primary side); permanent -1 Atk (if primary).}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= muscle tear; -4 Atk & +2 Speed (if primary side); -1 Str (all until healed); permanent -1 Atk & +1 Speed (if primary).}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments; -5 Atk & +3 Speed (if primary side); -1 Str (all until healed); permanent -2 Atk & +2 Speed (if primary).}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Hand Severed; severe bleeding.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Mangled and Hand Useless.}}")}}
+
+}}}}}}
+
+else
+
+{if (critroll < 6053)
+
+{//Hand, back result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Back of the hand.}}")
+
+if (severity < 16)
+
+{//1-10 and 11-15 results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= No additional effect.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("Result", "2 extra damage dice; count reset; held items dropped; -2 Atk.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= muscle tear; -3 Atk & +1 Speed (if primary side); permanent -1 Atk (if primary).}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments; -4 Atk & +2 Speed (if primary side, all until healed); permanent -1 Atk & +1 Speed (if primary).}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Hand Severed; severe bleeding.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Mangled and Hand Useless.}}")}}
+
+}}}}}}
+
+else
+
+{if (critroll < 6077)
+
+{//Palm result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Palm.}}")
+
+if (severity < 16)
+
+{//1-10 and 11-15 results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=No additional effect.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -2 Atk.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= muscle tear; -3 Atk & +1 Speed (if primary side); permanent -1 Atk (if primary).}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments; -4 Atk & +2 Speed (if primary side, all until healed); permanent -1 Atk & +1 Speed (if primary).}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Hand Severed; severe bleeding.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Mangled and Hand Useless.}}")}}
+
+}}}}}}
+
+else
+
+{if (critroll < 6221)
+
+{//Fingers result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Fingers.}}")
+
+if (severity < 16)
+
+{//1-10 and 11-15 results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= No additional effect.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped if ToP check failed.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -2 Atk.}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= muscle tear; -2 Atk & +1 Speed (if primary side).}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= Finger Severed.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= Finger Mangled.}}")}}
+
+}}}}}}
+
+else
+
+{if (critroll < 7181)
+
+{//Shoulder, side result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - side of the shoulder.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -2 Atk & +1 Speed (if primary side) or -2 Def (if secondary); -3 Str (all until healed).}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -3 Atk & +1 Speed (if primary side) or -3 Def (if secondary); -4 Str (all until healed); permanent -1 Str.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; -3 Atk & +1 Speed (if primary side) or -3 Def (if secondary); -5 Str (all until healed); permanent -1 Atk (if primary else -1 Def), -1/50 Str.}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments; -5 Atk & +2 Speed (if primary side) or -4 Def (if secondary); -6 Str (all until healed); permanent -1 Atk & +1 Speed (or -1 Def), -2/00 Str.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Arm lopped off at shoulder; severe bleeding.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Arm Mangled and Useless.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 9101)
+
+{//Shoulder, top result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Top of the shoulder.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= No additional effect.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=1 extra damage dice}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= count reset; held items dropped; -2 Atk & +1 Speed (if primary side) or -2 Def (if secondary); -3 Str (all until healed).}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("Result", "2 extra damage dice; count reset; held items dropped; -3 Atk & +1 Speed (if primary side) or -3 Def (if secondary); -4 Str (all until healed); permanent -1 Str.}}")}
+
+else
+
+{if (severity < 41)
+
+{//31-40 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; muscle tear; -3 Atk & +1 Speed (if primary side) or -3 Def (if secondary); -5 Str (all until healed); permanent -1 Atk (if primary else -1 Def), -1/50 Str.}}")}
+
+else
+
+{if (severity < 51)
+
+{//41-50 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; torn ligaments; -5 Atk & +2 Speed (if primary side) or -4 Def (if secondary); -6 Str (all until healed); permanent -1 Atk & +1 Speed (or -1 Def), -2/00 Str.}}")}
+
+else
+
+{//51+ result
+
+if (weapon == 2)
+
+{//Consult Hacking chart
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Arm lopped off at shoulder; severe bleeding.}}")}
+
+else
+
+{//Consult Crushing or Piercing charts
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; Arm Mangled and Useless.}}")}}
+
+}}}}}}}
+
+else
+
+{if (critroll < 9122)
+
+{//Neck, front result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Front of the neck.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -1 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= -3 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; -5 Atk & Def.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; -8 Atk & Def.}}")}
+
+else
+
+{//31-40, 41-50, and 51+ results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly.}}")}
+
+}}}}}
+
+else
+
+{if (critroll < 9143)
+
+{//Neck, back result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Back of the Neck.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -1 Atk & Def; count reset; held items dropped. }}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= -3 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; -5 Atk & Def.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; -8 Atk & Def.}}")}
+
+else
+
+{//31-40, 41-50, and 51+ results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly.}}")}
+
+}}}}}
+
+else
+
+{if (critroll < 9374)
+
+{//Neck, side result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Side of the neck.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -1 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= -3 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; -5 Atk & Def.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; -8 Atk & Def.}}")}
+
+else
+
+{//31-40, 41-50, and 51+ results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly.}}")}
+
+}}}}}
+
+else
+
+{if (critroll < 9654)
+
+{//Head, side result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Side of the head.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -1 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= -3 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; -5 Atk & Def.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; -8 Atk & Def.}}")}
+
+else
+
+{//31-40, 41-50, and 51+ results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly.}}")}
+
+}}}}}
+
+else
+
+{if (critroll < 9689)
+
+{//Head, back lower result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Lower back of the head.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -1 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= -3 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; -5 Atk & Def.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; -8 Atk & Def.}}")}
+
+else
+
+{//31-40, 41-50, and 51+ results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=Target killed instantly.}}")}
+
+}}}}}
+
+else
+
+{if (critroll < 9769)
+
+{//Face, lower side result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Lower side of the face.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -1 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= -3 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; -5 Atk & Def; permanent -1 Looks.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; -8 Atk & Def; permanent -2 Looks.}}")}
+
+else
+
+{//31-40, 41-50, and 51+ results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly.}}")}
+
+}}}}}
+
+else
+
+{if (critroll < 9789)
+
+{//Face, lower center result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Lower center of the face.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -1 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= -3 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; -5 Atk & Def; permanent -1 Looks.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; -8 Atk & Def; permanent -2 Looks.}}")}
+
+else
+
+{//31-40, 41-50, and 51+ results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly.}}")}
+
+}}}}}
+
+else
+
+{if (critroll < 9824)
+
+{//Head, back upper result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Upper back of the head.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -1 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= -3 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; -5 Atk & Def.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; -8 Atk & Def.}}")}
+
+else
+
+{//31-40, 41-50, and 51+ results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly.}}")}
+
+}}}}}
+
+else
+
+{if (critroll < 9904)
+
+{//Face, upper side result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Upper side of the face.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -1 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= -3 Atk & Def; count reset; held items dropped; permanent -1 Looks.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; -5 Atk & Def; permanent -2 Looks.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; -8 Atk & Def; permanent -3 Looks.}}")}
+
+else
+
+{//31-40, 41-50, and 51+ results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly.}}")}
+
+}}}}}
+
+else
+
+{if (critroll < 9923)
+
+{//Face, upper center result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Upper center of the face.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -1 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= -3 Atk & Def; count reset; held items dropped; permanent -1 Looks.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; -5 Atk & Def; permanent -2 Looks.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; -8 Atk & Def; permanent -4 Looks.}}")}
+
+else
+
+{//31-40, 41-50, and 51+ results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly.}}")}
+
+}}}}}
+
+else
+
+{//Head, top result
+
+sendChat('', "&{template:hm_std} {{name=Critical}} {{Severity= " + severity + "(" + wpntype + ")}}{{Crit Location =" + critroll + " - Top of the head.}}")
+
+if (severity < 11)
+
+{//1-10 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -1 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 16)
+
+{//11-15 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=2 extra damage dice}}{{Other= -2 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 21)
+
+{//16-20 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= -3 Atk & Def; count reset; held items dropped.}}")}
+
+else
+
+{if (severity < 26)
+
+{//21-25 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=3 extra damage dice}}{{Other= automatically ToPed; -5 Atk & Def.}}")}
+
+else
+
+{if (severity < 31)
+
+{//26-30 result
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage=4 extra damage dice}}{{Other= automatically ToPed; -8 Atk & Def.}}")}
+
+else
+
+{//31-40, 41-50, and 51+ results
+
+sendChat("", "&{template:hm_std}{{name=Result}}{{Damage= Target killed instantly.}}")}
+
+}}}}
+
+}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}}
+
+//The next line was used to test for accuracy of severity addition while debugging.
+
+//sendChat("Critical", "atksize" + atksize + " defsize" + defsize + " sizedif" + sizedif + " atkroll" + atkroll + " defroll" + defroll + " atkdmg" + atkdmg + " defdr" + defdr + " weapon" + weapon);
+
+return;}});
+
+var trimString = function(src) {
+
+    return src.replace(/^\s+|\s+$/g, '');};
