@@ -1,18 +1,4 @@
-<!-- Sheet upgrade workers -->
 <script type="text/worker">
-    on('sheet:opened',function() {
-        getAttrs(['skill_scruitiny', 'skill_scrutiny', 'constritution', 'constitution'], function(values) {
-            if (values.skill_scruitiny && values.skill_scrutiny == 0) {
-                setAttrs({'skill_scrutiny': values.skill_scruitiny,
-                          'skill_scruitiny': ''});
-            }
-
-            if (values.constritution && !values.constitution) {
-                setAttrs({'constitution': values.constritution,
-                         'constritution': ''});
-            }
-        });
-    });
 on("change:repeating_weapon:defence_dice_switch", function() {
         getAttrs(["repeating_weapon_defence_dice_switch"], function(values) {
             var check = parseInt(values.repeating_weapon_defence_dice_switch) || 0;
@@ -23,12 +9,257 @@ on("change:repeating_weapon:defence_dice_switch", function() {
     });
 });
 
-on("change:skill_dice_switch", function() {
+on("change:skill_dice_switch sheet:opened", function() {
         getAttrs(["skill_dice_switch"], function(values) {
             var check = parseInt(values.skill_dice_switch) || 0;
-            var dice = check ? "[[1d100+@{skill_acting}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_acting}]]";
+            var diceAct = check ? "[[1d100+@{skill_acting}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_acting}]]";
         setAttrs({
-            acting_dice: dice
+            acting_dice: diceAct
+        });
+    });
+    getSectionIDs('repeating_skill', function(idarray) {
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceRS = check ? "[[1d100+@{mastery}]] vs Opposing Roll" : "[[d100]] Skill: [[@{mastery}]]";
+            // create a variable to hold the attribute names and their value
+            const output = {};
+            // now loop through every row id, and update the skillname_dice attribute on that row
+            idarray.forEach(id => {
+                output[`repeating_skill_${id}_skillname_dice`] = diceRS;
+            });
+            // update the stats on the sheet
+            setAttrs(output);
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceAM = check ? "[[1d100+@{skill_animal_mimicry}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_animal_mimicry}]]";
+        setAttrs({
+            animal_mimicry_dice: diceAM
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceAH = check ? "[[1d100+@{skill_acnimal_husbandry}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_acnimal_husbandry}]]";
+        setAttrs({
+            animal_husbandry_dice: diceAH
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceB = check ? "[[1d100+@{skill_boating}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_boating}]]";
+        setAttrs({
+            boating_dice: diceB
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceC = check ? "[[1d100+@{skill_cartography}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_cartography}]]";
+        setAttrs({
+            cartography_dice: diceC
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceCR = check ? "[[1d100+@{skill_climbing}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_climbing}]]";
+        setAttrs({
+            climbing_dice: diceCR
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceCA = check ? "[[1d100+@{skill_current_affairs}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_current_affairs}]]";
+        setAttrs({
+            current_affairs_dice: diceCA
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceD = check ? "[[1d100+@{skill_diplomacy}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_diplomacy}]]";
+        setAttrs({
+            diplomacy_dice: diceD
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceDI = check ? "[[1d100+@{skill_disguise}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_disguise}]]";
+        setAttrs({
+            disguise_dice: diceDI
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceE = check ? "[[1d100+@{skill_escape_artist}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_escape_artist}]]";
+        setAttrs({
+            escape_artist_dice: diceE
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceF = check ? "[[1d100+@{skill_fire_building}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_fire_building}]]";
+        setAttrs({
+            fire_building_dice: diceAH
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceG = check ? "[[1d100+@{skill_glean_information}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_glean_information}]]";
+        setAttrs({
+            glean_information_dice: diceG
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceH = check ? "[[1d100+@{skill_hiding}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_hiding}]]";
+        setAttrs({
+            hiding_dice: diceH
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceI = check ? "[[1d100+@{skill_interrogation}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_interrogation}]]";
+        setAttrs({
+            interrogation_dice: diceI
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceIN = check ? "[[1d100+@{skill_intimidation}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_intimidation}]]";
+        setAttrs({
+            intimidation_dice: diceIN
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceJ = check ? "[[1d100+@{skill_jumping}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_jumping]]";
+        setAttrs({
+            jumping_dice: diceJ
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceL = check ? "[[1d100+@{skill_law}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_law}]]";
+        setAttrs({
+            law_dice: diceL
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceLi = check ? "[[1d100+@{skill_listening}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_listening}]]";
+        setAttrs({
+            listening_dice: diceLi
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceOb = check ? "[[1d100+@{skill_observation}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_observation}]]";
+        setAttrs({
+            observation_dice: diceOb
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceO = check ? "[[1d100+@{skill_oration}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_oration}]]";
+        setAttrs({
+            oration_dice: diceO
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var dicePr = check ? "[[1d100+@{skill_persuasion}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_persuasion}]]";
+        setAttrs({
+            persuasion_dice: dicePr
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var dicePP = check ? "[[1d100+@{skill_pick_pocket}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_pick_pocket}]]";
+        setAttrs({
+            pick_pocket_dice: dicePP
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceRL = check ? "[[1d100+@{skill_reading_lips}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_reading_lips}]]";
+        setAttrs({
+            reading_lips_dice: diceRL
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceR = check ? "[[1d100+@{skill_recruiting}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_recruiting}]]";
+        setAttrs({
+            recruiting_dice: diceR
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceRP = check ? "[[1d100+@{skill_resist_persuasion}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_resist_persuasion}]]";
+        setAttrs({
+            resist_persuasion_dice: diceRP
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceRU = check ? "[[1d100+@{skill_rope_use}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_rope_use}]]";
+        setAttrs({
+            rope_use_dice: diceRU
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceSa = check ? "[[1d100+@{skill_salesmanship}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_salesmanship}]]";
+        setAttrs({
+            salesmanship_dice: diceSa
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceSc = check ? "[[1d100+@{skill_scrutiny}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_scrutiny}]]";
+        setAttrs({
+            scrutiny_dice: diceSc
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceS = check ? "[[1d100+@{skill_seduction}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_seduction}]]";
+        setAttrs({
+            seduction_dice: diceS
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceSn = check ? "[[1d100+@{skill_sneaking}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_sneaking}]]";
+        setAttrs({
+            sneaking_dice: diceSn
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceSu = check ? "[[1d100+@{skill_survival}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_survival}]]";
+        setAttrs({
+            survival_dice: diceSu
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceSL = check ? "[[1d100+@{skill_skilled_liar}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_skilled_liar}]]";
+        setAttrs({
+            skilled_liar_dice: diceSL
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceT = check ? "[[1d100+@{skill_torture}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_torture}]]";
+        setAttrs({
+            torture_dice: diceT
+        });
+    });
+        getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceTr = check ? "[[1d100+@{skill_tracking}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_tracking}]]";
+        setAttrs({
+            tracking_dice: diceTr
         });
     });
 });
@@ -747,386 +978,242 @@ on("change:skill_dice_switch", function() {
             
 			<div class="sheet-row sheet-skill-row">
 				<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Acting (Lks,Cha)</div>
-                
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_acting" value="0"/></div>
-				
 				<input type="hidden" name="attr_acting_dice" value="[[d100]] Skill: [[@{skill_acting}]]" />
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_acting' value='@{character_name} makes an acting skill check\n\nRoll :@{acting_dice}'>Check</button></div>
 			</div>
 			
     		<div class="sheet-row sheet-skill-row">
 				<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Animal Husbandry (Wis)</div>
-				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_animal_husbandry" value="0"/></div>
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_animal_husbandry' value='@{character_name} makes an animal husbandry skill check\n\nRoll :[[d100]] Skill: [[@{skill_animal_husbandry}]]'>Check</button></div>
-			</div>
+				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_acnimal_husbandry" value="0"/></div>
+				<input type="hidden" name="attr_animal_husbandry_dice" value="[[d100]] Skill: [[@{skill_acnimal_husbandry}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_animal_husbandry' value='@{character_name} makes an animal husbandry skill check\n\nRoll :@{animal_husbandry_dice}'>Check</button></div>
+        	</div>
         	<div class="sheet-row sheet-skill-row">
 				<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Animal Mimicry (Wis)</div>
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_animal_mimicry" value="0"/></div>
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_animal_mimicry' value='@{character_name} makes an animal mimicry skill check\n\nRoll :[[d100]] Skill: [[@{skill_animal_mimicry}]]'>Check</button></div>
+				<input type="hidden" name="attr_animal_mimicry_dice" value="[[d100]] Skill: [[@{skill_animal_mimicry}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_animal_mimicry' value='@{character_name} makes an animal mimicry skill check\n\nRoll :@{animal_mimicry_dice}'>Check</button></div>
 			</div>
 			
         	<div class="sheet-row sheet-skill-row">
 				<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Boating (Wis)</div>
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_boating" value="0"/></div>
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_boating' value='@{character_name} makes a boating skill check\n\nRoll :[[d100]] Skill: [[@{skill_boating}]]'>Check</button></div>
+				<input type="hidden" name="attr_boating_dice" value="[[d100]] Skill: [[@{skill_boating]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_boating' value='@{character_name} makes a boating skill check\n\nRoll :@{boating_dice}'>Check</button></div>
 			</div>
             <div class="sheet-row sheet-skill-row">
 				<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Cartography (Int)</div>
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_cartography" value="0"/></div>
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_cartograpgy' value='@{character_name} makes a cartography skill check\n\nRoll :[[d100]] Skill: [[@{skill_cartography}]]'>Check</button></div>
+				<input type="hidden" name="attr_cartography_dice" value="[[d100]] Skill: [[@{skill_cartography}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_cartograpgy' value='@{character_name} makes a cartography skill check\n\nRoll :@{cartography_dice}'>Check</button></div>
 			</div>
 			
             <div class="sheet-row sheet-skill-row">
     			<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Climbing/Rappelling (Str,Dex)</div>
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_climbing" value="0"/></div>
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_climbing' value='@{character_name} makes a climbing skill check\n\nRoll :[[d100]] Skill: [[@{skill_climbing}]]'>Check</button></div>
+				<input type="hidden" name="attr_climbing_dice" value="[[d100]] Skill: [[@{skill_climbing}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_climbing' value='@{character_name} makes a climbing skill check\n\nRoll :@{climbing_dice}'>Check</button></div>
 			</div>
             <div class="sheet-row sheet-skill-row">
     			<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Current Affairs (Wis)</div>
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_current_affairs" value="0"/></div>
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_current_affairs' value='@{character_name} makes a current affairs skill check\n\nRoll :[[d100]] Skill: [[@{skill_current_affairs}]]'>Check</button></div>
+				<input type="hidden" name="attr_current_affairs_dice" value="[[d100]] Skill: [[@{skill_current_affairs}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_current_affairs' value='@{character_name} makes a current affairs skill check\n\nRoll :@{current_affairs_dice}'>Check</button></div>
 			</div>
             <div class="sheet-row sheet-skill-row">
     			<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Diplomacy (Cha)</div>
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_diplomacy" value="0"/></div>
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_diplomacy' value='@{character_name} makes a diplomacy skill check\n\nRoll :[[d100]] Skill: [[@{skill_diplomacy}]]'>Check</button></div>
+				<input type="hidden" name="attr_diplomacy_dice" value="[[d100]] Skill: [[@{skill_diplomacy}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_diplomacy' value='@{character_name} makes a diplomacy skill check\n\nRoll :@{diplomacy_dice}'>Check</button></div>
 			</div>
             <div class="sheet-row sheet-skill-row">
         		<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Disguise (Int,Cha)</div>
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_disguise" value="0"/></div>
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_disguise' value='@{character_name} makes a disguise skill check\n\nRoll :[[d100]] Skill: [[@{skill_disguise}]]'>Check</button></div>
+				<input type="hidden" name="attr_disguise_dice" value="[[d100]] Skill: [[@{skill_disguise}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_disguise' value='@{character_name} makes a disguise skill check\n\nRoll :@{disguise_dice}'>Check</button></div>
 			</div>
-
 			
-
             <div class="sheet-row sheet-skill-row">
-
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Distraction (Cha)</div>
-
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_distraction" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_distraction' value='@{character_name} makes a distraction skill check\n\nRoll :[[d100]] Skill: [[@{skill_distraction}]]'>Check</button></div>
-
+				<input type="hidden" name="attr_distraction_dice" value="[[d100]] Skill: [[@{skill_distraction}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_distraction' value='@{character_name} makes a distraction skill check\n\nRoll :@{distraction_dice}'>Check</button></div>
 			</div>
-
 			
-
             <div class="sheet-row sheet-skill-row">
-
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Escape Artist (Int,Dex)</div>
-
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_escape_artist" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_escape_artist' value='@{character_name} makes an escape artist skill check\n\nRoll :[[d100]] Skill: [[@{skill_escape_artist}]]'>Check</button></div>
+				<input type="hidden" name="attr_escape_artist_dice" value="[[d100]] Skill: [[@{skill_escape_artist}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_escape_artist' value='@{character_name} makes an escape artist skill check\n\nRoll :@{escape_artist_dice}'>Check</button></div>
 
 			</div>
 
 			
 
             <div class="sheet-row sheet-skill-row">
-
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Fire Building (Wis)</div>
-
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_fire_building" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_fire_building' value='@{character_name} makes a fire building skill check\n\nRoll :[[d100]] Skill: [[@{skill_fire_building}]]'>Check</button></div>
-
+				<input type="hidden" name="attr_fire_building_dice" value="[[d100]] Skill: [[@{skill_fire_building}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_fire_building' value='@{character_name} makes a fire building skill check\n\nRoll :@{fire_building_dice}'>Check</button></div>
 			</div>
-
 			
-
             <div class="sheet-row sheet-skill-row">
-
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Glean Information (Int,Wis,Cha)</div>
-
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_glean_information" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_glean_information' value='@{character_name} makes a glean information skill check\n\nRoll :[[d100]] Skill: [[@{skill_glean_information}]]'>Check</button></div>
-
+				<input type="hidden" name="attr_glean_information_dice" value="[[d100]] Skill: [[@{skill_glean_information}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_glean_information' value='@{character_name} makes a glean information skill check\n\nRoll :@{glean_information_dice}'>Check</button></div>
 			</div>
-
 			
-
             <div class="sheet-row sheet-skill-row">
-
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Hiding (Int,Dex)</div>
-
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_hiding" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_hiding' value='@{character_name} makes a hiding skill check\n\nRoll :[[d100]] Skill: [[@{skill_hiding}]]'>Check</button></div>
-
+				<input type="hidden" name="attr_hiding_dice" value="[[d100]] Skill: [[@{skill_hiding}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_hiding' value='@{character_name} makes a hiding skill check\n\nRoll :@{hiding_dice}'>Check</button></div>
 			</div>
-
 			
-
             <div class="sheet-row sheet-skill-row">
-
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Interrogation (Wis,Cha)</div>
-
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_interrogation" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_interrogation' value='@{character_name} makes an interrogation skill check\n\nRoll :[[d100]] Skill: [[@{skill_interrogation}]]'>Check</button></div>
-
+				<input type="hidden" name="attr_interrogation_dice" value="[[d100]] Skill: [[@{skill_interrogation}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_interrogation' value='@{character_name} makes an interrogation skill check\n\nRoll :@{interrogation_dice}'>Check</button></div>
 			</div>
-
             
-
             <div class="sheet-row sheet-skill-row">
-
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Intimidation (Str,Cha)</div>
-
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_intimidation" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_intimidation' value='@{character_name} makes an intimidation skill check\n\nRoll :[[d100]] Skill: [[@{skill_intimidation}]]'>Check</button></div>
-
+				<input type="hidden" name="attr_intimidation_dice" value="[[d100]] Skill: [[@{skill_intimidation}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_intimidation' value='@{character_name} makes an intimidation skill check\n\nRoll :@{intimidation_dice}'>Check</button></div>
 			</div>
-
             
-
             <div class="sheet-row sheet-skill-row">
-
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Jumping (Str)</div>
-
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_jumping" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_jumping' value='@{character_name} makes a jumping skill check\n\nRoll :[[d100]] Skill: [[@{skill_jumping}]]'>Check</button></div>
-
+				<input type="hidden" name="attr_jumping_dice" value="[[d100]] Skill: [[@{skill_jumping}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_jumping' value='@{character_name} makes a jumping skill check\n\nRoll :@{jumping_dice}'>Check</button></div>
 			</div>
-
             
-
             <div class="sheet-row sheet-skill-row">
-
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Law (Int)</div>
-
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_law" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_law' value='@{character_name} makes a law skill check\n\nRoll :[[d100]] Skill: [[@{skill_law}]]'>Check</button></div>
-
+				<input type="hidden" name="attr_law_dice" value="[[d100]] Skill: [[@{skill_law}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_law' value='@{character_name} makes a law skill check\n\nRoll :@{law_dice}'>Check</button></div>
 			</div>
-
-            
-
             <div class="sheet-row sheet-skill-row">
-
             	<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Listening (Wis)</div>
-
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_listening" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_listening' value='@{character_name} makes a listening skill check\n\nRoll :[[d100]] Skill: [[@{skill_listening}]]'>Check</button></div>
-
+				<input type="hidden" name="attr_listening_dice" value="[[d100]] Skill: [[@{skill_listening}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_listening' value='@{character_name} makes a listening skill check\n\nRoll :@{listening_dice}'>Check</button></div>
 			</div>
-
-            
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Observation (Wis)</div>
-
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_observation" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_observation' value='@{character_name} makes an observation skill check\n\nRoll :[[d100]] Skill: [[@{skill_observation}]]'>Check</button></div>
-
+				<input type="hidden" name="attr_observation_dice" value="[[d100]] Skill: [[@{skill_observation}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_observation' value='@{character_name} makes an observation skill check\n\nRoll :@{observation_dice}'>Check</button></div>
 			</div>
-
-            
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Oration (Cha)</div>
-
     			<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_oration" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_oration' value='@{character_name} makes an oration skill check\n\nRoll :[[d100]] Skill: [[@{skill_oration}]]'>Check</button></div>
-
+    			<input type="hidden" name="attr_oration_dice" value="[[d100]] Skill: [[@{skill_oration}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_oration' value='@{character_name} makes an oration skill check\n\nRoll :@{oration_dice}'>Check</button></div>
 			</div>
-
             
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Persuasion (Cha)</div>
-
     			<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_persuasion" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_persuasion' value='@{character_name} makes a persuasion skill check\n\nRoll :[[d100]] Skill: [[@{skill_persuasion}]]'>Check</button></div>
-
+    			<input type="hidden" name="attr_persuasion_dice" value="[[d100]] Skill: [[@{skill_persuasion}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_persuasion' value='@{character_name} makes a persuasion skill check\n\nRoll :@{persuasion_dice}'>Check</button></div>
 			</div>
-
-            
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Pick Pocket (Dex)</div>
-
     			<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_pick_pocket" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_pick_pocket' value='@{character_name} makes a pick pocket skill check\n\nRoll :[[d100]] Skill: [[@{skill_pick_pocket}]]'>Check</button></div>
-
+    			<input type="hidden" name="attr_pick_pocket_dice" value="[[d100]] Skill: [[@{skill_pick_pocket}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_pick_pocket' value='@{character_name} makes a pick pocket skill check\n\nRoll :@{pick_pocket_dice}'>Check</button></div>
 			</div>
-
-            
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Reading Lips (Int)</div>
-
     			<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_reading_lips" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_reading_lips' value='@{character_name} makes a reading lips skill check\n\nRoll :[[d100]] Skill: [[@{skill_reading_lips}]]'>Check</button></div>
-
+    			<input type="hidden" name="attr_reading_lips_dice" value="[[d100]] Skill: [[@{skill_reading_lips}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_reading_lips' value='@{character_name} makes a reading lips skill check\n\nRoll :@{reading_lips_dice}'>Check</button></div>
 			</div>
-
             
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Recruiting (Cha)</div>
-
     			<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_recruiting" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_recruiting' value='@{character_name} makes a recruiting skill check\n\nRoll :[[d100]] Skill: [[@{skill_recruiting}]]'>Check</button></div>
-
+    			<input type="hidden" name="attr_recruiting_dice" value="[[d100]] Skill: [[@{skill_recruiting}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_recruiting' value='@{character_name} makes a recruiting skill check\n\nRoll :@{recruiting_dice}'>Check</button></div>
 			</div>
-
-            
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Resist Persuasion (Wis)</div>
-
     			<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_resist_persuasion" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_resist_persuasion' value='@{character_name} makes a resist persuasion skill check\n\nRoll :[[d100]] Skill: [[@{skill_resist_persuasion}]]'>Check</button></div>
-
+    			<input type="hidden" name="attr_resist_persuasion_dice" value="[[d100]] Skill: [[@{skill_resist_persuasion}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_resist_persuasion' value='@{character_name} makes a resist persuasion skill check\n\nRoll :@{resist_persuasion_dice}'>Check</button></div>
 			</div>
-
             
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Rope Use (Dex)</div>
-
     			<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_rope_use" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_rope_use' value='@{character_name} makes a rope use skill check\n\nRoll :[[d100]] Skill: [[@{skill_rope_use}]]'>Check</button></div>
-
+    			<input type="hidden" name="attr_rope_use_dice" value="[[d100]] Skill: [[@{skill_rope_use}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_rope_use' value='@{character_name} makes a rope use skill check\n\nRoll :@{rope_use_dice}'>Check</button></div>
 			</div>
-
             
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Salesmanship (Int,Wis,Cha)</div>
-
         		<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_salesmanship" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_salesmanship' value='@{character_name} makes a salesmanship skill check\n\nRoll :[[d100]] Skill: [[@{skill_salesmanship}]]'>Check</button></div>
-
+        		<input type="hidden" name="attr_salesmanship_dice" value="[[d100]] Skill: [[@{skill_salesmanship}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_salesmanship' value='@{character_name} makes a salesmanship skill check\n\nRoll :@{salesmanship_dice}'>Check</button></div>
 			</div>
-
-            
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Scrutiny (Wis)</div>
-
             	<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_scrutiny" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_scrutiny' value='@{character_name} makes a scrutiny skill check\n\nRoll :[[d100]] Skill: [[@{skill_scrutiny}]]'>Check</button></div>
-
+            	<input type="hidden" name="attr_scrutiny_dice" value="[[d100]] Skill: [[@{skill_scrutiny}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_scrutiny' value='@{character_name} makes a scrutiny skill check\n\nRoll :@{scrutiny_dice}'>Check</button></div>
 			</div>
-
-            
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Seduction, Art of (Cha,Lks)</div>
-
             	<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_seduction" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_seduction' value='@{character_name} makes a seduction skill check\n\nRoll :[[d100]] Skill: [[@{skill_seduction}]]'>Check</button></div>
-
+            	<input type="hidden" name="attr_seduction_dice" value="[[d100]] Skill: [[@{skill_seduction}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_seduction' value='@{character_name} makes a seduction skill check\n\nRoll :@{seduction_dice}'>Check</button></div>
 			</div>
-
-            
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Skilled Liar (Cha)</div>
-
             	<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_skilled_liar" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_skilled_liar' value='@{character_name} makes a skilled liar skill check\n\nRoll :[[d100]] Skill: [[@{skill_skilled_liar}]]'>Check</button></div>
-
+            	<input type="hidden" name="attr_skilled_liar_dice" value="[[d100]] Skill: [[@{skill_skilled_liar}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_skilled_liar' value='@{character_name} makes a skilled liar skill check\n\nRoll :@{skilled_liar_dice}'>Check</button></div>
 			</div>
-
-            
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Sneaking (Dex)</div>
-
             	<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_sneaking" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_sneaking' value='@{character_name} makes a sneaking skill check\n\nRoll :[[d100]] Skill: [[@{skill_sneaking}]]'>Check</button></div>
-
+            	<input type="hidden" name="attr_sneaking_dice" value="[[d100]] Skill: [[@{skill_sneaking}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_sneaking' value='@{character_name} makes a sneaking skill check\n\nRoll :@{sneaking_dice}'>Check</button></div>
 			</div>
-
-            
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Survival (Wis,Con)</div>
-
             	<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_survival" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_survival' value='@{character_name} makes a survival skill check\n\nRoll :[[d100]] Skill: [[@{skill_survival}]]'>Check</button></div>
-
+            	<input type="hidden" name="attr_survival_dice" value="[[d100]] Skill: [[@{skill_survival}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_survival' value='@{character_name} makes a survival skill check\n\nRoll :@{survival_dice}'>Check</button></div>
 			</div>
-
-            
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Torture (Int)</div>
-
             	<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_torture" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_torture' value='@{character_name} makes a torture skill check\n\nRoll :[[d100]] Skill: [[@{skill_torture}]]'>Check</button></div>
-
+            	<input type="hidden" name="attr_torture_dice" value="[[d100]] Skill: [[@{skill_torture}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_torture' value='@{character_name} makes a torture skill check\n\nRoll :@{torture_dice}'>Check</button></div>
 			</div>
-
             
-
             <div class="sheet-row sheet-skill-row">
-
                 <div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Tracking (Wis)</div>
-
             	<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_tracking" value="0"/></div>
-
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_tracking' value='@{character_name} makes a tracking skill check\n\nRoll :[[d100]] Skill: [[@{skill_tracking}]]'>Check</button></div>
-
+            	<input type="hidden" name="attr_tracking_dice" value="[[d100]] Skill: [[@{skill_tracking}]]" />
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_tracking' value='@{character_name} makes a tracking skill check\n\nRoll :@{tracking_dice}'>Check</button></div>
 			</div>
-
-            
-
             <div class="sheet-row sheet-skill-row">
-
                 <fieldset class="repeating_skill">
-
                     <div class="sheet-col-15-24 sheet-vert-middle"><input type="text" name="attr_skillname"/></div>
-
                     <div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_mastery" value="0"/></div>
-
-                    <div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill' value='@{character_name} makes a @{skillname} skill check\n\nRoll :[[d100]] Skill: [[@{mastery}]]'>Check</button></div>
-
+                    <input type="hidden" name="attr_skillname_dice" value="[[d100]] Skill: [[@{mastery}]]" />
+                    <div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill' value='@{character_name} makes a @{skillname} skill check\n\nRoll :@{skillname_dice}'>Check</button></div>
                 </fieldset>
-
             </div>
-
-
-
 	</div>
 
 </div>
