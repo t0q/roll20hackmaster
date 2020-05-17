@@ -40,7 +40,7 @@ on("change:skill_dice_switch sheet:opened", function() {
     });
         getAttrs(["skill_dice_switch"], function(values) {
             var check = parseInt(values.skill_dice_switch) || 0;
-            var diceAH = check ? "[[1d100+@{skill_acnimal_husbandry}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_acnimal_husbandry}]]";
+            var diceAH = check ? "[[1d100+@{skill_animal_husbandry}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_animal_husbandry}]]";
         setAttrs({
             animal_husbandry_dice: diceAH
         });
@@ -495,13 +495,13 @@ on("change:skill_dice_switch sheet:opened", function() {
             <div class="sheet-row sheet-stat-row">
                 <div class="sheet-col-1-3">Observation</div>
                 <div class="sheet-col-1-6"><input type="number" name="attr_observation_value" value="@{skill_observation}" disabled="disabled"/></div>
-                <div class="sheet-col-1-3 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_quick_observation' value='@{character_name} makes an observation skill check\n\nRoll :[[d100]] Skill: [[@{skill_observation}]]'>Check</button></div>
+                <div class="sheet-col-1-3 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_quick_observation' value='@{character_name} makes an observation skill check\n\nRoll :@{observation_dice}'>Check</button></div>
             </div>
             
             <div class="sheet-row sheet-stat-row">
                 <div class="sheet-col-1-3">Listening</div>
                 <div class="sheet-col-1-6"><input type="number" name="attr_listening_value" value="@{skill_listening}" disabled="disabled"/></div>
-                <div class="sheet-col-1-3 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_quick_listening' value='@{character_name} makes a listening skill check\n\nRoll :[[d100]] Skill: [[@{skill_listening}]]'>Check</button></div>
+                <div class="sheet-col-1-3 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_quick_listening' value='@{character_name} makes a listening skill check\n\nRoll :@{listening_dice}'>Check</button></div>
             </div>
             
             <hr />
@@ -985,8 +985,8 @@ on("change:skill_dice_switch sheet:opened", function() {
 			
     		<div class="sheet-row sheet-skill-row">
 				<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Animal Husbandry (Wis)</div>
-				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_acnimal_husbandry" value="0"/></div>
-				<input type="hidden" name="attr_animal_husbandry_dice" value="[[d100]] Skill: [[@{skill_acnimal_husbandry}]]" />
+				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_animal_husbandry" value="0"/></div>
+				<input type="hidden" name="attr_animal_husbandry_dice" value="[[d100]] Skill: [[@{skill_animal_husbandry}]]" />
 				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_animal_husbandry' value='@{character_name} makes an animal husbandry skill check\n\nRoll :@{animal_husbandry_dice}'>Check</button></div>
         	</div>
         	<div class="sheet-row sheet-skill-row">
