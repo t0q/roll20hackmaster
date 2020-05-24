@@ -73,6 +73,13 @@ on("change:skill_dice_switch sheet:opened", function() {
             current_affairs_dice: diceCA
         });
     });
+            getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceDis = check ? "[[1d100+@{skill_distraction}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_distraction}]]";
+        setAttrs({
+            distraction_dice: diceDis
+        });
+    });
         getAttrs(["skill_dice_switch"], function(values) {
             var check = parseInt(values.skill_dice_switch) || 0;
             var diceD = check ? "[[1d100+@{skill_diplomacy}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_diplomacy}]]";
@@ -96,9 +103,9 @@ on("change:skill_dice_switch sheet:opened", function() {
     });
         getAttrs(["skill_dice_switch"], function(values) {
             var check = parseInt(values.skill_dice_switch) || 0;
-            var diceF = check ? "[[1d100+@{skill_fire_building}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_fire_building}]]";
+            var diceFB = check ? "[[1d100+@{skill_fire_building}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_fire_building}]]";
         setAttrs({
-            fire_building_dice: diceAH
+            fire_building_dice: diceFB
         });
     });
         getAttrs(["skill_dice_switch"], function(values) {
