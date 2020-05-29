@@ -9,6 +9,149 @@ on("change:repeating_weapon:defence_dice_switch", function() {
     });
 });
 
+const int = score => parseInt(score) || 0;
+on("change:strength change:strength_fractional sheet:opened", function() {
+    getAttrs(["strength","strength_fractional"], function(values) {
+        const str = int(values.strength);
+        const strfrac = int(values.strength_fractional);
+        let strtot  = str + strfrac*.01;
+        console.log(strtot);
+        const mods = [1.5, 2.5, 3.5, 5, 6.5, 8, 10, 12, 14, 15.5, 17, 18.5, 19.5, 20.5];
+        const getMod = score => (score> 20.5) ? 7 : mods.findIndex(check => check >= score) -7;
+        const strength_damage_mod =  getMod(strtot);
+        let feat_of_strength = 0;
+        if      (strtot <= 1.5)  feat_of_strength = -14;
+        else if (strtot <= 2)  feat_of_strength = -13;
+        else if (strtot <= 2.5)  feat_of_strength = -12;
+        else if (strtot <= 3)  feat_of_strength = -11;
+        else if (strtot <= 3.5)  feat_of_strength = -10;
+        else if (strtot <= 4.5)  feat_of_strength = -9;
+        else if (strtot <= 5)  feat_of_strength = -8;
+        else if (strtot <= 6)  feat_of_strength = -7;
+        else if (strtot <= 6.5)  feat_of_strength = -6;
+        else if (strtot <= 7.5)  feat_of_strength = -5;
+        else if (strtot <=  8) feat_of_strength = -4;
+        else if (strtot <= 9)  feat_of_strength = -3;
+        else if (strtot <= 9.5)  feat_of_strength = -2;
+        else if (strtot <= 10)  feat_of_strength = -1;
+        else if (strtot <= 12)  feat_of_strength = 0;
+        else                    feat_of_strength = Math.round(2*(strtot-11.5));
+        setAttrs({
+            strength_damage_mod: strength_damage_mod,
+            feat_of_strength: feat_of_strength
+    });
+  });
+});
+
+on("change:intelligence change:intelligence_fractional sheet:opened", function() {
+    getAttrs(["intelligence","intelligence_fractional"], function(values) {
+        const inte = int(values.intelligence);
+        const intefrac = int(values.intelligence_fractional);
+        let intetot  = inte + intefrac*.01;
+        console.log(intetot);
+        const mods = [2, 3, 4, 7, 10, 12, 15, 18,20];
+        const getMod = score => (score> 20.5) ? 3 : mods.findIndex(check => check >= score) -5;
+        const intelligence_attack_mod =  getMod(intetot);
+        setAttrs({
+            intelligence_attack_mod: intelligence_attack_mod,
+    });
+  });
+});
+
+on("change:wisdom change:wisdom_fractional sheet:opened", function() {
+    getAttrs(["wisdom","wisdom_fractional"], function(values) {
+        const wis = int(values.wisdom);
+        const wisfrac = int(values.wisdom_fractional);
+        let wistot  = wis + wisfrac*.01;
+        console.log(wistot);
+        const mods = [2, 4, 7,10, 12, 15, 18,20];
+        const getMod = score => (score> 20) ? 4 : mods.findIndex(check => check >= score) -4;
+        const wisdom_defense_mod =  getMod(wistot);
+        const mods2 = [3,5,7,9, 13, 15, 18,20];
+        const getMod2 = score => (score> 20) ? 4 : mods2.findIndex(check => check >= score) -4;
+        const mental_save_bonus =  getMod2(wistot);
+        const mods3 = [2,3,4,7,10,12,15,18,20];
+        const getMod3 = score => (score> 20) ? 2 : mods3.findIndex(check => check >= score) -7;
+        const wisdom_initiative_mod = -1*getMod3(wistot);
+        const mods4 = [3,6,9,12,15,18,21,22];
+        const getMod4= score => (score> 22) ? 4 : mods3.findIndex(check => check >= score) -3;
+        const fatigue_wis = -1*getMod3(wistot);
+        setAttrs({
+            wisdom_defense_mod:wisdom_defense_mod,
+            mental_save_bonus:mental_save_bonus,
+            wisdom_initiative_mod: wisdom_initiative_mod,
+            fatigue_wis:fatigue_wis
+    });
+  });
+});
+
+on("change:dexterity change:dexterity_fractional sheet:opened", function() {
+    getAttrs(["dexterity","dexterity_fractional"], function(values) {
+        const dex = int(values.dexterity);
+        const dexfrac = int(values.dexterity_fractional);
+        let dextot  = dex + dexfrac*.01;
+        console.log(dextot);
+        const mods = [4, 5.5, 7,8.5, 10, 11.5,13,14.5,16,17.5,19,20.5,21];
+        const getMod = score => (score> 21) ? 7 : mods.findIndex(check => check >= score) -5;
+        const dexterity_defense_mod =  getMod(dextot);
+        const mods2 = [5,7,9, 13, 15, 18,20];
+        const getMod2 = score => (score> 20) ? 4 : mods2.findIndex(check => check >= score) -3;
+        const dodge_save_bonus =  getMod2(dextot);
+        const mods3 = [3,5.5,7.5,9.5,12,14,16,18,20];
+        const getMod3 = score => (score> 20) ? 5 : mods3.findIndex(check => check >= score) -4;
+        const dexterity_attack_mod =  getMod3(dextot);
+        const mods4 = [3,4.5,5,6,6.5,7.5,8,9,9.5,10,12,12.5,13,13.5,14,14.5,15,15.5,16,16.5,17,17.5,18,18.5,19,19.5,20,20.5];
+        const getMod4 = score => (score> 20.5) ? 19 : mods4.findIndex(check => check >= score) -10;
+        const feat_of_agility =  getMod4(dextot);
+        const mods5 = [4,5.5,7,8.5,10,11.5,13,14.5,16,17.5,19,20.5,21];
+        const getMod5 = score => (score> 21) ? 5 : mods5.findIndex(check => check >= score) -7;
+        const dexterity_initiative_mod = -1*getMod5(dextot);
+        setAttrs({
+            dexterity_defense_mod:dexterity_defense_mod,
+            dexterity_attack_mod:dexterity_attack_mod,
+            dodge_save_bonus:dodge_save_bonus,
+            feat_of_agility:feat_of_agility,
+            dexterity_initiative_mod:dexterity_initiative_mod
+    });
+  });
+});
+
+on("change:constitution change:constitution_fractional sheet:opened", function() {
+    getAttrs(["constitution","constitution_fractional"], function(values) {
+        const con = int(values.constitution);
+        let topsave= Math.floor(con*.5);
+        const confrac = int(values.constitution_fractional);
+        let contot  = con + confrac*.01;
+        console.log(contot);
+        const mods = [2,3,5,7,9,13,15,18,21];
+        const getMod = score => (score> 22) ? 5 : mods.findIndex(check => check >= score) -5;
+        const physical_save_bonus =  getMod(contot);
+        setAttrs({
+            physical_save_bonus: physical_save_bonus,
+            topsave:topsave
+    });
+  });
+});
+
+on("change:charisma change:charisma_fractional sheet:opened", function() {
+    getAttrs(["charisma","charisma_fractional"], function(values) {
+        const cha = int(values.charisma);
+        console.log(cha);
+        const chafrac = int(values.charisma_fractional);
+        let chatot  = cha + chafrac*.01;
+        console.log(chatot);
+        if  (chatot <= 10)  turning_mod = cha-10;
+        else                turning_mod = cha-10;
+        const mods = [2,4,6,8,10,11,13,15,17,19,21];
+        const getMod = score => (score> 22) ? 7 : mods.findIndex(check => check >= score) -5;
+        const morale_mod =  getMod(chatot);
+        setAttrs({
+            turning_mod:turning_mod,
+            morale_mod:morale_mod
+    });
+  });
+});
+
 on("change:skill_dice_switch sheet:opened", function() {
         getAttrs(["skill_dice_switch"], function(values) {
             var check = parseInt(values.skill_dice_switch) || 0;
@@ -73,6 +216,13 @@ on("change:skill_dice_switch sheet:opened", function() {
             current_affairs_dice: diceCA
         });
     });
+            getAttrs(["skill_dice_switch"], function(values) {
+            var check = parseInt(values.skill_dice_switch) || 0;
+            var diceDis = check ? "[[1d100+@{skill_distraction}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_distraction}]]";
+        setAttrs({
+            distraction_dice: diceDis
+        });
+    });
         getAttrs(["skill_dice_switch"], function(values) {
             var check = parseInt(values.skill_dice_switch) || 0;
             var diceD = check ? "[[1d100+@{skill_diplomacy}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_diplomacy}]]";
@@ -96,9 +246,9 @@ on("change:skill_dice_switch sheet:opened", function() {
     });
         getAttrs(["skill_dice_switch"], function(values) {
             var check = parseInt(values.skill_dice_switch) || 0;
-            var diceF = check ? "[[1d100+@{skill_fire_building}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_fire_building}]]";
+            var diceFB = check ? "[[1d100+@{skill_fire_building}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_fire_building}]]";
         setAttrs({
-            fire_building_dice: diceAH
+            fire_building_dice: diceFB
         });
     });
         getAttrs(["skill_dice_switch"], function(values) {
@@ -269,20 +419,20 @@ on("change:skill_dice_switch sheet:opened", function() {
     <div class="sheet-col-5-8 sheet-padr">
         <div class="sheet-row">
             <div class="sheet-col-1-2"><input class="sheet-underlined" type="text" name="attr_character_name"/><br/>Character Name</div>
-        	<div class="sheet-col-1-4"><select name="attr_class">
-                <option value="Assassin">Assassin</option>
-                <option value="Barbarian">Barbarian</option>
-                <option value="Cleric">Cleric</option>
-                <option value="Fighter">Fighter</option>
-                <option value="Fighter/Mage">Fighter/Mage</option>
-                <option value="Fighter/Thief">Fighter/Thief</option>
-                <option value="Knight">Knight</option>
-                <option value="Mage">Mage</option>
-                <option value="Mage/Thief">Mage/Thief</option>
-                <option value="Paladin">Paladin</option>
-                <option value="Ranger">Ranger</option>
-                <option value="Rogue">Rogue</option>
-                <option value="Thief">Thief</option>
+        	<div class="sheet-col-1-4"><select name="attr_class_fatigue">
+                <option value="0">Assassin</option>
+                <option value="-2">Barbarian</option>
+                <option value="0">Cleric</option>
+                <option value="-2">Fighter</option>
+                <option value="-1">Fighter/Mage</option>
+                <option value="-1">Fighter/Thief</option>
+                <option value="-2">Knight</option>
+                <option value="0">Mage</option>
+                <option value="0">Mage/Thief</option>
+                <option value="-2">Paladin</option>
+                <option value="-2">Ranger</option>
+                <option value="0">Rogue</option>
+                <option value="0">Thief</option>
             </select><br/>Class</div>
     		<div class="sheet-col-1-4"><select name="attr_race">
                 <option value="Dwarf">Dwarf</option>
@@ -355,17 +505,18 @@ on("change:skill_dice_switch sheet:opened", function() {
 		<div class="sheet-col-5-8 sheet-padr">
             <h4>Core Stats</h4>
             <div class="sheet-row">
-				<div class="sheet-col-1-10 sheet-core-stat-label">STR</div>
+                <div class="sheet-col-1-10"><button class="sheet-skill-roll" type='roll' name='roll_ability_save' value='?{Ability Check of Save?| Save, @{character_name} makes a Strength Ability Save \n\n Strength Save :[[1d20 + @{strength} ]] |  Check, @{character_name} makes a Strength Ability Check (trying to roll under ability) \n\n Strength Save :[[1d20 ]] vs @{strength}}'>STR</button></div>
 				<div class="sheet-col-1-16"><input type="text" name="attr_strength"/></div>
 				<div class="sheet-col-1-16"><input type="text" name="attr_strength_fractional"/></div>
 				<div class="sheet-col-1-10 sheet-core-stat-text">Damage Mod</div>
                 <div class="sheet-col-1-12"><input type="number" name="attr_strength_damage_mod" value="0"/></div>
 				<div class="sheet-col-1-10 sheet-core-stat-text">Feat of Strength</div>
 				<div class="sheet-col-1-12"><input type="number" name="attr_feat_of_strength" value="0"/></div>
+				<div class="sheet-col-1-12"><button class="sheet-skill-roll" type='roll' name='roll_feat_of_strength' value='@{character_name} attempts a Feat of Strength \n\n Feat of Strength :[[1d20 + @{feat_of_strength} ]]'>FoS</button></div>
 			</div>
             
             <div class="sheet-row">
-                <div class="sheet-col-1-10 sheet-core-stat-label">INT</div>
+                <div class="sheet-col-1-10"><button class="sheet-skill-roll" type='roll' name='roll_ability_save' value='?{Ability Check of Save?| Save, @{character_name} makes a Intelligence Ability Save \n\n Intelligence Save :[[1d20 + @{intelligence} ]] |  Check, @{character_name} makes a Intelligence Ability Check (trying to roll under ability) \n\n Intelligence Save :[[1d20 ]] vs @{intelligence}}'>INT</button></div>
 				<div class="sheet-col-1-16"><input type="text" name="attr_intelligence"/></div>
 				<div class="sheet-col-1-16"><input type="text" name="attr_intelligence_fractional"/></div>
 				<div class="sheet-col-1-10 sheet-core-stat-text">Attack Mod</div>
@@ -373,7 +524,7 @@ on("change:skill_dice_switch sheet:opened", function() {
 			</div>
             
             <div class="sheet-row">
-                <div class="sheet-col-1-10 sheet-core-stat-label">WIS</div>
+                <div class="sheet-col-1-10"><button class="sheet-skill-roll" type='roll' name='roll_ability_save' value='?{Ability Check of Save?| Save, @{character_name} makes a Wisdom Ability Save \n\n Wisdom Save :[[1d20 + @{wisdom} ]] |  Check, @{character_name} makes a Wisdom Ability Check (trying to roll under ability) \n\n Wisdom Save :[[1d20 ]] vs @{wisdom}}'>WIS</button></div>
                 <div class="sheet-col-1-16"><input type="text" name="attr_wisdom"/></div>
                 <div class="sheet-col-1-16"><input type="text" name="attr_wisdom_fractional"/></div>
 				<div class="sheet-col-1-10 sheet-core-stat-text">Initiative Mod</div>
@@ -383,7 +534,7 @@ on("change:skill_dice_switch sheet:opened", function() {
 			</div>
             
             <div class="sheet-row">
-                <div class="sheet-col-1-10 sheet-core-stat-label">DEX</div>
+                <div class="sheet-col-1-10"><button class="sheet-skill-roll" type='roll' name='roll_ability_save' value='?{Ability Check of Save?| Save, @{character_name} makes a Dexterity Ability Save \n\n Dexterity Save :[[1d20 + @{dexterity} ]] |  Check, @{character_name} makes a Dexterity Ability Check (trying to roll under ability) \n\n Dexterity Save :[[1d20 ]] vs @{dexterity}}'>DEX</button></div>
                 <div class="sheet-col-1-16"><input type="text" name="attr_dexterity"/></div>
                 <div class="sheet-col-1-16"><input type="text" name="attr_dexterity_fractional"/></div>
                 <div class="sheet-col-1-10 sheet-core-stat-text">Initiative Mod</div>
@@ -397,18 +548,26 @@ on("change:skill_dice_switch sheet:opened", function() {
 			</div>
             
             <div class="sheet-row">
-                <div class="sheet-col-1-10 sheet-core-stat-label">CON</div>
+                <div class="sheet-col-1-10"><button class="sheet-skill-roll" type='roll' name='roll_ability_save' value='?{Ability Check of Save?| Save, @{character_name} makes a Constitution Ability Save \n\n Constitution Save :[[1d20 + @{constitution} ]] |  Check, @{character_name} makes a Constitution Ability Check (trying to roll under ability) \n\n Constitution Save :[[1d20 ]] vs @{constitution}}'>CON</button></div>
                 <div class="sheet-col-1-16"><input type="text" name="attr_constitution"/></div>
                 <div class="sheet-col-1-16"><input type="text" name="attr_constitution_fractional"/></div>
+                 <div class="sheet-col-1-10 sheet-core-stat-text"></div>
+                <div class="sheet-col-1-12"></div>
+				<div class="sheet-col-1-10 sheet-core-stat-text"></div>
+				<div class="sheet-col-1-12"></div>                
+				<div class="sheet-col-1-10 sheet-core-stat-text"></div>
+                <div class="sheet-col-1-12"></div>
+                <div class="sheet-col-1-10 sheet-core-stat-text"></div>
+				<div class="sheet-col-1-10"><button class="sheet-skill-roll" type='roll' name='roll_feat_of_agility' value='@{character_name} attempts a Feat of Agility \n\n Feat of Agility :[[1d20 + @{feat_of_agility} ]]'>FoA</button></div>
 			</div>
             
             <div class="sheet-row">
-                <div class="sheet-col-1-10 sheet-core-stat-label">LKS</div>
+                <div class="sheet-col-1-10"><button class="sheet-skill-roll" type='roll' name='roll_ability_save' value='?{Ability Check of Save?| Save, @{character_name} makes a Looks Ability Save \n\n Looks Save :[[1d20 + @{looks} ]] |  Check, @{character_name} makes a Looks Ability Check (trying to roll under ability) \n\n Looks Save :[[1d20 ]] vs @{looks}}'>LKS</button></div>
                 <div class="sheet-col-1-16"><input type="text" name="attr_looks"/></div>
                 <div class="sheet-col-1-16"><input type="text" name="attr_looks_fractional"/></div>
             </div>
             <div class="sheet-row">
-                <div class="sheet-col-1-10 sheet-core-stat-label">CHA</div>
+                <div class="sheet-col-1-10"><button class="sheet-skill-roll" type='roll' name='roll_ability_save' value='?{Ability Check of Save?| Save, @{character_name} makes a Charisma Ability Save \n\n Charisma Save :[[1d20 + @{Charisma} ]] |  Check, @{character_name} makes a Charisma Ability Check (trying to roll under ability) \n\n Charisma Save :[[1d20 ]] vs @{charisma}}'>CHA</button></div>
                 <div class="sheet-col-1-16"><input type="text" name="attr_charisma"/></div>
                 <div class="sheet-col-1-16"><input type="text" name="attr_charisma_fractional"/></div>
                 <div class="sheet-col-1-10 sheet-core-stat-text">Turning Mod</div>
@@ -486,7 +645,14 @@ on("change:skill_dice_switch sheet:opened", function() {
                 <div class="sheet-col-1-4"><input type="number" name="attr_physical_save" value="@{level}+@{physical_save_bonus}" disabled="disabled"/></div>
                 <div class="sheet-col-1-4"><input type="number" name="attr_physical_save_bonus" value="0"/></div>
                 <div class="sheet-col-1-4 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_mental_save' value='@{character_name} makes a Saving Throw \n\nPhysical Save :[[1d20 + @{physical_save} ]]'>Save</button></div>
-            </div>            
+            </div> 
+            
+            <div class="sheet-row sheet-stat-row">
+                <div class="sheet-col-1-4">Poison</div>
+                <div class="sheet-col-1-4"><input type="number" name="attr_poison_save" value="@{level}+@{poison_save_bonus}+@{constitution}" disabled="disabled"/></div>
+                <div class="sheet-col-1-4"><input type="number" name="attr_poison_save_bonus" value="0"/></div>
+                <div class="sheet-col-1-4 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_mental_save' value='@{character_name} makes a Saving Throw \n\nPoison Save :[[1d20 + @{poison_save} ]]'>Save</button></div>
+            </div> 
             
             <hr />
             
@@ -511,6 +677,7 @@ on("change:skill_dice_switch sheet:opened", function() {
                 <div class="sheet-col-1-4"><input type="number" name="attr_initiative" value="@{level_initiative_bonus}+@{wisdom_initiative_mod}+@{dexterity_initiative_mod}+@{armor_init_modifier}+@{encumbrance_initiative_mod}" disabled="disabled"/></div>
                 <div class="sheet-col-1-4">
         		    <select name="attr_initiative_die">
+        		        <option value="d3">d3</option>
     					<option value="d4">d4</option>
     					<option value="d6">d6</option>
                         <option value="d8">d8</option>
@@ -562,14 +729,14 @@ on("change:skill_dice_switch sheet:opened", function() {
 			<div class="sheet-col-1-8" title="Only enter the base damage roll here without any bonuses from stats or other sources"><input type="text" name="attr_weapon_base_damage"/></div>
 			<div class="sheet-col-1-8" title="Only enter the shield damage roll here without any bonuses from stats or other sources"><input type="text" name="attr_weapon_shield_damage"/></div>
 			<div class="sheet-col-1-16"><input type="number" name="attr_weapon_reach" min=0 step=0.25></div>
-        	<div class="sheet-col-1-16"><input type="number" name="attr_weapon_attack_mod_total" value="@{weapon_misc_attack}+@{weapon_style_attack}+@{level_attack_bonus}+@{intelligence_attack_mod}+@{dexterity_attack_mod}+@{weapon_magic_bonus}+@{weapon_spec_attack}+@{weapon_talent_attack}" disabled="disabled"/></div>
-            <input type="hidden" name="attr_weapon_jab_speed_mod_total" value="@{weapon_misc_speed}+@{weapon_style_speed}+@{base_weapon_jab_speed}+@{level_speed_bonus}+@{armor_speed_modifier}+@{weapon_spec_speed}+@{weapon_talent_speed}+@{encumbrance_speed_mod}" disabled="disabled"/>
-            <div class="sheet-col-1-16"><input type="number" name="attr_weapon_speed_mod_total" value="@{weapon_misc_speed}+@{weapon_style_speed}+@{base_weapon_speed}+@{level_speed_bonus}+@{armor_speed_modifier}+@{weapon_spec_speed}+@{weapon_talent_speed}+@{encumbrance_speed_mod}" disabled="disabled"/></div>
-            <div class="sheet-col-1-16"><input type="number" name="attr_weapon_defense_mod_total" value="@{weapon_misc_defense}+@{weapon_style_defense}+@{wisdom_defense_mod}+@{dexterity_defense_mod}+@{weapon_spec_defense}+@{weapon_talent_defense}+@{armor_defense_bonus}+@{shield_defense_bonus}+@{natural_defense_bonus}+@{encumbrance_defense_mod}" disabled="disabled"/></div>
-            <div class="sheet-col-1-16"><input type="number" name="attr_weapon_damage_mod_total" value="@{weapon_misc_damage}+@{weapon_style_damage}+@{weapon_stat_bonus_damage}+@{weapon_spec_damage}+@{weapon_talent_damage}+@{weapon_magic_bonus}" disabled="disabled"/></div>
+        	<div class="sheet-col-1-16"><input type="number" name="attr_weapon_attack_mod_total" value="@{fatigue_attack}+@{weapon_misc_attack}+@{weapon_style_attack}+@{level_attack_bonus}+@{intelligence_attack_mod}+@{dexterity_attack_mod}+@{weapon_magic_bonus}+@{weapon_spec_attack}+@{weapon_talent_attack}" disabled="disabled"/></div>
+            <input type="hidden" name="attr_weapon_jab_speed_mod_total" value="@{fatigue_speed}+@{weapon_misc_speed}+@{weapon_style_speed}+@{base_weapon_jab_speed}+@{level_speed_bonus}+@{armor_speed_modifier}+@{weapon_spec_speed}+@{weapon_talent_speed}+@{encumbrance_speed_mod}" disabled="disabled"/>
+            <div class="sheet-col-1-16"><input type="number" name="attr_weapon_speed_mod_total" value="@{fatigue_speed}+@{weapon_misc_speed}+@{weapon_style_speed}+@{base_weapon_speed}+@{level_speed_bonus}+@{armor_speed_modifier}+@{weapon_spec_speed}+@{weapon_talent_speed}+@{encumbrance_speed_mod}" disabled="disabled"/></div>
+            <div class="sheet-col-1-16"><input type="number" name="attr_weapon_defense_mod_total" value="@{fatigue_defense}+@{weapon_misc_defense}+@{weapon_style_defense}+@{wisdom_defense_mod}+@{dexterity_defense_mod}+@{weapon_spec_defense}+@{weapon_talent_defense}+@{armor_defense_bonus}+@{shield_defense_bonus}+@{natural_defense_bonus}+@{encumbrance_defense_mod}" disabled="disabled"/></div>
+            <div class="sheet-col-1-16"><input type="number" name="attr_weapon_damage_mod_total" value="@{fatigue_damage}+@{weapon_misc_damage}+@{weapon_style_damage}+@{weapon_stat_bonus_damage}+@{weapon_spec_damage}+@{weapon_talent_damage}+@{weapon_magic_bonus}" disabled="disabled"/></div>
             <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_attack' value='&{template:hm_std} {{name=@{character_name} attacks!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}} {{reach=@{weapon_reach}}} {{atk_roll=[[1d20cs>19cf1cf19 +@{weapon_attack_mod_total}]]}}'>ATK</button></div>
             <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} hits!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}} {{reach=@{weapon_reach}}} {{damage=[[@{weapon_base_damage}+@{weapon_damage_mod_total}]]}}'>DMG</button></div>
-            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_defense' value='&{template:hm_std} {{name=@{character_name} defends!!}}{{def_roll=[[ @{defence_dice} +@{weapon_defense_mod_total}]]}} {{dr=[[@{dr}]]}} {{sdr=[[@{shield_dr}]]}}'>DEF</button></div>
+            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_defense' value='&{template:hm_std} {{name=@{character_name} defends!!}}{{def_roll=[[ @{defence_dice} +@{weapon_defense_mod_total}]]}} {{dr=[[@{dr}]]}} {{sdr=[[@{shield_dr}]]}}{{fatigue=[[@{current_fatigue}+@{weapon_defense_mod_total}]]}}'>DEF</button></div>
             <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} is blocked!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}} {{reach=@{weapon_reach}}} {{damage=[[@{weapon_shield_damage}+@{weapon_damage_mod_total}]]}}'>SHD</button></div>
             <div>
             <div class="sheet-col-1-8"><span>Hidden Details</span></div>
@@ -855,6 +1022,67 @@ on("change:skill_dice_switch sheet:opened", function() {
                 <div class="sheet-col-1-8"><input type="number" name="attr_natural_dr" value="0"/></div>
                 <div class="sheet-col-1-8"><input type="number" name="attr_natural_defense_bonus" value="0"/></div>
                 <div class="sheet-col-3-8"></div>
+            </div>
+            <hr/>
+            
+                        <h4>Fatigue</h4>
+            
+            <div class="sheet-row sheet-stat-row sheet-padr">
+                <div class="sheet-col-1-8"></div>
+                <div class="sheet-col-1-8">Base Fatigue</div>
+                <div class="sheet-col-1-8">Current Fatigue</div>
+                <div class="sheet-col-1-8">Attack Mod</div>
+                <div class="sheet-col-1-8">Speed Mod</div>
+                <div class="sheet-col-1-8">Defense Mod</div>
+                <div class="sheet-col-1-8">Damage Mod</div>
+                <div class="sheet-col-1-8">Fatigue Check</div>
+            </div>
+            
+            <div class="sheet-row sheet-stat-row sheet-padr">
+                <div class="sheet-col-1-8"></div>
+                <div class="sheet-col-1-8"><input type="number" name="attr_base_fatigue" value="@{fatigue_con}+@{class_fatigue}+@{fatigue_wis}+@{fatigue_shield}+@{fatigue_armor}+@{fatigue_weight}" disabled="disabled" /></div>
+                <input type="hidden" name="attr_base_fatigue_con" value="0" />
+                <input type="hidden" name="attr_base_fatigue_wis" value="0" />
+                <div class="sheet-col-1-8"><input type="number" name="attr_current_fatigue"/></div>
+                <div class="sheet-col-1-8"><input type="number" name="attr_fatigue_attack" value="0"/></div>
+                <div class="sheet-col-1-8"><input type="number" name="attr_fatigue_speed" value="0"/></div>
+                <div class="sheet-col-1-8"><input type="number" name="attr_fatigue_defense" value="0"/></div>
+                <div class="sheet-col-1-8"><input type="number" name="attr_fatigue_damage" value="0"/></div>
+                <div class="sheet-col-1-8"><button class="sheet-skill-roll" type='roll' name='roll_ability_save' value=' @{character_name} makes a Fatigue Check (roll above current fatigue) \n\n Fatigue Check :[[1d20]] vs @{current_fatigue}'></button></div>
+                <fieldset class="sheet-col-3-8">
+                <input type="checkbox" class="wombat-show arrow" name="attr_wombat_show" title="Show/Hide" value="1">
+                <span>Base Fatigue Details</span>
+                <div class="wombat">
+                <div class="sheet-col-3-8">Shield</div>
+                <div class="sheet-col-3-8">
+                    <select name="attr_fatigue_shield">
+					    <option value="0">None</option>
+					    <option value="0">Buckler</option>
+                        <option value="1">Small or Medium </option>
+                        <option value="2">Large</option>
+                        <option value="3">Body</option>
+				    </select>
+				</div>
+                <div class="sheet-col-3-8">Armor</div>
+                <div class="sheet-col-3-8">
+                    <select name="attr_fatigue_armor">
+					    <option value="0">None</option>
+					    <option value="0">Light</option>
+                        <option value="1">Medium </option>
+                        <option value="2">Heavy</option>
+				    </select>
+				</div>
+                <div class="sheet-col-3-8">Weight</div>
+                <div class="sheet-col-3-8">
+                    <select name="attr_fatigue_weight">
+					    <option value="0">Healthy</option>
+                        <option value="1">Overweight</option>
+                        <option value="3">Obese</option>
+				    </select>
+                </div>
+                <div class="sheet-col-3-8">Misc</div>
+                <div class="sheet-col-3-8"><input type="number" name="attr_fatigue_misc"/></div>
+                </fieldset>
             </div>
             <hr/>
             
@@ -1482,8 +1710,15 @@ on("change:skill_dice_switch sheet:opened", function() {
             {{/rollWasFumble() def_roll}}{{/rollWasCrit() def_roll}}
         
             {{#rollWasFumble() def_roll}}{{#^rollWasCrit() def_roll}}
-                <tr><td><span class="tcat">Fumble!</span></td></tr>
+                <tr><td><span class="tcat">Fumble! (Automatic Fatigue Gain)</span></td></tr>
             {{/^rollWasCrit() def_roll}}{{/rollWasFumble() def_roll}}
+
+            {{#^rollGreater() def_roll fatigue}}
+
+                <tr><td><span class="tcat">Fatigue Gained!</span></td></tr>
+
+            {{/^rollGreater() def_roll fatigue}}
+
         {{/def_roll}}
 		{{#damage}}
             <tr><td><span class="tcat">Damage Roll: </span>{{damage}}<img src="https://i.imgur.com/N8POrfv.png"></td></tr>
@@ -1492,9 +1727,9 @@ on("change:skill_dice_switch sheet:opened", function() {
             <tr><td><span class="tcat">DR: </span>{{dr}}{{#sdr}} + {{sdr}}<img src="https://i.imgur.com/AYeAO4C.png">{{/sdr}}</td></tr>
         {{/dr}}
         
-        {{#allprops() name weapon speed reach atk_roll def_roll damage dr sdr}}
+        {{#allprops() name weapon speed reach atk_roll def_roll damage dr sdr fatigue}}
             <tr><td><span class="tcat">{{key}}: </span>{{value}}</td></tr>
-        {{/allprops() name weapon speed reach atk_roll def_roll damage dr sdr}}
+        {{/allprops() name weapon speed reach atk_roll def_roll damage dr sdr fatigue}}
     </table>
 
 </rolltemplate>
@@ -1513,4 +1748,3 @@ on("change:skill_dice_switch sheet:opened", function() {
     </table>
 
 </rolltemplate>
-
