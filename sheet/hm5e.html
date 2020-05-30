@@ -138,7 +138,7 @@ on("change:skill_dice_switch sheet:opened", function() {
     });
         getAttrs(["skill_dice_switch"], function(values) {
             var check = parseInt(values.skill_dice_switch) || 0;
-            var diceJ = check ? "[[1d100+@{skill_jumping}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_jumping]]";
+            var diceJ = check ? "[[1d100+@{skill_jumping}]] vs Opposing Roll" : "[[d100]] Skill: [[@{skill_jumping}]]";
         setAttrs({
             jumping_dice: diceJ
         });
@@ -490,7 +490,7 @@ on("change:skill_dice_switch sheet:opened", function() {
             
             <div class="sheet-row sheet-stat-row">
                 <div class="sheet-col-1-4">Physical</div>
-                <div class="sheet-col-1-4"><input type="number" name="attr_physical_save" value="@{level}+@{physical_save_bonus}" disabled="disabled"/></div>
+                <div class="sheet-col-1-4"><input type="number" name="attr_physical_save" value="@{physical_save_bonus}" disabled="disabled"/></div>
                 <div class="sheet-col-1-4"><input type="number" name="attr_physical_save_bonus" value="0"/></div>
                 <div class="sheet-col-1-4 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_mental_save' value='@{character_name} makes a Saving Throw \n\nPhysical Save :[[1d20 + @{physical_save} ]]'>Save</button></div>
             </div>            
