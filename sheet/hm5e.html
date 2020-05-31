@@ -276,21 +276,23 @@ on("change:skill_dice_switch sheet:opened", function() {
     <div class="sheet-col-5-8 sheet-padr">
         <div class="sheet-row">
             <div class="sheet-col-1-2"><input class="sheet-underlined" type="text" name="attr_character_name"/><br/>Character Name</div>
-        	<div class="sheet-col-1-4"><select name="attr_class">
-                <option value="Assassin">Assassin</option>
-                <option value="Barbarian">Barbarian</option>
-                <option value="Cleric">Cleric</option>
-                <option value="Fighter">Fighter</option>
-                <option value="Fighter/Mage">Fighter/Mage</option>
-                <option value="Fighter/Thief">Fighter/Thief</option>
-                <option value="Knight">Knight</option>
-                <option value="Mage">Mage</option>
-                <option value="Mage/Thief">Mage/Thief</option>
-                <option value="Paladin">Paladin</option>
-                <option value="Ranger">Ranger</option>
-                <option value="Rogue">Rogue</option>
-                <option value="Thief">Thief</option>
-            </select><br/>Class</div>
+        <div class="sheet-col-1-4">
+                <select name="attr_class_fatigue">
+            	<option value="0">Assassin</option>
+            	<option value="-2">Barbarian</option>
+            	<option value="0+0">Cleric</option>
+            	<option value="-2+0">Fighter</option>
+            	<option value="-1">Fighter/Mage</option>
+            	<option value="-1+0">Fighter/Thief</option>
+            	<option value="-2+0+0">Knight</option>
+            	<option value="0+0+0">Mage</option>
+            	<option value="0+0+0+0">Mage/Thief</option>
+            	<option value="-2+0+0+0">Paladin</option>
+            	<option value="-2+0+0+0+0">Ranger</option>
+            	<option value="0+0+0+0+0">Rogue</option>
+            	<option value="0+0+0+0+0+0">Thief</option>
+                </select><br/>Class
+            </div>
     		<div class="sheet-col-1-4"><select name="attr_race">
                 <option value="Dwarf">Dwarf</option>
                 <option value="Elf">Elf</option>
