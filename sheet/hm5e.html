@@ -1115,7 +1115,7 @@ on("change:skill_dice_switch sheet:opened", function() {
             </div>
             <div class="sheet-col-1-8">d20</div>
             <div class="sheet-col-1-16" title="Range at which you roll a d20"><input type="text" name="attr_0_range"/></div>  
-            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_0_range_adjusted" value="@{0_range}*@{target_size}*(@{adv_sighting}+1)" readonly /></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_0_range_adjusted" value="@{0_range}*@{target_size}*(@{adv_sighting}+1)" disabled /></div>
             
             <div class="sheet-col-1-16"></div>
             <div class="sheet-col-1-8 sheet-vert-bottom">Base Speed</div>
@@ -1128,7 +1128,7 @@ on("change:skill_dice_switch sheet:opened", function() {
             
             <div class="sheet-col-1-8">d20-4</div>
             <div class="sheet-col-1-16" title="Range at which you roll a d20-4"><input type="text" name="attr_four_range"/></div>
-            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_four_range_adjusted" value="@{four_range}*@{target_size}*(@{adv_sighting}+1)" readonly /></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_four_range_adjusted" value="@{four_range}*@{target_size}*(@{adv_sighting}+1)" disabled /></div>
               
         <div class="sheet-row sheet-stat-row sheet-padl">
             <div class="sheet-col-1-8 sheet-vert-bottom">Str Bonus</div>
@@ -1146,7 +1146,7 @@ on("change:skill_dice_switch sheet:opened", function() {
             <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_misc_damage" value="0"/></div>
             <div class="sheet-col-1-8">d20-6</div>
             <div class="sheet-col-1-16" title="Range at which you roll a d20-6"><input type="text" name="attr_six_range"/></div>
-            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_six_range_adjusted" value="@{six_range}*@{target_size}*(@{adv_sighting}+1)" readonly /></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_six_range_adjusted" value="@{six_range}*@{target_size}*(@{adv_sighting}+1)"  disabled/></div>
         <div class="sheet-row sheet-stat-row sheet-padl">
             <div class="sheet-col-1-8 sheet-vert-bottom">Target Size</div>
             <div class="sheet-col-1-8" title="Determines range modifier">
@@ -1169,7 +1169,7 @@ on("change:skill_dice_switch sheet:opened", function() {
             <div class="sheet-col-1-16 sheet-vert-bottom"></div>
             <div class="sheet-col-1-8">d20-8 Range</div>
             <div class="sheet-col-1-16" title="Range at which you roll a d20-8"><input type="text" name="attr_eight_range"/></div>
-            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_eight_range_adjusted" value="@{eight_range}*@{target_size}*(@{adv_sighting}+1)"  /></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_eight_range_adjusted" value="@{eight_range}*@{target_size}*(@{adv_sighting}+1)" disabled /></div>
             <hr />
             <div><textarea name="attr_combat_profile_notes"></textarea></div>
         </div>
