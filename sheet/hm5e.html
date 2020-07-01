@@ -1067,11 +1067,9 @@ on("change:skill_dice_switch sheet:opened", function() {
                     <option value="5">5</option>
 				</select>
             </div>
-            <div class="sheet-col-1-16">
-            </div>
             
-            <div class="sheet-col-1-8">d20 Range</div>
-            <div class="sheet-col-1-16" title="Range at which you roll a d20"><input type="text" name="attr_best_range"/></div>
+            <div class="sheet-col-1-8">Max Ranges</div>
+            <div class="sheet-col-1-8">Green is Adjusted Ranges</div>
      
             
         </div>
@@ -1080,7 +1078,9 @@ on("change:skill_dice_switch sheet:opened", function() {
             <div class="sheet-col-1-16"></div>
             <div class="sheet-col-1-8 sheet-vert-bottom">Magic Damage Bonus</div>
             <div class="sheet-col-1-16" title="The magic bonus will be added as a bonus to only damage rolls"><input type="number" name="attr_weapon_magic_damage_bonus" value="0"/></div>
-            <div class="sheet-col-1-8"></div>
+            <div class="sheet-col-1-16"><input type="checkbox" name="attr_adv_sighting" value=".5" /></div>
+            
+            <div class="sheet-col-1-16"><span>Advanced Sighting</span></div>
            
             <div class="sheet-col-1-8 sheet-vert-bottom">Talents</div>
             <div class="sheet-col-1-16 sheet-vert-bottom">
@@ -1113,10 +1113,9 @@ on("change:skill_dice_switch sheet:opened", function() {
                     <option value="5">5</option>
 				</select>
             </div>
-            <div class="sheet-col-1-16 sheet-vert-bottom">
-            </div>
-            <div class="sheet-col-1-8">d20-4 Range</div>
-            <div class="sheet-col-1-16" title="Range at which you roll a d20-4"><input type="text" name="attr_-4_range"/></div>          
+            <div class="sheet-col-1-8">d20</div>
+            <div class="sheet-col-1-16" title="Range at which you roll a d20"><input type="text" name="attr_0_range"/></div>  
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_0_range_adjusted" value="@{0_range}*@{target_size}*(@{adv_sighting}+1)" disabled /></div>
             
             <div class="sheet-col-1-16"></div>
             <div class="sheet-col-1-8 sheet-vert-bottom">Base Speed</div>
@@ -1126,10 +1125,10 @@ on("change:skill_dice_switch sheet:opened", function() {
             <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_style_attack" value="0"/></div>
             <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_style_speed" value="0"/></div> 
             <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_style_damage" value="0"/></div>
-            <div class="sheet-col-1-16 sheet-vert-bottom"></div>
             
-            <div class="sheet-col-1-8">d20-6 Range</div>
-            <div class="sheet-col-1-16" title="Range at which you roll a d20-6"><input type="text" name="attr_-6_range"/></div>
+            <div class="sheet-col-1-8">d20-4</div>
+            <div class="sheet-col-1-16" title="Range at which you roll a d20-4"><input type="text" name="attr_-4_range"/></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_-4_range_adjusted" value="@{-4_range}*@{target_size}*(@{adv_sighting}+1)"disabled/></div>
               
         <div class="sheet-row sheet-stat-row sheet-padl">
             <div class="sheet-col-1-8 sheet-vert-bottom">Str Bonus</div>
@@ -1145,9 +1144,32 @@ on("change:skill_dice_switch sheet:opened", function() {
             <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_misc_attack" value="0"/></div>
             <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_misc_speed" value="0"/></div>
             <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_misc_damage" value="0"/></div>
+            <div class="sheet-col-1-8">d20-6</div>
+            <div class="sheet-col-1-16" title="Range at which you roll a d20-6"><input type="text" name="attr_-6_range"/></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_-6_range_adjusted" value="@{-6_range}*@{target_size}*(@{adv_sighting}+1)" disabled/></div>
+        <div class="sheet-row sheet-stat-row sheet-padl">
+            <div class="sheet-col-1-8 sheet-vert-bottom">Target Size</div>
+            <div class="sheet-col-1-8" title="Determines range modifier">
+				<select name="attr_target_size">
+				    <option value="0 ">      </option>
+					<option value=".5 "> Tiny</option>
+					<option value=".66"> Small</option>
+					<option value="1">Medium</option>
+					<option value="1.5"> Large</option>
+					<option value="2"> Huge</option>
+					<option value="4"> Giant</option>
+					<option value="6"> Enormous</option>
+					<option value="8"> Colossal</option>
+				</select>
+			</div>
+            <div class="sheet-col-1-16"></div>
+            <div class="sheet-col-1-8 sheet-vert-bottom"></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"></div>
             <div class="sheet-col-1-16 sheet-vert-bottom"></div>
             <div class="sheet-col-1-8">d20-8 Range</div>
-            <div class="sheet-col-1-16" title="Range at which you roll a d20-6"><input type="text" name="attr_-8_range"/></div>
+            <div class="sheet-col-1-16" title="Range at which you roll a d20-8"><input type="text" name="attr_-8_range"/></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_-8_range_adjusted" value="@{-8_range}*@{target_size}*(@{adv_sighting}+1)"disabled /></div>
             <hr />
             <div><textarea name="attr_combat_profile_notes"></textarea></div>
         </div>
@@ -1258,7 +1280,7 @@ on("change:skill_dice_switch sheet:opened", function() {
             
             <div class="sheet-row sheet-stat-row sheet-padr">
                 <div class="sheet-col-1-8"></div>
-                <div class="sheet-col-1-8"><input type="number" name="attr_base_fatigue" value="@{fatigue_con}+@{class_fatigue}+@{fatigue_wis}+@{fatigue_shield}+@{fatigue_armor}+@{fatigue_weight}" disabled="disabled" /></div>
+                <div class="sheet-col-1-8"><input type="number" name="attr_base_fatigue" value="@{fatigue_misc}+@{fatigue_con}+@{class_fatigue}+@{fatigue_wis}+@{fatigue_shield}+@{fatigue_armor}+@{fatigue_weight}" disabled="disabled" /></div>
                 <input type="hidden" name="attr_base_fatigue_con" value="0" />
                 <input type="hidden" name="attr_base_fatigue_wis" value="0" />
                 <div class="sheet-col-1-8"><input type="number" name="attr_current_fatigue"/></div>
@@ -1267,15 +1289,16 @@ on("change:skill_dice_switch sheet:opened", function() {
                 <div class="sheet-col-1-8"><input type="number" name="attr_fatigue_defense" value="0"/></div>
                 <div class="sheet-col-1-8"><input type="number" name="attr_fatigue_damage" value="0"/></div>
                 <div class="sheet-col-1-8"><button class="sheet-skill-roll" type='roll' name='roll_ability_save' value=' @{character_name} makes a Fatigue Check (roll above current fatigue) \n\n Fatigue Check :[[1d20]] vs @{current_fatigue}'></button></div>
-                <fieldset class="sheet-col-3-8">
+                <fieldset class="sheet-col-1-2">
                 <input type="checkbox" class="wombat-show arrow" name="attr_wombat_show" title="Show/Hide" value="1">
                 <span>Base Fatigue Details</span>
                 <div class="wombat">
+                <div class="sheet-col-3-4">These automatically apply to base fatigue</div>
                 <div class="sheet-col-3-8">Shield</div>
                 <div class="sheet-col-3-8">
                     <select name="attr_fatigue_shield">
 					    <option value="0">None</option>
-					    <option value="0">Buckler</option>
+					    <option value="0+0">Buckler</option>
                         <option value="1">Small or Medium </option>
                         <option value="2">Large</option>
                         <option value="3">Body</option>
@@ -1285,7 +1308,7 @@ on("change:skill_dice_switch sheet:opened", function() {
                 <div class="sheet-col-3-8">
                     <select name="attr_fatigue_armor">
 					    <option value="0">None</option>
-					    <option value="0">Light</option>
+					    <option value="0+0">Light</option>
                         <option value="1">Medium </option>
                         <option value="2">Heavy</option>
 				    </select>
@@ -1300,6 +1323,35 @@ on("change:skill_dice_switch sheet:opened", function() {
                 </div>
                 <div class="sheet-col-3-8">Misc</div>
                 <div class="sheet-col-3-8"><input type="number" name="attr_fatigue_misc"/></div>
+                </fieldset>
+                <fieldset class="sheet-col-1-2">
+                <input type="checkbox" class="wombat-show arrow" name="attr_wombat_show" title="Show/Hide" value="1">
+                <span>Situational Modifiers</span>
+                <div class="wombat">
+                <div class="sheet-col-3-4">These do not automatically apply to base fatigue</div>
+                <div class="sheet-col-3-8">Encumberance</div>
+                <div class="sheet-col-3-8">
+                    <select name="attr_fatigue_encumberance">
+					    <option value="0">None = 0</option>
+					    <option value="1">Light = 1</option>
+                        <option value="2">Medium = 2 </option>
+                        <option value="3">Heavy = 3</option>
+				    </select>
+				</div>
+                <div class="sheet-col-3-8">Wounded</div>
+                <div class="sheet-col-3-8">
+                    <select name="attr_fatigue_wounds">
+					    <option value="0"> 100%= 0</option>
+					    <option value="1"> 51-99% = +1</option>
+                        <option value="4"> 11-50%= +4 </option>
+                        <option value="8"> 1-10%= +8</option>
+				    </select>
+				</div>
+				<div class="sheet-col-3-4">Wound Thresholds</div>
+				<div class="sheet-col-3-8"> 50% Threshold</div>
+				<div class="sheet-col-3-8"><input type="number" name="attr_50_thresh" value="@{hp_max}*.50" /></div>
+				<div class="sheet-col-3-8"> 10% Threshold</div>
+				<div class="sheet-col-3-8"><input type="number" name="attr_10_thresh" value="@{hp_max}*.10"/></div>
                 </fieldset>
             </div>
             <hr/>
@@ -1468,7 +1520,7 @@ on("change:skill_dice_switch sheet:opened", function() {
 				<div class="sheet-col-15-24 sheet-vert-middle" style="color:red;">Cartography (Int)</div>
 				<div class="sheet-col-1-6 sheet-vert-middle"><input type="number" name="attr_skill_cartography" value="0"/></div>
 				<input type="hidden" name="attr_cartography_dice" value="[[d100]] Skill: [[@{skill_cartography}]]" />
-				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_cartograpgy' value='@{character_name} makes a cartography skill check\n\nRoll :@{cartography_dice}'>Check</button></div>
+				<div class="sheet-col-5-24 sheet-vert-middle"><button class="sheet-skill-roll" type='roll' name='roll_skill_cartography' value='@{character_name} makes a cartography skill check\n\nRoll :@{cartography_dice}'>Check</button></div>
 			</div>
 			
             <div class="sheet-row sheet-skill-row">
@@ -2030,3 +2082,4 @@ on("change:skill_dice_switch sheet:opened", function() {
     </table>
 
 </rolltemplate>
+
