@@ -93,6 +93,28 @@ on("change:repeating_weapon:start_working1 sheet:opened", function() {
     });
 });
 
+
+on("change:repeating_rangedweapons:target_size change:repeating_rangedweapons:zero_range change:repeating_rangedweapons:four_range change:repeating_rangedweapons:six_range change:repeating_rangedweapons:adv_sighting change:repeating_rangedweapons:eight_range sheet:opened", function() {
+        getAttrs(["repeating_rangedweapons_target_size","repeating_rangedweapons_adv_sighting","repeating_rangedweapons_eight_range","repeating_rangedweapons_six_range","repeating_rangedweapons_zero_range","repeating_rangedweapons_four_range"], function(values) {
+            const adv_sighting = int(values.repeating_rangedweapons_adv_sighting);
+            const target_size = int(values.repeating_rangedweapons_target_size);
+            const zero_range = int(values.repeating_rangedweapons_zero_range);
+            const four_range = int(values.repeating_rangedweapons_four_range);
+            const six_range = int(values.repeating_rangedweapons_six_range);
+            const eight_range = int(values.repeating_rangedweapons_eight_range);
+            let zero_range_adjusted= Math.min(zero_range*target_size*(adv_sighting+1),eight_range);
+            let four_range_adjusted= Math.min(four_range*target_size*(adv_sighting+1),eight_range);
+            let six_range_adjusted= Math.min(six_range*target_size*(adv_sighting+1),eight_range);
+            let eight_range_adjusted= Math.min(eight_range*target_size*(adv_sighting+1),eight_range);
+        setAttrs({
+            repeating_rangedweapons_zero_range_adjusted: zero_range_adjusted,
+            repeating_rangedweapons_four_range_adjusted: four_range_adjusted,
+            repeating_rangedweapons_six_range_adjusted: six_range_adjusted,
+            repeating_rangedweapons_eight_range_adjusted: eight_range_adjusted
+        });
+    });
+});
+
 on("change:repeating_weapon:start_working1 sheet:opened", function() {
         getAttrs(["repeating_weapon_start_working1"], function(values) {
             const sw1 = int(values.repeating_weapon_start_working1);
@@ -817,9 +839,9 @@ on("change:skill_dice_switch sheet:opened", function() {
             <div class="sheet-col-1-16"><input type="number" name="attr_weapon_defense_mod_total" value="@{fatigue_defense}+@{weapon_misc_defense}+@{weapon_style_defense}+@{wisdom_defense_mod}+@{dexterity_defense_mod}+@{weapon_spec_defense}+@{weapon_talent_defense}+@{armor_defense_bonus}+@{shield_def_switch}+@{natural_defense_bonus}+@{encumbrance_defense_mod}" disabled="disabled"/></div>
             <div class="sheet-col-1-16"><input type="number" name="attr_weapon_damage_mod_total" value="@{fatigue_damage}+@{weapon_misc_damage}+@{weapon_style_damage}+@{weapon_stat_bonus_damage}+@{weapon_spec_damage}+@{weapon_talent_damage}+@{weapon_magic_bonus}" disabled="disabled"/></div>
             <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_attack' value='&{template:hm_std} {{name=@{character_name} attacks!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}} {{reach=@{weapon_reach}}} {{atk_roll=[[1d20 +@{weapon_attack_mod_total}]]}}{{perf=[[19+@{weapon_attack_mod_total}]]}}'>ATK</button></div>
-            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} hits!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}} {{reach=@{weapon_reach}}} {{damage=[[@{weapon_base_damage}+@{weapon_damage_mod_total}]]}}'>DMG</button></div>
+            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} hits!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}} {{reach=@{weapon_reach}}} {{damage=[[@{weapon_base_damage}+@{weapon_damage_mod_total}]]}}{{type= @{weapon_dmg_type}}}'>DMG</button></div>
             <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_defense' value='&{template:hm_std} {{name=@{character_name} defends!!}}{{def_roll=[[ @{start_working} +@{weapon_defense_mod_total}]]}} {{dr=[[@{dr}]]}} {{sdr=[[@{shield_dr}]]}}{{fatigue=[[@{current_fatigue}+@{weapon_defense_mod_total}]]}}{{perf=[[19+@{weapon_defense_mod_total}+@{crit_value}]]}}'>DEF</button></div>
-            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} is blocked!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}} {{reach=@{weapon_reach}}} {{damage=[[@{weapon_shield_damage}+@{weapon_damage_mod_total}]]}}'>SHD</button></div>
+            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} is blocked!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}} {{reach=@{weapon_reach}}} {{damage=[[@{weapon_shield_damage}+@{weapon_damage_mod_total}]]}}{{type= @{weapon_dmg_type}}}'>SHD</button></div>
             <div>
             <div class="sheet-col-1-8"><span>Hidden Details</span></div>
             <input type="checkbox" class="wombat-show arrow" name="attr_wombat_show" title="Show/Hide" value="1">
@@ -832,9 +854,8 @@ on("change:skill_dice_switch sheet:opened", function() {
             
             <div class="sheet-col-1-16" title="The magic bonus will be added as a bonus to BOTH the attack and damage rolls"><input type="number" name="attr_weapon_magic_bonus" value="0"/></div>
             
-            <div class="sheet-col-1-16"></div>
-            
-            <div class="sheet-col-1-16"></div>
+            <div class="sheet-col-1-8">Damage Type</div>
+			
             <div class="sheet-col-1-8 sheet-vert-bottom">Specialization</div>
             <div class="sheet-col-1-16">
     			<select name="attr_weapon_spec_attack">
@@ -886,8 +907,11 @@ on("change:skill_dice_switch sheet:opened", function() {
             <div class="sheet-col-1-16"></div>
             <div class="sheet-col-1-8 sheet-vert-bottom">Base Speed</div>
             <div class="sheet-col-1-16"><input type="number" name="attr_base_weapon_speed"></div>
-            <div class="sheet-col-1-16"></div>
-            <div class="sheet-col-1-16"></div>
+            <div class="sheet-col-1-8"><select name="attr_weapon_dmg_type">
+					<option value="Bludgeoning">Bludgeoning</option>
+					<option value="Hacking"> Hacking </option>
+                    <option value="Piercing"> Piercing</option>
+				</select></div>
            
             <div class="sheet-col-1-8 sheet-vert-bottom">Talents</div>
             <div class="sheet-col-1-16 sheet-vert-bottom">
@@ -953,7 +977,7 @@ on("change:skill_dice_switch sheet:opened", function() {
             <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_style_damage" value="0"/></div>
             
             <div class="sheet-col-1-8">Jab Roll</div>
-            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} jabs you!}} {{weapon=@{weapon}}} {{speed=@{weapon_jab_speed_mod_total}}} {{reach=@{weapon_reach}}} {{damage=[[@{weapon_jab_damage}+@{weapon_damage_mod_total}]]}}'>DMG</button></div>
+            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} jabs you!}} {{weapon=@{weapon}}} {{speed=@{weapon_jab_speed_mod_total}}} {{reach=@{weapon_reach}}} {{damage=[[@{weapon_jab_damage}+@{weapon_damage_mod_total}]]}}{{type= Piercing}}'>DMG</button></div>
               
         <div class="sheet-row sheet-stat-row sheet-padl">
             <div class="sheet-col-1-8 sheet-vert-bottom">Shield Use</div>
@@ -1020,7 +1044,7 @@ on("change:skill_dice_switch sheet:opened", function() {
             <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_attack' value='&{template:hm_std} {{name=@{character_name} attacks!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}}{{atk_roll=[[1d20 +@{weapon_attack_mod_total}-4+@{aiming}]]}}{{perf=[[19+@{weapon_attack_mod_total}-4]]}}'>-4</button></div>
             <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_attack' value='&{template:hm_std} {{name=@{character_name} attacks!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}}{{atk_roll=[[1d20 +@{weapon_attack_mod_total}-6+@{aiming}]]}}{{perf=[[19+@{weapon_attack_mod_total}-6]]}}'>-6</button></div>
             <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_attack' value='&{template:hm_std} {{name=@{character_name} attacks!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}}{{atk_roll=[[1d20 +@{weapon_attack_mod_total}-8+@{aiming}]]}}{{perf=[[19+@{weapon_attack_mod_total}-8]]}}'>-8</button></div>
-            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} hits!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}} {{damage=[[@{weapon_base_damage}+@{weapon_damage_mod_total}]]}}'>DMG</button></div>
+            <div class="sheet-col-1-16"><button type='roll' name='roll_weapon_damage' value='&{template:hm_std} {{name=@{character_name} hits!}} {{weapon=@{weapon}}} {{speed=@{weapon_speed_mod_total}}} {{damage=[[@{weapon_base_damage}+@{weapon_damage_mod_total}]]}}{{type= @{weapon_dmg_type}}}'>DMG</button></div>
             <div>
             <div class="sheet-col-1-8"><span>Hidden Details</span></div>
             <input type="checkbox" class="wombat-show arrow" name="attr_wombat_show" title="Show/Hide" value="1">
@@ -1114,13 +1138,13 @@ on("change:skill_dice_switch sheet:opened", function() {
 				</select>
             </div>
             <div class="sheet-col-1-8">d20</div>
-            <div class="sheet-col-1-16" title="Range at which you roll a d20"><input type="text" name="attr_0_range"/></div>  
-            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_0_range_adjusted" value="@{0_range}*@{target_size}*(@{adv_sighting}+1)" disabled /></div>
+            <div class="sheet-col-1-16" title="Range at which you roll a d20"><input type="text" name="attr_zero_range"/></div>  
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_zero_range_adjusted" value="0"  /></div>
             
             <div class="sheet-col-1-16"></div>
             <div class="sheet-col-1-8 sheet-vert-bottom">Base Speed</div>
             <div class="sheet-col-1-16"><input type="number" name="attr_base_weapon_speed"></div>
-            <div class="sheet-col-1-8"></div>
+            <div class="sheet-col-1-8">Damage Type</div>
             <div class="sheet-col-1-8 sheet-vert-bottom">Style</div>
             <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_style_attack" value="0"/></div>
             <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_style_speed" value="0"/></div> 
@@ -1128,7 +1152,7 @@ on("change:skill_dice_switch sheet:opened", function() {
             
             <div class="sheet-col-1-8">d20-4</div>
             <div class="sheet-col-1-16" title="Range at which you roll a d20-4"><input type="text" name="attr_four_range"/></div>
-            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_four_range_adjusted" value="@{four_range}*@{target_size}*(@{adv_sighting}+1)" disabled /></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_four_range_adjusted" value="0" /></div>
               
         <div class="sheet-row sheet-stat-row sheet-padl">
             <div class="sheet-col-1-8 sheet-vert-bottom">Str Bonus</div>
@@ -1138,15 +1162,18 @@ on("change:skill_dice_switch sheet:opened", function() {
 					<option value="@{strength_damage_mod}">Y</option>
 				</select>
 			</div>
-            <div class="sheet-col-1-16"></div>
-            <div class="sheet-col-1-16"></div>
+            <div class="sheet-col-1-8"><select name="attr_weapon_dmg_type">
+                    <option value="Piercing"> Piercing</option>
+					<option value="Bludgeoning">Bludgeoning</option>
+					<option value="Hacking"> Hacking </option>
+				</select></div>
             <div class="sheet-col-1-8 sheet-vert-bottom">Miscellaneous</div>
             <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_misc_attack" value="0"/></div>
             <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_misc_speed" value="0"/></div>
             <div class="sheet-col-1-16 sheet-vert-bottom"><input type="number" name="attr_weapon_misc_damage" value="0"/></div>
             <div class="sheet-col-1-8">d20-6</div>
             <div class="sheet-col-1-16" title="Range at which you roll a d20-6"><input type="text" name="attr_six_range"/></div>
-            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_six_range_adjusted" value="@{six_range}*@{target_size}*(@{adv_sighting}+1)"  disabled/></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_six_range_adjusted" value="0" /></div>
         <div class="sheet-row sheet-stat-row sheet-padl">
             <div class="sheet-col-1-8 sheet-vert-bottom">Target Size</div>
             <div class="sheet-col-1-8" title="Determines range modifier">
@@ -1169,7 +1196,7 @@ on("change:skill_dice_switch sheet:opened", function() {
             <div class="sheet-col-1-16 sheet-vert-bottom"></div>
             <div class="sheet-col-1-8">d20-8 Range</div>
             <div class="sheet-col-1-16" title="Range at which you roll a d20-8"><input type="text" name="attr_eight_range"/></div>
-            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_eight_range_adjusted" value="@{eight_range}*@{target_size}*(@{adv_sighting}+1)" disabled /></div>
+            <div class="sheet-col-1-16 sheet-vert-bottom"><input type="text" name="attr_eight_range_adjusted" value="0"  /></div>
             <hr />
             <div><textarea name="attr_combat_profile_notes"></textarea></div>
         </div>
@@ -2059,9 +2086,13 @@ on("change:skill_dice_switch sheet:opened", function() {
             <tr><td><span class="tcat">DR: </span>{{dr}}{{#sdr}} + {{sdr}}<img src="https://i.imgur.com/AYeAO4C.png">{{/sdr}}</td></tr>
         {{/dr}}
         
-        {{#allprops() name weapon speed reach atk_roll def_roll damage dr sdr fatigue perf}}
+        {{#type}}
+            <tr><td><span class="tcat">Type: </span>{{type}}</td></tr>
+        {{/type}}
+        
+        {{#allprops() name weapon speed reach atk_roll def_roll damage dr sdr fatigue perf type}}
             <tr><td><span class="tcat">{{key}}: </span>{{value}}</td></tr>
-        {{/allprops() name weapon speed reach atk_roll def_roll damage dr sdr fatigue perf}}
+        {{/allprops() name weapon speed reach atk_roll def_roll damage dr sdr fatigue perf type}}
     </table>
 
 </rolltemplate>
