@@ -49,6 +49,7 @@ input.sheet-arrow[type="checkbox"]:checked + span::before {
 .charsheet .sheet-reset {
     counter-reset: wound-counter;
 }
+
 div.sheet-wound-counter::before {
     /* Increments "wound-counter" by 1 */
     counter-increment: wound-counter;
